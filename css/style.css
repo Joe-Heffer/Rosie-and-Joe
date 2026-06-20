@@ -624,6 +624,10 @@ img {
   display: block;
 }
 
+.embed__cta {
+  margin: var(--space-sm) 0 0;
+}
+
 /* The mat — gives a bare cross-origin iframe (Google Forms, Maps) a
    considered border instead of sitting raw on the section background. */
 .embed__frame {
