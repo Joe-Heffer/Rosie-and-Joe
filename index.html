@@ -6,11 +6,12 @@
   <title>Rosie &amp; Joe — 17 April 2027</title>
   <meta name="description" content="Rosie and Joe are getting married on Saturday 17 April 2027 at Eyam Hall." />
 
-  <!-- Google Fonts: Cormorant Garamond (serif headings) + Montserrat (body) -->
+  <!-- Google Fonts: Cormorant (Light Italic display) + Cormorant SC (labels)
+       + Spectral (body) + Jost (utility) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&family=Spectral:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/style.css" />
@@ -42,8 +43,20 @@
   <main>
     <!-- Hero -->
     <section class="hero">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <svg class="botanical hero__mark" viewBox="0 0 40 72" aria-hidden="true" focusable="false">
+        <path d="M20 71 C20 50 19 28 20 6" />
+        <path d="M20 14 C24 10 28 9 31 6" />
+        <path d="M20 14 C16 10 12 9 9 6" />
+        <path d="M20 24 C24 20 28 19 31 16" />
+        <path d="M20 24 C16 20 12 19 9 16" />
+        <path d="M20 34 C24 30 28 29 31 26" />
+        <path d="M20 34 C16 30 12 29 9 26" />
+        <path d="M20 44 C23 41 26 40 29 38" />
+        <path d="M20 44 C17 41 14 40 11 38" />
+      </svg>
       <h1 class="hero__names">Rosie &amp; Joe</h1>
-      <h2 class="hero__date">Saturday 17 April 2027</h2>
+      <p class="hero__date">Saturday 17 April 2027</p>
       <!-- TODO: refine wording of tagline -->
       <p class="hero__tagline">Together with our families, we invite you to celebrate our wedding day.</p>
       <div class="hero__actions">
@@ -52,27 +65,52 @@
       </div>
     </section>
 
-    <!-- Welcome -->
-    <section class="section text-center">
+    <!-- Intro image — Eyam Hall, letterbox -->
+    <figure class="figure figure--bleed reveal">
+      <img
+        class="figure__img"
+        src="images/eyam-hall.png"
+        alt="Eyam Hall at dusk, seen from the walled garden path through borders of roses and perennials."
+        loading="lazy"
+      />
+      <figcaption class="figure__caption">Eyam Hall &middot; Eyam, Derbyshire</figcaption>
+    </figure>
+
+    <!-- Welcome note -->
+    <section class="section reveal">
       <div class="container">
-        <span class="eyebrow">Welcome</span>
-        <!-- TODO: replace welcome copy -->
-        <p>
-          We are so delighted to share our special day with you. After many happy
-          years together, we can't wait to gather our favourite people at
-          Eyam Hall in the heart of the Peak District for an unforgettable
-          celebration. Explore the pages below for all the details you'll need.
-        </p>
-        <div class="hero__actions">
-          <a class="btn" href="details.html">View Details</a>
-          <a class="btn btn--outline" href="rsvp.html">RSVP</a>
+        <div class="note">
+          <span class="eyebrow">Welcome</span>
+          <!-- TODO: replace welcome copy -->
+          <p class="note__lead">
+            We are so delighted to share our day with you.
+          </p>
+          <p>
+            After many happy years together, we can't wait to gather our
+            favourite people at Eyam Hall, in the heart of the Peak District,
+            for an unhurried spring celebration. The pages here hold everything
+            you'll need — the order of the day, how to find us, and a place to
+            let us know you're coming.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="details.html">View Details</a>
+            <a class="btn btn--outline" href="rsvp.html">RSVP</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="site-footer__ornament" aria-hidden="true">&#10086;</div>
+    <svg class="botanical site-footer__ornament" viewBox="0 0 40 72" aria-hidden="true" focusable="false">
+      <path d="M20 71 C20 50 19 28 20 6" />
+      <path d="M20 14 C24 10 28 9 31 6" />
+      <path d="M20 14 C16 10 12 9 9 6" />
+      <path d="M20 24 C24 20 28 19 31 16" />
+      <path d="M20 24 C16 20 12 19 9 16" />
+      <path d="M20 44 C23 41 26 40 29 38" />
+      <path d="M20 44 C17 41 14 40 11 38" />
+    </svg>
     <p class="site-footer__date">Saturday 17 April 2027</p>
     <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
   </footer>

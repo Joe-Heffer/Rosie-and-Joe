@@ -1,47 +1,55 @@
 /* ==========================================================================
    Rosie & Joe — Wedding Site
-   Design system & styles
+   Design system & styles — "Walled Garden in Winter Light"
+
+   Warm, restrained keepsake palette on an ivory canvas. Cormorant Light
+   Italic for display, Spectral for body, Cormorant SC for labels, Jost for
+   utility. Fine sage rules, a film-grain hero overlay, sparing botanical
+   marks. No drop shadows, no gold, no pure white, no bold weights.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    Design tokens (CSS custom properties)
    -------------------------------------------------------------------------- */
 :root {
-  /* Colours — soft, romantic palette with a dusty-rose accent */
-  --color-bg: #faf6f1;          /* cream background */
-  --color-surface: #ffffff;     /* cards / raised surfaces */
-  --color-text: #2f2b29;        /* dark charcoal text */
-  --color-muted: #6f6862;       /* secondary text */
-  --color-accent: #b9818a;      /* dusty rose */
-  --color-accent-dark: #9c6670; /* dusty rose, darker (hover) */
-  --color-border: #e7ddd4;      /* subtle borders */
+  /* Palette */
+  --ivory:     #f6f2ea;  /* warm parchment — primary background */
+  --stone:     #352f28;  /* deep warm near-black — body text */
+  --sage:      #7e9178;  /* dusty sage — botanical accent, fine rules */
+  --terra:     #a8573d;  /* muted terracotta — the single warm accent */
+  --taupe:     #9a8f82;  /* warm taupe — secondary / muted text */
+  --limestone: #eae5dc;  /* paler than ivory — card surfaces, inset areas */
+
+  /* A translucent sage for fine hairlines (~35% opacity) */
+  --rule: rgba(126, 145, 120, 0.35);
 
   /* Typography */
-  --font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  --font-display:    "Cormorant", Georgia, "Times New Roman", serif;
+  --font-small-caps: "Cormorant SC", Georgia, "Times New Roman", serif;
+  --font-body:       "Spectral", Georgia, "Times New Roman", serif;
+  --font-utility:    "Jost", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 
-  --fs-base: 1rem;       /* 16px */
+  /* Type scale */
   --fs-sm: 0.875rem;
-  --fs-lg: 1.25rem;
-  --fs-xl: 1.75rem;
-  --fs-2xl: 2.5rem;
-  --fs-3xl: 4rem;
-  --lh-base: 1.7;
-  --lh-tight: 1.2;
+  --fs-lg: 1.4rem;
+  --fs-xl: clamp(1.6rem, 4vw, 2.25rem);    /* sub-display / pull statements */
+  --fs-2xl: clamp(2.25rem, 6vw, 3.25rem);  /* page titles */
+  --fs-3xl: clamp(3rem, 9vw, 6rem);        /* the one big hero moment */
 
-  /* Spacing scale */
+  /* Spacing scale (retained for layout rules) */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2.5rem;
   --space-xl: 4rem;
-  --space-2xl: 6rem;
 
-  /* Layout */
+  /* Rhythm & layout */
+  --section-gap: clamp(4rem, 8vw, 7rem);
+  --text-max:    680px;
   --container-max: 1080px;
-  --radius: 4px;
-  --shadow: 0 6px 24px rgba(47, 43, 41, 0.08);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --transition: 0.25s ease;
 }
 
@@ -60,39 +68,48 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--ivory);
+  color: var(--stone);
   font-family: var(--font-body);
-  font-size: var(--fs-base);
-  line-height: var(--lh-base);
+  font-weight: 300;
+  font-size: clamp(16px, 1.1vw, 18px);
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
+/* Display headings — weight comes from size, never from boldness. */
 h1,
 h2,
 h3 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: var(--lh-tight);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.15;
   margin: 0 0 var(--space-sm);
+  color: var(--stone);
 }
 
-h1 { font-size: var(--fs-2xl); }
+h1 { font-size: var(--fs-2xl); font-style: italic; }
 h2 { font-size: var(--fs-xl); }
-h3 { font-size: var(--fs-lg); letter-spacing: 0.02em; }
+h3 { font-size: var(--fs-lg); }
 
 p {
-  margin: 0 0 var(--space-sm);
+  margin: 0 0 var(--space-md);
 }
 
+/* Links — text colour is unchanged; a terracotta underline appears on hover. */
 a {
-  color: var(--color-accent-dark);
-  text-decoration: none;
-  transition: color var(--transition);
+  color: var(--stone);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
 }
 
-a:hover {
-  color: var(--color-text);
+a:hover,
+a:focus-visible {
+  text-decoration-color: var(--terra);
 }
 
 img {
@@ -111,70 +128,126 @@ img {
 }
 
 .section {
-  padding: var(--space-xl) 0;
+  padding: var(--section-gap) 0;
 }
 
+/* Inset surface — used for the RSVP block. Paler than ivory, thin sage rules. */
 .section--alt {
-  background-color: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--limestone);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Constrain running prose to a comfortable measure. */
+.prose {
+  max-width: var(--text-max);
 }
 
 .text-center {
   text-align: center;
 }
 
+/* Section labels — structural signposts, not headings. Always taupe. */
+.eyebrow {
+  display: block;
+  font-family: var(--font-small-caps);
+  font-weight: 400;
+  font-size: 0.8125rem;        /* ~13px */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: var(--space-md);
+}
+
+/* Buttons — Jost utility type, terracotta as the single accent. No shadow. */
 .btn {
   display: inline-block;
-  font-family: var(--font-body);
+  font-family: var(--font-utility);
+  font-weight: 300;
   font-size: var(--fs-sm);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-decoration: none;
   padding: 0.85rem 2rem;
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius);
-  background-color: var(--color-accent);
-  color: #fff;
+  border: 1px solid var(--terra);
+  border-radius: 2px;
+  background-color: var(--terra);
+  color: var(--ivory);
   cursor: pointer;
   transition: background-color var(--transition), color var(--transition),
     border-color var(--transition);
 }
 
-.btn:hover {
-  background-color: var(--color-accent-dark);
-  border-color: var(--color-accent-dark);
-  color: #fff;
+.btn:hover,
+.btn:focus-visible {
+  background-color: transparent;
+  color: var(--terra);
+  text-decoration: none;
 }
 
 .btn--outline {
   background-color: transparent;
-  color: var(--color-accent-dark);
+  color: var(--terra);
 }
 
-.btn--outline:hover {
-  background-color: var(--color-accent);
-  color: #fff;
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--terra);
+  color: var(--ivory);
 }
 
-.eyebrow {
-  display: inline-block;
-  font-size: var(--fs-sm);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-accent-dark);
-  margin-bottom: var(--space-sm);
+/* Botanical line marks — thin single-stroke SVG in sage. */
+.botanical {
+  display: block;
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 0.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Fine horizontal rule between passages. */
+.rule {
+  border: 0;
+  height: 1px;
+  background-color: var(--rule);
+  margin: var(--space-xl) 0;
 }
 
 /* --------------------------------------------------------------------------
-   Navigation
+   Scroll reveal
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation — quiet, not a bar competing with the imagery
    -------------------------------------------------------------------------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(250, 246, 241, 0.95);
+  background-color: rgba(246, 242, 234, 0.92);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--rule);
 }
 
 .nav {
@@ -185,15 +258,17 @@ img {
 }
 
 .nav__logo {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
+  font-style: italic;
   font-size: var(--fs-lg);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-text);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--stone);
+  text-decoration: none;
 }
 
 .nav__logo:hover {
-  color: var(--color-accent-dark);
+  text-decoration: none;
 }
 
 .nav__toggle {
@@ -212,8 +287,8 @@ img {
 .nav__toggle span {
   display: block;
   width: 24px;
-  height: 2px;
-  background-color: var(--color-text);
+  height: 1px;
+  background-color: var(--stone);
   transition: transform var(--transition), opacity var(--transition);
 }
 
@@ -227,66 +302,97 @@ img {
 }
 
 .nav__link {
+  font-family: var(--font-utility);
+  font-weight: 300;
   font-size: var(--fs-sm);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--taupe);
+  text-decoration: none;
   padding: var(--space-xs) 0;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
 }
 
 .nav__link:hover {
-  color: var(--color-accent-dark);
+  color: var(--stone);
+  text-decoration: none;
 }
 
 .nav__link.active {
-  color: var(--color-accent-dark);
-  border-bottom-color: var(--color-accent);
+  color: var(--stone);
+  border-bottom-color: var(--terra);
 }
 
 /* --------------------------------------------------------------------------
-   Hero
+   Hero — wide and quiet; names overlaid in light italic
    -------------------------------------------------------------------------- */
 .hero {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  overflow: hidden;
   min-height: calc(100vh - 64px);
   padding: var(--space-xl) var(--space-md);
-  /* TODO: replace placeholder colour with full-bleed image, e.g.
-     background: url("../images/hero.jpg") center / cover no-repeat; */
-  background-color: #e7d8d3;
-  background-image: linear-gradient(
-    180deg,
-    rgba(231, 216, 211, 0.6),
-    rgba(250, 246, 241, 0.9)
-  );
-  color: var(--color-text);
+  /* Considered placeholder until a real image exists: paler limestone with a
+     thin sage inset border. When a hero image arrives, swap to e.g.
+     background: url("../images/hero.jpg") center / cover no-repeat;
+     and add filter: contrast(1.03) saturate(0.92) sepia(0.06); for the
+     Ektar colour signature. */
+  background-color: var(--limestone);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--stone);
+}
+
+/* Film grain — the signature element. ~8% opacity, subliminal. */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Hero content sits above the grain. */
+.hero > *:not(.hero-grain) {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__mark {
+  width: 38px;
+  height: auto;
+  margin: 0 auto var(--space-md);
+  opacity: 0.9;
 }
 
 .hero__names {
   font-size: var(--fs-3xl);
-  margin-bottom: var(--space-sm);
+  font-style: italic;
+  margin: 0 0 var(--space-md);
+  letter-spacing: 0.01em;
 }
 
 .hero__date {
-  font-family: var(--font-body);
-  font-size: var(--fs-lg);
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: var(--space-md);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--fs-xl);
+  color: var(--terra);
+  margin: 0 0 var(--space-md);
 }
 
 .hero__tagline {
-  font-family: var(--font-heading);
-  font-size: var(--fs-xl);
-  font-style: italic;
-  color: var(--color-accent-dark);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--fs-lg);
+  color: var(--taupe);
   max-width: 36ch;
+  margin: 0 auto;
 }
 
 .hero__actions {
@@ -294,25 +400,84 @@ img {
   flex-wrap: wrap;
   gap: var(--space-sm);
   justify-content: center;
-  margin-top: var(--space-lg);
+  margin-top: var(--space-xl);
 }
 
 /* --------------------------------------------------------------------------
-   Page header (interior pages)
+   Figure — letterbox intro image, shot-on-film treatment
+   -------------------------------------------------------------------------- */
+.figure {
+  margin: 0;
+}
+
+/* Full-bleed: the image sits directly in <main>, which already spans the
+   full page width (like the hero), so no viewport-breakout trick is needed —
+   using 100vw here would overflow past the scrollbar on the right. */
+.figure--bleed {
+  width: 100%;
+}
+
+.figure__img {
+  display: block;
+  width: 100%;
+  /* Letterbox crop — never square, per the concept. */
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  /* Ektar / 35mm colour signature. */
+  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.figure__caption {
+  font-family: var(--font-small-caps);
+  font-weight: 400;
+  font-size: 0.8125rem;        /* ~13px */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   Page header (interior pages) — left-aligned, like a letter
    -------------------------------------------------------------------------- */
 .page-header {
-  text-align: center;
-  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  max-width: var(--text-max);
+  margin: 0 auto;
+  padding: var(--section-gap) var(--space-md) var(--space-lg);
 }
 
 .page-header h1 {
   font-size: var(--fs-2xl);
+  margin-bottom: var(--space-md);
 }
 
 .page-header p {
-  color: var(--color-muted);
-  max-width: 50ch;
+  color: var(--taupe);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Prose blocks (welcome note, accommodation)
+   -------------------------------------------------------------------------- */
+.note {
+  max-width: var(--text-max);
   margin: 0 auto;
+}
+
+.note__lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-xl);
+  line-height: 1.3;
+  color: var(--stone);
+  margin-bottom: var(--space-lg);
+}
+
+.note .hero__actions {
+  justify-content: flex-start;
 }
 
 /* --------------------------------------------------------------------------
@@ -321,91 +486,178 @@ img {
 .detail {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   align-items: start;
-  padding: var(--space-lg) 0;
-  border-bottom: 1px solid var(--color-border);
+  max-width: var(--container-max);
+  margin: 0 auto;
 }
 
-.detail:last-child {
-  border-bottom: none;
-}
-
-.detail__meta {
-  color: var(--color-accent-dark);
+.detail__meta h2 {
+  margin-bottom: var(--space-sm);
 }
 
 .detail__time {
-  font-family: var(--font-heading);
-  font-size: var(--fs-lg);
   display: block;
-  margin-top: var(--space-xs);
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
 }
 
 .address {
   font-style: normal;
-  color: var(--color-muted);
-  line-height: 1.5;
-  margin-bottom: var(--space-sm);
+  color: var(--taupe);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   Schedule timeline — a quiet list, no icons
+   -------------------------------------------------------------------------- */
+.timeline {
+  list-style: none;
+  max-width: var(--text-max);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.timeline__item {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: var(--space-md);
+  align-items: baseline;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline__item:last-child {
+  border-bottom: none;
+}
+
+.timeline__time {
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.timeline__event {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--stone);
+}
+
+.timeline__event span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--taupe);
+}
+
+/* --------------------------------------------------------------------------
+   Link list (accommodation)
+   -------------------------------------------------------------------------- */
+.link-list {
+  list-style: none;
+  max-width: var(--text-max);
+  margin: var(--space-lg) auto 0;
+  padding: 0;
+}
+
+.link-list li {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.link-list li:last-child {
+  border-bottom: none;
+}
+
+.link-list a {
+  color: var(--terra);
 }
 
 /* --------------------------------------------------------------------------
    Embeds (RSVP form / map)
    -------------------------------------------------------------------------- */
 .embed {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: var(--space-sm);
-  margin-top: var(--space-md);
+  max-width: var(--container-max);
+  margin: var(--space-lg) auto 0;
 }
 
 .embed iframe {
   width: 100%;
   border: 0;
   display: block;
-  border-radius: var(--radius);
+  border: 1px solid var(--rule);
 }
 
+/* Considered placeholder — a letterbox limestone panel with grain, not a grey
+   box. No "image coming soon" styling beyond the copy itself. */
 .embed__placeholder {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 320px;
-  color: var(--color-muted);
-  background-color: var(--color-bg);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
+  aspect-ratio: 21 / 9;
+  min-height: 280px;
+  color: var(--taupe);
+  background-color: var(--limestone);
+  border: 1px solid var(--rule);
   padding: var(--space-lg);
 }
 
+.embed__placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.embed__placeholder p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
 /* --------------------------------------------------------------------------
-   Footer
+   Footer — minimal
    -------------------------------------------------------------------------- */
 .site-footer {
   text-align: center;
-  padding: var(--space-xl) var(--space-md);
-  border-top: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  padding: var(--section-gap) var(--space-md);
+  border-top: 1px solid var(--rule);
+  background-color: var(--ivory);
 }
 
 .site-footer__ornament {
-  color: var(--color-accent);
-  font-size: var(--fs-lg);
-  letter-spacing: 0.5em;
-  margin-bottom: var(--space-sm);
+  width: 32px;
+  height: auto;
+  margin: 0 auto var(--space-md);
+  opacity: 0.9;
 }
 
 .site-footer__date {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
+  font-style: italic;
   font-size: var(--fs-lg);
+  margin-bottom: var(--space-xs);
 }
 
 .site-footer__note {
-  color: var(--color-muted);
+  font-family: var(--font-utility);
+  font-weight: 300;
   font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  color: var(--taupe);
   margin-bottom: 0;
 }
 
@@ -413,12 +665,6 @@ img {
    Responsive — mobile-first, single breakpoint at 768px
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-  :root {
-    --fs-3xl: 2.75rem;
-    --fs-2xl: 2rem;
-    --fs-xl: 1.5rem;
-  }
-
   .nav__toggle {
     display: flex;
   }
@@ -431,9 +677,8 @@ img {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    box-shadow: var(--shadow);
+    background-color: var(--ivory);
+    border-bottom: 1px solid var(--rule);
     max-height: 0;
     overflow: hidden;
     transition: max-height var(--transition);
@@ -445,7 +690,7 @@ img {
 
   .nav__links li {
     text-align: center;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--rule);
   }
 
   .nav__link {
@@ -456,11 +701,16 @@ img {
 
   .nav__link.active {
     border-bottom: none;
-    background-color: var(--color-surface);
+    background-color: var(--limestone);
   }
 
   .detail {
     grid-template-columns: 1fr;
-    gap: var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .timeline__item {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
   }
 }
