@@ -31,7 +31,18 @@ All colours, fonts and spacing live as CSS custom properties at the top of
 `css/style.css` (the `:root` block) so the whole look can be re-themed in one place:
 
 - **Fonts:** Cormorant Garamond (serif headings) + Montserrat (sans-serif body), loaded from Google Fonts.
-- **Palette:** cream background, charcoal text, dusty-rose accent.
+- **Palette** ("Walled Garden in Winter Light"):
+
+  | Name | Hex | Use |
+  |---|---|---|
+  | Ivory | `#F6F2EA` | Canvas/background (not pure white) |
+  | Stone | `#352F28` | Body text (warm near-black) |
+  | Sage | `#7E9178` | Botanical accents, fine rules |
+  | Terra | `#A8573D` | Single warm accent — date, one button, link hovers, active nav |
+  | Taupe | `#9A8F82` | Secondary text, section labels |
+  | Limestone | `#EAE5DC` | Inset surfaces (RSVP band, hero/map placeholders) |
+
+  There's also `--rule`, Sage at ~35% opacity, used for hairline dividers.
 - **Spacing:** a consistent `--space-*` scale.
 - **Responsive:** mobile-first with a single breakpoint at `768px`.
 - **Utilities:** `.container`, `.section`, `.btn` (and `.btn--outline`).
