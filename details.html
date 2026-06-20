@@ -6,10 +6,12 @@
   <title>The Day — Rosie &amp; Joe</title>
   <meta name="description" content="Ceremony, reception and dress code details for Rosie and Joe's wedding at Eyam Hall." />
 
+  <!-- Google Fonts: Cormorant (Light Italic display) + Cormorant SC (labels)
+       + Spectral (body) + Jost (utility) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&family=Spectral:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/style.css" />
@@ -39,13 +41,13 @@
   </header>
 
   <main>
-    <div class="page-header">
+    <div class="page-header reveal">
       <span class="eyebrow">The Day</span>
       <h1>Order of the Day</h1>
       <p>Everything you need to know about our celebration at Eyam Hall.</p>
     </div>
 
-    <section class="section section--alt" id="ceremony">
+    <section class="section section--alt reveal" id="ceremony">
       <div class="container">
         <div class="detail">
           <div class="detail__meta">
@@ -71,7 +73,7 @@
       </div>
     </section>
 
-    <section class="section" id="reception">
+    <section class="section reveal" id="reception">
       <div class="container">
         <div class="detail">
           <div class="detail__meta">
@@ -97,7 +99,7 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="dress-code">
+    <section class="section section--alt reveal" id="dress-code">
       <div class="container">
         <div class="detail">
           <div class="detail__meta">
@@ -117,10 +119,54 @@
         </div>
       </div>
     </section>
+
+    <section class="section reveal" id="schedule">
+      <div class="container">
+        <div class="note">
+          <span class="eyebrow">Schedule</span>
+          <h2>A Gentle Timeline</h2>
+        </div>
+        <!-- TODO: confirm timings -->
+        <ol class="timeline">
+          <li class="timeline__item">
+            <span class="timeline__time">12:30 pm</span>
+            <span class="timeline__event">Arrival<span>Guests gather at Eyam Hall</span></span>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__time">1:00 pm</span>
+            <span class="timeline__event">Ceremony<span>We exchange our vows</span></span>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__time">2:00 pm</span>
+            <span class="timeline__event">Drinks &amp; Photographs<span>Reception in the courtyard</span></span>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__time">4:00 pm</span>
+            <span class="timeline__event">Wedding Breakfast<span>A seated meal and speeches</span></span>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__time">7:00 pm</span>
+            <span class="timeline__event">Evening Celebration<span>Music and dancing in the barn</span></span>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__time">Midnight</span>
+            <span class="timeline__event">Carriages<span>A fond farewell</span></span>
+          </li>
+        </ol>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="site-footer__ornament" aria-hidden="true">&#10086;</div>
+    <svg class="botanical site-footer__ornament" viewBox="0 0 40 72" aria-hidden="true" focusable="false">
+      <path d="M20 71 C20 50 19 28 20 6" />
+      <path d="M20 14 C24 10 28 9 31 6" />
+      <path d="M20 14 C16 10 12 9 9 6" />
+      <path d="M20 24 C24 20 28 19 31 16" />
+      <path d="M20 24 C16 20 12 19 9 16" />
+      <path d="M20 44 C23 41 26 40 29 38" />
+      <path d="M20 44 C17 41 14 40 11 38" />
+    </svg>
     <p class="site-footer__date">Saturday 17 April 2027</p>
     <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
   </footer>

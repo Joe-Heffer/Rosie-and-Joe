@@ -6,10 +6,12 @@
   <title>Getting Here — Rosie &amp; Joe</title>
   <meta name="description" content="Travel and directions to Eyam Hall for Rosie and Joe's wedding." />
 
+  <!-- Google Fonts: Cormorant (Light Italic display) + Cormorant SC (labels)
+       + Spectral (body) + Jost (utility) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&family=Spectral:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/style.css" />
@@ -39,13 +41,13 @@
   </header>
 
   <main>
-    <div class="page-header">
+    <div class="page-header reveal">
       <span class="eyebrow">Getting Here</span>
       <h1>Travel &amp; Directions</h1>
       <p>Eyam Hall sits in the historic village of Eyam in the Peak District.</p>
     </div>
 
-    <section class="section section--alt" id="by-car">
+    <section class="section section--alt reveal" id="by-car">
       <div class="container">
         <div class="detail">
           <div class="detail__meta">
@@ -69,7 +71,7 @@
       </div>
     </section>
 
-    <section class="section" id="by-public-transport">
+    <section class="section reveal" id="by-public-transport">
       <div class="container">
         <div class="detail">
           <div class="detail__meta">
@@ -93,9 +95,12 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="map">
+    <section class="section section--alt reveal" id="map">
       <div class="container">
-        <h2 class="text-center">Find Us on the Map</h2>
+        <div class="note">
+          <span class="eyebrow">The Map</span>
+          <h2>Find Us</h2>
+        </div>
         <div class="embed">
           <!-- GOOGLE MAPS EMBED: replace src with your Google Maps embed URL -->
           <!--
@@ -121,10 +126,40 @@
         </div>
       </div>
     </section>
+
+    <section class="section reveal" id="accommodation">
+      <div class="container">
+        <div class="note">
+          <span class="eyebrow">Accommodation</span>
+          <h2>Where to Stay</h2>
+          <!-- TODO: replace accommodation copy -->
+          <p>
+            Eyam and the surrounding Hope Valley have plenty of welcoming places
+            to stay, from village inns to country guesthouses. We'd suggest
+            booking early, as spring is a popular time in the Peak District. A
+            few favourites to start you off:
+          </p>
+        </div>
+        <!-- TODO: replace with real accommodation names, links and notes -->
+        <ul class="link-list">
+          <li><a href="#">Village inn, Eyam</a> — within walking distance of the hall</li>
+          <li><a href="#">Guesthouse, Grindleford</a> — a short drive away</li>
+          <li><a href="#">Hotel, Bakewell</a> — for a wider choice of rooms</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="site-footer__ornament" aria-hidden="true">&#10086;</div>
+    <svg class="botanical site-footer__ornament" viewBox="0 0 40 72" aria-hidden="true" focusable="false">
+      <path d="M20 71 C20 50 19 28 20 6" />
+      <path d="M20 14 C24 10 28 9 31 6" />
+      <path d="M20 14 C16 10 12 9 9 6" />
+      <path d="M20 24 C24 20 28 19 31 16" />
+      <path d="M20 24 C16 20 12 19 9 16" />
+      <path d="M20 44 C23 41 26 40 29 38" />
+      <path d="M20 44 C17 41 14 40 11 38" />
+    </svg>
     <p class="site-footer__date">Saturday 17 April 2027</p>
     <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
   </footer>

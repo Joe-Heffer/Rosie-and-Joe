@@ -4,6 +4,7 @@
    - Hamburger menu toggle for mobile nav
    - Smooth scroll for in-page anchor links
    - Highlight the current page's nav link
+   - Gentle scroll reveal for sections (respects reduced-motion)
    ========================================================================== */
 (function () {
   "use strict";
@@ -56,9 +57,44 @@
     });
   }
 
+  /* ---- Gentle scroll reveal --------------------------------------------- */
+  function initScrollReveal() {
+    var revealed = document.querySelectorAll(".reveal");
+    if (!revealed.length) return;
+
+    var prefersReduced =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // No motion (by preference or lack of support): show everything at once.
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      revealed.forEach(function (el) {
+        el.classList.add("is-visible");
+      });
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+
+    revealed.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
     initSmoothScroll();
     initActiveLink();
+    initScrollReveal();
   });
 })();
