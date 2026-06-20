@@ -40,6 +40,61 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <svg class="icon-defs" aria-hidden="true">
+      <symbol id="icon-home" viewBox="0 0 24 24">
+        <path d="M4 11.5 L12 4.5 L20 11.5" />
+        <path d="M6.5 10 V19.5 H17.5 V10" />
+      </symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24">
+        <path d="M5 6.5 H19 V19.5 H5 Z" />
+        <path d="M5 10 H19" />
+        <path d="M8.5 4 V7.5" />
+        <path d="M15.5 4 V7.5" />
+      </symbol>
+      <symbol id="icon-envelope" viewBox="0 0 24 24">
+        <path d="M4.5 6.5 H19.5 V17.5 H4.5 Z" />
+        <path d="M4.5 6.5 L12 13 L19.5 6.5" />
+      </symbol>
+      <symbol id="icon-compass" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 7.5 L13.7 12 L12 16.5 L10.3 12 Z" />
+      </symbol>
+      <symbol id="icon-bed" viewBox="0 0 24 24">
+        <path d="M3.5 18.5 V9.5 H10 V13" />
+        <path d="M3.5 13 H20.5 V18.5" />
+        <path d="M3.5 21 V18.5" />
+        <path d="M20.5 21 V18.5" />
+      </symbol>
+      <symbol id="icon-gift" viewBox="0 0 24 24">
+        <path d="M4 9.5 H20 V20 H4 Z" />
+        <path d="M4 13.5 H20" />
+        <path d="M12 9.5 V20" />
+        <path d="M9 9.5 C8 7.5 9 5.5 11 5.5 C12 5.5 12 8 12 9.5" />
+        <path d="M15 9.5 C16 7.5 15 5.5 13 5.5 C12 5.5 12 8 12 9.5" />
+      </symbol>
+      <symbol id="icon-car" viewBox="0 0 24 24">
+        <path d="M4 16 L6 10 H17 L19.5 16" />
+        <path d="M4 16 H19.5 V18.5 H4 Z" />
+        <circle cx="8" cy="18.5" r="1.5" />
+        <circle cx="16" cy="18.5" r="1.5" />
+      </symbol>
+      <symbol id="icon-train" viewBox="0 0 24 24">
+        <path
+          d="M6 6.5 H18 V16 C18 17.5 16.5 18.5 15 18.5 H9 C7.5 18.5 6 17.5 6 16 Z"
+        />
+        <path d="M6 12 H18" />
+        <path d="M9 18.5 L7 21" />
+        <path d="M15 18.5 L17 21" />
+        <circle cx="9" cy="15" r="1" />
+        <circle cx="15" cy="15" r="1" />
+      </symbol>
+      <symbol id="icon-map-pin" viewBox="0 0 24 24">
+        <path
+          d="M12 21 C12 21 6 14.5 6 10 C6 6.5 8.7 4 12 4 C15.3 4 18 6.5 18 10 C18 14.5 12 21 12 21 Z"
+        />
+        <circle cx="12" cy="10" r="2.2" />
+      </symbol>
+    </svg>
     <header class="site-header">
       <div class="container">
         <nav class="nav" aria-label="Primary">
@@ -54,12 +109,38 @@
             <span></span><span></span><span></span>
           </button>
           <ul class="nav__links" id="primary-menu">
-            <li><a class="nav__link" href="/">Home</a></li>
-            <li><a class="nav__link" href="details.html">The Day</a></li>
-            <li><a class="nav__link" href="rsvp.html">RSVP</a></li>
-            <li><a class="nav__link" href="travel.html">Getting Here</a></li>
-            <li><a class="nav__link" href="accommodation.html">Stay</a></li>
-            <li><a class="nav__link" href="gift.html">Gifts</a></li>
+            <li>
+              <a class="nav__link" href="/"
+                ><svg class="icon"><use href="#icon-home"></use></svg>Home</a
+              >
+            </li>
+            <li>
+              <a class="nav__link" href="details.html"
+                ><svg class="icon"><use href="#icon-calendar"></use></svg>The
+                Day</a
+              >
+            </li>
+            <li>
+              <a class="nav__link" href="rsvp.html"
+                ><svg class="icon"><use href="#icon-envelope"></use></svg>RSVP</a
+              >
+            </li>
+            <li>
+              <a class="nav__link" href="travel.html"
+                ><svg class="icon"><use href="#icon-compass"></use></svg>Getting
+                Here</a
+              >
+            </li>
+            <li>
+              <a class="nav__link" href="accommodation.html"
+                ><svg class="icon"><use href="#icon-bed"></use></svg>Stay</a
+              >
+            </li>
+            <li>
+              <a class="nav__link" href="gift.html"
+                ><svg class="icon"><use href="#icon-gift"></use></svg>Gifts</a
+              >
+            </li>
           </ul>
         </nav>
       </div>
@@ -78,7 +159,7 @@
         <div class="container">
           <div class="detail">
             <div class="detail__meta">
-              <h2>By Car</h2>
+              <h2><svg class="icon"><use href="#icon-car"></use></svg>By Car</h2>
             </div>
             <div>
               <address class="address">
@@ -131,7 +212,7 @@
               href="https://maps.app.goo.gl/m7929JLmESZKKWne8"
               target="_blank"
               rel="noopener"
-              >Get Directions</a
+              ><svg class="icon"><use href="#icon-map-pin"></use></svg>Get Directions</a
             >
           </p>
         </div>
@@ -141,7 +222,7 @@
         <div class="container">
           <div class="detail">
             <div class="detail__meta">
-              <h2>By Public Transport</h2>
+              <h2><svg class="icon"><use href="#icon-train"></use></svg>By Public Transport</h2>
             </div>
             <div>
               <address class="address">
