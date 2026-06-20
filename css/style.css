@@ -440,6 +440,20 @@ img {
   margin-top: var(--space-md);
 }
 
+/* Photo credit — quiet utility line beneath a borrowed image's caption. */
+.figure__credit {
+  font-family: var(--font-utility);
+  font-weight: 200;
+  font-size: 0.75rem;
+  color: var(--taupe);
+  text-align: center;
+  margin-top: var(--space-xs);
+}
+
+.figure__credit a {
+  color: var(--taupe);
+}
+
 /* --------------------------------------------------------------------------
    Split — portrait image beside prose (welcome note)
    -------------------------------------------------------------------------- */
