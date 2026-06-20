@@ -353,6 +353,12 @@ img {
   filter: contrast(1.03) saturate(0.92) sepia(0.06);
 }
 
+/* Evening guest invitation — swap the daytime hero photo for a barn/banquet
+   shot, distinguishing this page from the homepage at a glance. */
+.hero--evening .hero__bg {
+  background-image: url("../images/barn-hall-banquet.png");
+}
+
 /* Scrim — darkens the photo so the ivory text reads clearly. */
 .hero__scrim {
   position: absolute;
