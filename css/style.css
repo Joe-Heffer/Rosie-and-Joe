@@ -441,6 +441,34 @@ img {
 }
 
 /* --------------------------------------------------------------------------
+   Split — portrait image beside prose (welcome note)
+   -------------------------------------------------------------------------- */
+.split {
+  display: grid;
+  grid-template-columns: 5fr 6fr;   /* portrait slightly narrower than the prose */
+  gap: var(--space-xl);
+  align-items: center;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.split__figure {
+  margin: 0;
+}
+
+.split__img {
+  display: block;
+  width: 100%;
+  /* Gentle portrait crop — never square, per the concept. */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  /* Ektar / 35mm colour signature — matches .figure__img. */
+  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+  /* Thin sage hairline frame. */
+  border: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
    Page header (interior pages) — left-aligned, like a letter
    -------------------------------------------------------------------------- */
 .page-header {
@@ -702,6 +730,11 @@ img {
   .nav__link.active {
     border-bottom: none;
     background-color: var(--limestone);
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 
   .detail {
