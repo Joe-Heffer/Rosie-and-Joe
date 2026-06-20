@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP — Rosie &amp; Joe</title>
+  <meta name="description" content="RSVP to Rosie and Joe's wedding on 17 April 2027." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__logo" href="index.html">Rosie &amp; Joe</a>
+        <button
+          class="nav__toggle"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-controls="primary-menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="primary-menu">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="details.html">The Day</a></li>
+          <li><a class="nav__link" href="rsvp.html">RSVP</a></li>
+          <li><a class="nav__link" href="travel.html">Getting Here</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <span class="eyebrow">RSVP</span>
+      <h1>Will You Join Us?</h1>
+      <!-- TODO: confirm RSVP deadline -->
+      <p>
+        We can't wait to celebrate with you. Please let us know whether you can
+        make it by <strong>Saturday 16 January 2027</strong> using the form
+        below.
+      </p>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="embed">
+          <!-- GOOGLE FORM EMBED: replace src with your form URL -->
+          <!--
+          <iframe
+            src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
+            width="100%"
+            height="900"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Wedding RSVP form"
+          >Loading…</iframe>
+          -->
+
+          <!-- TODO: remove this placeholder once the iframe above is enabled -->
+          <div class="embed__placeholder">
+            <p>
+              Our RSVP form will appear here.<br />
+              Paste your Google Form embed link in the comment above to enable it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__ornament" aria-hidden="true">&#10086;</div>
+    <p class="site-footer__date">Saturday 17 April 2027</p>
+    <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
