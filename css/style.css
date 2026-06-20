@@ -337,14 +337,31 @@ img {
   overflow: hidden;
   min-height: calc(100vh - 64px);
   padding: var(--space-xl) var(--space-md);
-  /* Considered placeholder until a real image exists: paler limestone with a
-     thin sage inset border. When a hero image arrives, swap to e.g.
-     background: url("../images/hero.jpg") center / cover no-repeat;
-     and add filter: contrast(1.03) saturate(0.92) sepia(0.06); for the
-     Ektar colour signature. */
   background-color: var(--limestone);
   box-shadow: inset 0 0 0 1px var(--rule);
-  color: var(--stone);
+  color: var(--ivory);
+}
+
+/* Hero banner image — Eyam Hall. Filter lives on this layer (not .hero)
+   so the Ektar colour signature doesn't bleed onto the text above it. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../images/eyam-hall.png") center / cover no-repeat;
+  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+}
+
+/* Scrim — darkens the photo so the ivory text reads clearly. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(53, 47, 40, 0.45) 0%,
+    rgba(53, 47, 40, 0.6) 100%
+  );
 }
 
 /* Film grain — the signature element. ~8% opacity, subliminal. */
@@ -352,15 +369,15 @@ img {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
-/* Hero content sits above the grain. */
-.hero > *:not(.hero-grain) {
+/* Hero content sits above the image, scrim and grain. */
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim) {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero__mark {
@@ -390,7 +407,8 @@ img {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: var(--fs-lg);
-  color: var(--taupe);
+  color: var(--ivory);
+  opacity: 0.85;
   max-width: 36ch;
   margin: 0 auto;
 }
