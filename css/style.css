@@ -587,6 +587,45 @@ img {
 }
 
 /* --------------------------------------------------------------------------
+   Payment details (gift — bank transfer)
+   -------------------------------------------------------------------------- */
+.payment-details {
+  max-width: var(--text-max);
+  margin: var(--space-lg) 0 0;
+}
+
+.payment-details__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.payment-details__row:last-child {
+  border-bottom: none;
+}
+
+.payment-details dt {
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.payment-details dd {
+  margin: 0;
+  font-family: var(--font-utility);
+  font-size: var(--fs-lg);
+  color: var(--stone);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------------
    Link list (accommodation)
    -------------------------------------------------------------------------- */
 .link-list {
