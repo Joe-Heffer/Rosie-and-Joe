@@ -1,3 +1,4 @@
+[![CI](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/ci.yml/badge.svg)](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/ci.yml)
 [![pages-build-deployment](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/pages/pages-build-deployment)
 
 # Rosie &amp; Joe — Wedding Website
