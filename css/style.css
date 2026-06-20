@@ -358,11 +358,13 @@ img {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(53, 47, 40, 0.45) 0%,
-    rgba(53, 47, 40, 0.6) 100%
-  );
+  background:
+    radial-gradient(
+      ellipse 65% 55% at 50% 50%,
+      rgba(33, 28, 22, 0.55) 0%,
+      rgba(33, 28, 22, 0) 72%
+    ),
+    linear-gradient(180deg, rgba(53, 47, 40, 0.4) 0%, rgba(53, 47, 40, 0.58) 100%);
 }
 
 /* Film grain — the signature element. ~8% opacity, subliminal. */
@@ -388,11 +390,20 @@ img {
   opacity: 0.9;
 }
 
+/* Soft, large-blur shadow for legibility against the photo's high-frequency
+   detail (stonework, leaves) — not a decorative drop shadow. */
+.hero__names,
+.hero__date,
+.hero__tagline {
+  text-shadow: 0 2px 16px rgba(30, 26, 20, 0.4);
+}
+
 .hero__names {
   font-size: var(--fs-3xl);
   font-style: italic;
   margin: 0 0 var(--space-md);
   letter-spacing: 0.01em;
+  color: var(--ivory);
 }
 
 .hero__date {
