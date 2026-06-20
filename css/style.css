@@ -404,6 +404,43 @@ img {
 }
 
 /* --------------------------------------------------------------------------
+   Figure — letterbox intro image, shot-on-film treatment
+   -------------------------------------------------------------------------- */
+.figure {
+  margin: 0;
+}
+
+/* Full-bleed: the image sits directly in <main>, which already spans the
+   full page width (like the hero), so no viewport-breakout trick is needed —
+   using 100vw here would overflow past the scrollbar on the right. */
+.figure--bleed {
+  width: 100%;
+}
+
+.figure__img {
+  display: block;
+  width: 100%;
+  /* Letterbox crop — never square, per the concept. */
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  /* Ektar / 35mm colour signature. */
+  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.figure__caption {
+  font-family: var(--font-small-caps);
+  font-weight: 400;
+  font-size: 0.8125rem;        /* ~13px */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
    Page header (interior pages) — left-aligned, like a letter
    -------------------------------------------------------------------------- */
 .page-header {
