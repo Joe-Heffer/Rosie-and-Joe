@@ -97,11 +97,11 @@ p {
   margin: 0 0 var(--space-md);
 }
 
-/* Links — text colour is unchanged; a terracotta underline appears on hover. */
+/* Links — terracotta text with a matching underline, darkening on hover. */
 a {
-  color: var(--stone);
+  color: var(--terra);
   text-decoration: underline;
-  text-decoration-color: transparent;
+  text-decoration-color: color-mix(in srgb, var(--terra) 40%, transparent);
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
   transition: text-decoration-color 0.15s ease;
@@ -415,6 +415,12 @@ img {
    using 100vw here would overflow past the scrollbar on the right. */
 .figure--bleed {
   width: 100%;
+}
+
+/* Banner: a shallower crop than the standard letterbox figure, for images
+   used as a low-profile divider rather than a full editorial moment. */
+.figure--banner .figure__img {
+  aspect-ratio: 16 / 5;
 }
 
 .figure__img {
