@@ -17,6 +17,7 @@
   --stone:     #352f28;  /* deep warm near-black — body text */
   --sage:      #7e9178;  /* dusty sage — botanical accent, fine rules */
   --terra:     #a8573d;  /* muted terracotta — the single warm accent */
+  --terra-light: #d99877;  /* lighter terracotta tint — legible on the dark hero photo */
   --taupe:     #9a8f82;  /* warm taupe — secondary / muted text */
   --limestone: #eae5dc;  /* paler than ivory — card surfaces, inset areas */
 
@@ -399,8 +400,31 @@ img {
   font-style: italic;
   font-weight: 300;
   font-size: var(--fs-xl);
-  color: var(--terra);
+  color: var(--terra-light);
   margin: 0 0 var(--space-md);
+}
+
+/* The botanical mark and outline button use sage/terra elsewhere against
+   the ivory canvas; on the hero's dark photo those muted tones disappear,
+   so lighten them here to keep the same accent without losing legibility. */
+.hero .botanical {
+  stroke: var(--ivory);
+}
+
+.hero .btn--outline {
+  border-color: var(--terra-light);
+  color: var(--terra-light);
+}
+
+.hero .btn--outline:hover,
+.hero .btn--outline:focus-visible {
+  background-color: var(--terra-light);
+  color: var(--stone);
+}
+
+.hero .btn:hover,
+.hero .btn:focus-visible {
+  color: var(--terra-light);
 }
 
 .hero__tagline {
