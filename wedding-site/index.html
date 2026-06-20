@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rosie &amp; Joe — 17 April 2027</title>
+  <meta name="description" content="Rosie and Joe are getting married on Saturday 17 April 2027 at Eyam Hall." />
+
+  <!-- Google Fonts: Cormorant Garamond (serif headings) + Montserrat (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__logo" href="index.html">Rosie &amp; Joe</a>
+        <button
+          class="nav__toggle"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-controls="primary-menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="primary-menu">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="details.html">The Day</a></li>
+          <li><a class="nav__link" href="rsvp.html">RSVP</a></li>
+          <li><a class="nav__link" href="travel.html">Getting Here</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero__names">Rosie &amp; Joe</h1>
+      <h2 class="hero__date">Saturday 17 April 2027</h2>
+      <!-- TODO: refine wording of tagline -->
+      <p class="hero__tagline">Together with our families, we invite you to celebrate our wedding day.</p>
+      <div class="hero__actions">
+        <a class="btn" href="details.html">View Details</a>
+        <a class="btn btn--outline" href="rsvp.html">RSVP</a>
+      </div>
+    </section>
+
+    <!-- Welcome -->
+    <section class="section text-center">
+      <div class="container">
+        <span class="eyebrow">Welcome</span>
+        <!-- TODO: replace welcome copy -->
+        <p>
+          We are so delighted to share our special day with you. After many happy
+          years together, we can't wait to gather our favourite people at
+          Eyam Hall in the heart of the Peak District for an unforgettable
+          celebration. Explore the pages below for all the details you'll need.
+        </p>
+        <div class="hero__actions">
+          <a class="btn" href="details.html">View Details</a>
+          <a class="btn btn--outline" href="rsvp.html">RSVP</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__ornament" aria-hidden="true">&#10086;</div>
+    <p class="site-footer__date">Saturday 17 April 2027</p>
+    <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

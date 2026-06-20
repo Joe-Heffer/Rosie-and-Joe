@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Here — Rosie &amp; Joe</title>
+  <meta name="description" content="Travel and directions to Eyam Hall for Rosie and Joe's wedding." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__logo" href="index.html">Rosie &amp; Joe</a>
+        <button
+          class="nav__toggle"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-controls="primary-menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="primary-menu">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="details.html">The Day</a></li>
+          <li><a class="nav__link" href="rsvp.html">RSVP</a></li>
+          <li><a class="nav__link" href="travel.html">Getting Here</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <span class="eyebrow">Getting Here</span>
+      <h1>Travel &amp; Directions</h1>
+      <p>Eyam Hall sits in the historic village of Eyam in the Peak District.</p>
+    </div>
+
+    <section class="section section--alt" id="by-car">
+      <div class="container">
+        <div class="detail">
+          <div class="detail__meta">
+            <h2>By Car</h2>
+          </div>
+          <div>
+            <address class="address">
+              <!-- TODO: confirm address / parking details -->
+              Eyam Hall, Main Road,<br />
+              Eyam, Hope Valley,<br />
+              Derbyshire, S32 5QW
+            </address>
+            <!-- TODO: replace by-car directions -->
+            <p>
+              Eyam is easily reached from the M1 (junction 29) and A623. There
+              is free parking in the village car park, a short walk from the
+              hall. Please allow extra time for the scenic country roads.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="by-public-transport">
+      <div class="container">
+        <div class="detail">
+          <div class="detail__meta">
+            <h2>By Public Transport</h2>
+          </div>
+          <div>
+            <address class="address">
+              <!-- TODO: confirm nearest station / bus routes -->
+              Nearest rail station: Grindleford (approx. 4 miles)<br />
+              Bus services run from Sheffield and Bakewell to Eyam.
+            </address>
+            <!-- TODO: replace public-transport directions -->
+            <p>
+              The nearest railway stations are Grindleford and Hathersage, both
+              on the Sheffield–Manchester line. Local buses connect the
+              surrounding towns to Eyam village. Taxis are limited, so we
+              recommend booking in advance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="map">
+      <div class="container">
+        <h2 class="text-center">Find Us on the Map</h2>
+        <div class="embed">
+          <!-- GOOGLE MAPS EMBED: replace src with your Google Maps embed URL -->
+          <!--
+          <iframe
+            src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map to Eyam Hall"
+          ></iframe>
+          -->
+
+          <!-- TODO: remove this placeholder once the iframe above is enabled -->
+          <div class="embed__placeholder">
+            <p>
+              An interactive map will appear here.<br />
+              Paste your Google Maps embed link in the comment above to enable it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__ornament" aria-hidden="true">&#10086;</div>
+    <p class="site-footer__date">Saturday 17 April 2027</p>
+    <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
