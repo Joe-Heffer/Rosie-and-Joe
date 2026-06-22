@@ -13,19 +13,38 @@ A static, mobile-first wedding website for Rosie & Joe, built with vanilla HTML,
 
 There is no build step. Open any `.html` file directly in a browser, or serve the directory with any static file server (e.g. `python3 -m http.server`). All paths are relative, so both approaches work.
 
-There are no tests, linters, or package manifests in this repo.
+There are no tests, linters, or package manifests in this repo. `.github/workflows/ci.yml` runs `html-proofer` (link/image/HTML validity checks, with `cake/index.html` excluded) and `node --check js/main.js` on every push/PR.
 
 ## Architecture
 
-Four pages share a common header/footer markup pattern and a single stylesheet/script:
+Eight pages share a common header/footer markup pattern (via custom elements, see below) and a single stylesheet/script:
 
 - `index.html` — Home (hero with grain + botanical mark, welcome note, CTAs)
-- `details.html` — The Day (ceremony, reception, dress code, **Schedule timeline**)
-- `rsvp.html` — RSVP (intro + Google Form embed, on a limestone band)
-- `travel.html` — Getting Here (directions + Google Maps embed, **Accommodation block**)
+- `details.html` — The Day (ceremony, reception, dress code, schedule timeline)
+- `rsvp.html` — RSVP (intro + live Google Form embed, on a limestone band)
+- `travel.html` — Getting Here (directions + live Google Maps embed)
+- `accommodation.html` — Where to stay near the venue
+- `gift.html` — Gift / honeymoon fund info
+- `evening/index.html` — Evening-only guests page (one directory deep; keeps its own simplified inline header instead of `<site-header>`, since its nav has no links and the shared header's links are root-relative)
+- `save-the-date/index.html` — standalone save-the-date card; fully self-contained with inline `<style>` and no shared header/footer/nav — not part of the templating system below
 - `css/style.css` — entire design system and all styles
 - `js/main.js` — mobile nav toggle, smooth scroll, active-nav-link highlighting, scroll reveal
-- `images/` — drop hero/gallery images here (currently empty aside from `.gitkeep`)
+- `js/components.js` — defines the `<site-header>` / `<site-footer>` custom elements (see "Shared header/footer" below)
+- `images/icons.svg` — shared SVG icon sprite; pages reference icons via `<svg class="icon"><use href="images/icons.svg#icon-name"></use></svg>` instead of duplicating `<symbol>` defs inline
+- `images/` — hero/gallery images
+- `cake/index.html` — a large (~26 MB) bundled artifact, not hand-authored like the rest of the site; deliberately excluded from CI and out of scope for site maintenance
+
+### Shared header/footer markup (no build step)
+
+There's no templating engine or build step, so duplication across pages is handled with light-DOM custom elements instead. `js/components.js` defines `<site-header>` and `<site-footer>`, which render their real `<header>`/`<footer>` markup into themselves via `innerHTML` in `connectedCallback()` — no Shadow DOM, so the existing global stylesheet still applies via ordinary class selectors. Pages include it as `<script src="js/components.js"></script>` **synchronously in `<head>`** (not deferred), so the elements are defined and upgraded before the parser reaches their tags in `<body>` — by the time `js/main.js`'s `DOMContentLoaded` handlers run, the nav/footer markup is already real. `css/style.css` sets `site-header, site-footer { display: contents; }` so the wrapper element doesn't break the header's `position: sticky` behaviour. Usage:
+
+```html
+<site-header logo="Rosie &amp; Joe's Wedding"></site-header>
+<!-- … -->
+<site-footer></site-footer>
+```
+
+The `logo` attribute is optional (defaults to "Rosie & Joe"). `evening/index.html` is the one exception — it keeps an inline simplified `<header>` rather than `<site-header>`.
 
 ### Design system — "Walled Garden in Winter Light"
 
@@ -40,21 +59,21 @@ A warm, restrained "keepsake" theme. All colours, fonts and rhythm are CSS custo
 - **Utilities/components:** `.container`, `.section` / `.section--alt` (limestone band), `.btn` / `.btn--outline`, `.eyebrow`, `.note` / `.note__lead`, `.detail`, `.timeline`, `.link-list`, `.embed`.
 - **Avoid** (per the concept): drop shadows, rounded cards, gold, watercolour florals, pure-white backgrounds, font-weight 700, countdown timers, centring everything.
 
-### Placeholder content
+### Content status
 
-Placeholder copy throughout the pages is marked with `<!-- TODO -->` comments — search for `TODO` to find everything that still needs real content (e.g. hero tagline, welcome copy, schedule timings, accommodation list, hero background image).
+There are no remaining `<!-- TODO -->` placeholder comments — all copy, the Google Form embed, and the Google Maps embed are live. Two narrower placeholders remain in `evening/index.html`: an `[RSVP DEADLINE]` placeholder in the RSVP section copy, and a `<!-- PARKING: confirm with venue -->` comment ahead of the transport paragraph — both need real information from the couple/venue rather than invented content.
 
 ### Embedding the Google Form (RSVP)
 
-In `rsvp.html`, find the block marked `<!-- GOOGLE FORM EMBED: replace src with your form URL -->`. Uncomment the `<iframe>`, replace the placeholder `src` with the form URL, and delete the `.embed__placeholder` div directly below it. The surrounding `.embed` section is already styled for `width="100%" height="900"`.
+`rsvp.html` already embeds a live Google Form (`<iframe src="https://docs.google.com/forms/...">`). To point it at a different form, replace that `src` with the new form's embed URL. The surrounding `.embed` section is already styled for `width="100%" height="900"`.
 
 ### Embedding the Google Map (Getting Here)
 
-Same pattern in `travel.html`: find `<!-- GOOGLE MAPS EMBED: replace src with your Google Maps embed URL -->`, uncomment the `<iframe>` with the real `src`, and delete the placeholder div below it.
+`travel.html` already embeds a live Google Map (`<iframe src="https://maps.google.com/maps?q=...">`). To change the location, replace that `src` with a new embed URL from Google Maps' **Share → Embed a map**.
 
 ### Adding a hero image
 
-Add the image to `images/` (e.g. `images/hero.jpg`), then in `css/style.css` find the `.hero` rule and replace the placeholder `background-color: var(--limestone)` (and its inset border) with a full-bleed image, e.g. `background: url("../images/hero.jpg") center / cover no-repeat;`. For the Ektar/35mm look the concept calls for, also add `filter: contrast(1.03) saturate(0.92) sepia(0.06);` and crop landscape/letterbox — never square. The `.hero-grain` overlay already sits above the image and makes photographs feel shot on film.
+The hero background image is already wired in via `.hero__bg` in `css/style.css` (around line 391; there's also a `.hero--evening` variant used on `evening/index.html`). To swap the photo, add the new image to `images/` and update the `background-image` value there. For the Ektar/35mm look the concept calls for, keep `filter: contrast(1.03) saturate(0.92) sepia(0.06);` and crop landscape/letterbox — never square. The `.hero-grain` overlay already sits above the image and makes photographs feel shot on film.
 
 ## Deployment
 
