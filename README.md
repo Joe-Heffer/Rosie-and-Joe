@@ -99,3 +99,11 @@ The home-page hero currently uses a placeholder colour. To use a full-bleed phot
 > **Tip:** Because everything is static and uses relative paths, the site also
 > works by simply opening `index.html` in a browser, or via any static file
 > host (Netlify, Cloudflare Pages, etc.).
+
+## AI usage
+
+This repository's code, markup and styling were developed with assistance
+from [Claude Code](https://claude.com/claude-code), Anthropic's AI coding
+assistant. All AI-assisted changes are reviewed by a human before being
+committed. Wedding-specific content — copy, schedule, venue details and the
+like — is authored and approved by Rosie &amp; Joe.
