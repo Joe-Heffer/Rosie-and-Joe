@@ -65,7 +65,7 @@ There's no build step or templating engine, so `index.html`, `details.html`,
 `js/components.js`, which defines two custom elements:
 
 ```html
-<site-header logo="Rosie &amp; Joe's Wedding"></site-header>
+<site-header></site-header>
 <!-- … -->
 <site-footer></site-footer>
 ```
