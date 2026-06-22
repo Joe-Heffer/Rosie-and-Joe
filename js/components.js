@@ -9,6 +9,36 @@
 (function () {
   "use strict";
 
+  var NAV_LINKS = [
+    { href: "/", icon: "home", label: "Home" },
+    { href: "details.html", icon: "calendar", label: "The Day" },
+    { href: "rsvp.html", icon: "envelope", label: "RSVP" },
+    { href: "travel.html", icon: "compass", label: "Getting Here" },
+    { href: "accommodation.html", icon: "bed", label: "Stay" },
+    { href: "gift.html", icon: "gift", label: "Gifts" },
+  ];
+
+  function navIcon(name) {
+    return (
+      '<svg class="icon"><use href="images/icons.svg#icon-' +
+      name +
+      '"></use></svg>'
+    );
+  }
+
+  function navLinkItem(link) {
+    return (
+      '<li><a class="nav__link" href="' +
+      link.href +
+      '">' +
+      navIcon(link.icon) +
+      link.label +
+      "</a></li>"
+    );
+  }
+
+  var NAV_LINKS_HTML = NAV_LINKS.map(navLinkItem).join("");
+
   var HEADER_HTML =
     '<header class="site-header">' +
     '<div class="container">' +
@@ -18,12 +48,7 @@
     "<span></span><span></span><span></span>" +
     "</button>" +
     '<ul class="nav__links" id="primary-menu">' +
-    '<li><a class="nav__link" href="/"><svg class="icon"><use href="images/icons.svg#icon-home"></use></svg>Home</a></li>' +
-    '<li><a class="nav__link" href="details.html"><svg class="icon"><use href="images/icons.svg#icon-calendar"></use></svg>The Day</a></li>' +
-    '<li><a class="nav__link" href="rsvp.html"><svg class="icon"><use href="images/icons.svg#icon-envelope"></use></svg>RSVP</a></li>' +
-    '<li><a class="nav__link" href="travel.html"><svg class="icon"><use href="images/icons.svg#icon-compass"></use></svg>Getting Here</a></li>' +
-    '<li><a class="nav__link" href="accommodation.html"><svg class="icon"><use href="images/icons.svg#icon-bed"></use></svg>Stay</a></li>' +
-    '<li><a class="nav__link" href="gift.html"><svg class="icon"><use href="images/icons.svg#icon-gift"></use></svg>Gifts</a></li>' +
+    NAV_LINKS_HTML +
     "</ul>" +
     "</nav>" +
     "</div>" +
