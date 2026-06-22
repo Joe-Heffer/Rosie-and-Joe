@@ -127,6 +127,10 @@
     />
     <circle cx="12" cy="10" r="2.2" />
   </symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24">
+    <path d="M8 3.5 H16 V20.5 H8 Z" />
+    <path d="M11 18 H13" />
+  </symbol>
   <symbol id="icon-document" viewBox="0 0 24 24">
     <path d="M7 3.5 H14.5 L18 7 V20.5 H7 Z" />
     <path d="M14.5 3.5 V7 H18" />
