@@ -223,13 +223,6 @@ img {
 }
 
 /* Small line icons — same single-stroke convention as .botanical. */
-.icon-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
 .icon {
   display: inline-block;
   flex-shrink: 0;
@@ -276,6 +269,14 @@ img {
 /* --------------------------------------------------------------------------
    Navigation — quiet, not a bar competing with the imagery
    -------------------------------------------------------------------------- */
+/* <site-header>/<site-footer> (js/components.js) are unstyled custom
+   element wrappers around the real <header>/<footer> — display: contents
+   removes their box so the wrapper is invisible to layout. */
+site-header,
+site-footer {
+  display: contents;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -815,38 +816,6 @@ img {
   border: 1px solid var(--rule);
 }
 
-/* Considered placeholder — a letterbox limestone panel with grain, not a grey
-   box. No "image coming soon" styling beyond the copy itself. */
-.embed__placeholder {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  aspect-ratio: 21 / 9;
-  min-height: 280px;
-  color: var(--taupe);
-  background-color: var(--limestone);
-  border: 1px solid var(--rule);
-  padding: var(--space-lg);
-}
-
-.embed__placeholder::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-}
-
-.embed__placeholder p {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-}
-
 /* --------------------------------------------------------------------------
    Footer — minimal
    -------------------------------------------------------------------------- */
@@ -952,5 +921,64 @@ img {
 
   .embed iframe {
     height: 1200px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Skip link — visually hidden until focused, for keyboard/screen-reader users
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 200;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--ivory);
+  color: var(--stone);
+  border: 1px solid var(--rule);
+  font-family: var(--font-utility);
+  font-size: var(--fs-sm);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Print — guests printing the schedule or directions get plain, paginated
+   text rather than the sticky header, hero photo and decorative motifs.
+   -------------------------------------------------------------------------- */
+@media print {
+  .site-header,
+  .hero-grain,
+  .botanical,
+  .skip-link {
+    display: none;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: var(--space-md) 0;
+  }
+
+  .hero__bg,
+  .hero__scrim {
+    display: none;
+  }
+
+  .hero__names,
+  .hero__date,
+  .hero__tagline {
+    color: var(--stone);
+  }
+
+  .section,
+  .detail,
+  .timeline__item {
+    break-inside: avoid;
+  }
+
+  .embed iframe {
+    display: none;
   }
 }

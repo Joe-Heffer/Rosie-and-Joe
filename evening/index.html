@@ -36,8 +36,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="theme-color" content="#A8573D" />
+    <script src="../js/components.js"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">
         <nav class="nav" aria-label="Primary">
@@ -46,7 +50,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <section class="hero hero--evening">
         <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__scrim" aria-hidden="true"></div>
@@ -107,7 +111,15 @@
                 please arrange your transport, especially for the journey
                 home, in advance.
               </p>
-              <!-- PARKING: confirm with venue -->
+              <p>
+                You'll find our <strong>car park</strong> opposite the main
+                entrance to Eyam Hall, reserved for our guests. It's
+                available for the full evening and overnight, so you're
+                welcome to leave your car and collect it the next day if
+                you'd rather not drive home. Please note there is strictly
+                no parking behind the hall without the venue's
+                authorisation.
+              </p>
               <p>
                 <a
                   class="btn btn--outline"
@@ -159,7 +171,7 @@
             <p>
               We'd love to know you're joining us for the evening. Please
               RSVP via <strong>hello@rosieandjoe.uk</strong> by
-              <strong>[RSVP DEADLINE]</strong>.
+              <strong>Saturday 16 January 2027</strong>.
             </p>
             <p><a class="btn" href="mailto:hello@rosieandjoe.uk">RSVP Now</a></p>
           </div>
@@ -167,25 +179,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <svg
-        class="botanical site-footer__ornament"
-        viewBox="0 0 40 72"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path d="M20 71 C20 50 19 28 20 6" />
-        <path d="M20 14 C24 10 28 9 31 6" />
-        <path d="M20 14 C16 10 12 9 9 6" />
-        <path d="M20 24 C24 20 28 19 31 16" />
-        <path d="M20 24 C16 20 12 19 9 16" />
-        <path d="M20 44 C23 41 26 40 29 38" />
-        <path d="M20 44 C17 41 14 40 11 38" />
-      </svg>
-      <p class="site-footer__date">Saturday 17 April 2027</p>
-      <p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>
-      <p class="site-footer__contact"><a href="mailto:hello@rosieandjoe.uk">hello@rosieandjoe.uk</a></p>
-    </footer>
+    <site-footer></site-footer>
 
     <script src="../js/main.js"></script>
   </body>

@@ -14,17 +14,24 @@ files can be hosted, including GitHub Pages.
 ## Project structure
 
 ```
-wedding-site/
-├── index.html        # Home — hero, welcome, CTAs
-├── details.html      # The Day — ceremony, reception, dress code
-├── rsvp.html         # RSVP — intro + Google Form embed placeholder
-├── travel.html       # Getting Here — by car, public transport, map placeholder
+.
+├── index.html              # Home — hero, welcome, CTAs
+├── details.html            # The Day — ceremony, reception, dress code, schedule
+├── rsvp.html                # RSVP — intro + Google Form embed
+├── travel.html              # Getting Here — by car, public transport, map
+├── accommodation.html       # Where to stay near the venue
+├── gift.html                 # Gift / honeymoon fund info
+├── evening/index.html        # Evening-only guests page
+├── save-the-date/index.html  # Standalone save-the-date card
 ├── css/
 │   └── style.css     # Design system (CSS custom properties) + all styles
 ├── js/
-│   └── main.js       # Mobile nav toggle, smooth scroll, active nav link
+│   ├── main.js        # Mobile nav toggle, smooth scroll, active nav link, scroll reveal
+│   └── components.js  # <site-header> / <site-footer> custom elements, shared markup
 ├── images/
-│   └── .gitkeep      # Drop hero / gallery images here
+│   ├── icons.svg      # Shared SVG icon sprite, referenced via <use> on every page
+│   └── …              # Hero / gallery photos
+├── favicon.svg
 └── README.md
 ```
 
@@ -33,7 +40,7 @@ wedding-site/
 All colours, fonts and spacing live as CSS custom properties at the top of
 `css/style.css` (the `:root` block) so the whole look can be re-themed in one place:
 
-- **Fonts:** Cormorant Garamond (serif headings) + Montserrat (sans-serif body), loaded from Google Fonts.
+- **Fonts** (Google Fonts): **Cormorant** 300 italic for display (hero names, headings, date), **Cormorant SC** for small-caps section labels, **Spectral** 300 for body prose, **Jost** 200/300 for utility text (nav, buttons, times).
 - **Palette** ("Walled Garden in Winter Light"):
 
   | Name      | Hex       | Use                                                            |
@@ -43,45 +50,70 @@ All colours, fonts and spacing live as CSS custom properties at the top of
   | Sage      | `#7E9178` | Botanical accents, fine rules                                  |
   | Terra     | `#A8573D` | Single warm accent — date, one button, link hovers, active nav |
   | Taupe     | `#9A8F82` | Secondary text, section labels                                 |
-  | Limestone | `#EAE5DC` | Inset surfaces (RSVP band, hero/map placeholders)              |
+  | Limestone | `#EAE5DC` | Inset surfaces (RSVP band)              |
 
   There's also `--rule`, Sage at ~35% opacity, used for hairline dividers.
 
 - **Spacing:** a consistent `--space-*` scale.
 - **Responsive:** mobile-first with a single breakpoint at `768px`.
-- **Utilities:** `.container`, `.section`, `.btn` (and `.btn--outline`).
+- **Utilities:** `.container`, `.section` / `.section--alt`, `.btn` (and `.btn--outline`), `.detail`, `.timeline`, `.link-list`, `.embed`.
 
-Placeholder copy throughout the pages is marked with `<!-- TODO -->` comments — search for `TODO` to find everything that still needs real content.
+### Shared header/footer markup
+
+There's no build step or templating engine, so `index.html`, `details.html`,
+`rsvp.html`, `travel.html`, `accommodation.html` and `gift.html` each include
+`js/components.js`, which defines two custom elements:
+
+```html
+<site-header logo="Rosie &amp; Joe's Wedding"></site-header>
+<!-- … -->
+<site-footer></site-footer>
+```
+
+`js/components.js` is loaded synchronously in `<head>` (not deferred), so the
+elements render their markup before the parser reaches their tags in
+`<body>` — there's no flash of empty content, and `js/main.js`'s
+`DOMContentLoaded` handlers see fully-rendered nav/footer markup. The
+`evening/index.html` page keeps its own simplified inline header instead,
+since its nav has no links (the page lives one directory below the root and
+the shared header's links are root-relative).
+
+Icons are defined once in `images/icons.svg` and referenced from every page via
+`<svg class="icon"><use href="images/icons.svg#icon-name"></use></svg>`.
 
 ## How to swap in the Google Form (RSVP)
 
-1. In Google Forms, open your RSVP form and click **Send → `< >` (embed HTML)**.
-2. Copy the `<iframe …>` snippet Google gives you (or just the `src` URL).
-3. Open `rsvp.html` and find the block marked:
-   ```html
-   <!-- GOOGLE FORM EMBED: replace src with your form URL -->
-   ```
-4. **Uncomment** the `<iframe>` and replace the placeholder `src` with your form URL.
-5. **Delete** the `<div class="embed__placeholder">…</div>` block directly below it.
-
-The surrounding `.embed` section is already styled, so the form will sit naturally
-on the page at `width="100%"` and `height="900"`.
+`rsvp.html` already embeds a live Google Form. To point it at a different
+form: in Google Forms, open **Send → `< >` (embed HTML)**, copy the `src` URL,
+and replace the existing `<iframe src="…">` in `rsvp.html`.
 
 ## How to swap in the Google Map (Getting Here)
 
-The same pattern applies in `travel.html`:
-
-1. In Google Maps, search your venue, click **Share → Embed a map**, and copy the `<iframe>` HTML.
-2. Find the block marked `<!-- GOOGLE MAPS EMBED: replace src with your Google Maps embed URL -->`.
-3. Uncomment the `<iframe>` (swap in your `src`) and delete the placeholder `<div>` below it.
+`travel.html` already embeds a live Google Map. To change the location,
+generate a new embed URL via **Share → Embed a map** in Google Maps and
+replace the existing `<iframe src="…">` in `travel.html`.
 
 ## Adding a hero image
 
-The home-page hero currently uses a placeholder colour. To use a full-bleed photo:
+The hero background image is set in `css/style.css` on the `.hero__bg` rule.
+To swap it, add the new image to `images/` and update the `background-image`
+(or `background`) value there — for the Ektar/35mm look the design calls
+for, keep `filter: contrast(1.03) saturate(0.92) sepia(0.06);` and crop
+landscape/letterbox, never square. The `.hero-grain` overlay already sits
+above the image and makes photographs feel shot on film.
 
-1. Add your image to `images/` (e.g. `images/hero.jpg`).
-2. In `css/style.css`, find the `.hero` rule and replace the placeholder
-   `background-color` with the commented-out `background` line, pointing at your image.
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every push/PR:
+
+- **html-proofer** — checks links, images and HTML validity across the site (`cake/index.html` is excluded — see below).
+- **js-syntax** — `node --check js/main.js`.
+
+### A note on `cake/`
+
+`cake/index.html` is a large (~26 MB) bundled artifact, not hand-authored
+like the rest of the site, and is deliberately excluded from CI. It's left
+as-is and out of scope for the templating/cleanup work described above.
 
 ## Deploying to GitHub Pages
 
