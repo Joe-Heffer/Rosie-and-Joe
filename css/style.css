@@ -669,10 +669,21 @@ site-footer {
 }
 
 .address {
+  font-family: var(--font-utility);
   font-style: normal;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.03em;
   color: var(--taupe);
-  line-height: 1.6;
+  line-height: 1.8;
   margin-bottom: var(--space-md);
+}
+
+/* When an address follows prose, give it room to read as its own block
+   rather than a continuation of the sentence above. */
+p + .address {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule);
 }
 
 /* --------------------------------------------------------------------------
