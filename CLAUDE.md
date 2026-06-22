@@ -39,7 +39,7 @@ Eight pages share a common header/footer markup pattern (via custom elements, se
 There's no templating engine or build step, so duplication across pages is handled with light-DOM custom elements instead. `js/components.js` defines `<site-header>` and `<site-footer>`, which render their real `<header>`/`<footer>` markup into themselves via `innerHTML` in `connectedCallback()` — no Shadow DOM, so the existing global stylesheet still applies via ordinary class selectors. Pages include it as `<script src="js/components.js"></script>` **synchronously in `<head>`** (not deferred), so the elements are defined and upgraded before the parser reaches their tags in `<body>` — by the time `js/main.js`'s `DOMContentLoaded` handlers run, the nav/footer markup is already real. `css/style.css` sets `site-header, site-footer { display: contents; }` so the wrapper element doesn't break the header's `position: sticky` behaviour. Usage:
 
 ```html
-<site-header logo="Rosie &amp; Joe's Wedding"></site-header>
+<site-header></site-header>
 <!-- … -->
 <site-footer></site-footer>
 ```
