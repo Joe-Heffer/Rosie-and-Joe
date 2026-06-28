@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table Plan — Rosie &amp; Joe</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Google Fonts: Cormorant (Light Italic display) + Cormorant SC (labels)
+         + Spectral (body) + Jost (utility) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&family=Spectral:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="theme-color" content="#A8573D" />
+    <script src="js/components.js"></script>
+
+    <style>
+      /* ── Table Plan: screen styles ── */
+
+      .tp-print-only { display: none; }
+
+      /* Controls bar */
+      .tp-controls {
+        border-bottom: 1px solid var(--rule);
+        padding: var(--space-md) 0;
+      }
+      .tp-controls .container {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+      }
+
+      /* Mobile hint */
+      .tp-venue-hint {
+        display: none;
+        font-family: var(--font-utility);
+        font-size: var(--fs-sm);
+        color: var(--taupe);
+        text-align: center;
+        padding-bottom: var(--space-md);
+        margin: 0;
+      }
+      @media (max-width: 640px) {
+        .tp-venue-hint { display: block; }
+      }
+
+      /* Venue section: allow horizontal scroll on narrow screens */
+      .tp-venue .container {
+        overflow-x: auto;
+        padding-bottom: var(--space-lg);
+      }
+
+      /* Table rows */
+      .tp-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 36px;
+      }
+      .tp-row:last-child { margin-bottom: 0; }
+      .tp-row--2 { margin-left: 145px; }
+
+      /* Table unit wrapper */
+      .tp-table-unit {
+        position: relative;
+        width: 270px;
+        height: 270px;
+        flex-shrink: 0;
+      }
+
+      /* Circular table disc */
+      .tp-table-disc {
+        position: absolute;
+        top: 65px;
+        left: 65px;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background-color: var(--limestone);
+        border: 1px solid var(--rule);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Table name label */
+      .tp-table-name {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--stone);
+        text-align: center;
+        cursor: pointer;
+        padding: 0 8px;
+        line-height: 1.3;
+        user-select: none;
+      }
+      .tp-table-name:hover { color: var(--terra); }
+
+      /* Table name inline input */
+      .tp-table-name-input {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--stone);
+        text-align: center;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--terra);
+        outline: none;
+        width: 110px;
+        padding: 0 4px;
+      }
+
+      /* Seat button */
+      .tp-seat {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px dashed var(--sage);
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        font-family: var(--font-utility);
+        font-weight: 300;
+        font-size: 0.58rem;
+        letter-spacing: 0.03em;
+        color: var(--stone);
+        text-align: center;
+        line-height: 1.2;
+        word-break: break-word;
+        overflow: hidden;
+      }
+
+      /* Empty seat: "+" placeholder via pseudo-element */
+      .tp-seat:not(.tp-seat--named)::before {
+        content: "+";
+        font-size: 1.1rem;
+        color: var(--taupe);
+        font-family: var(--font-utility);
+        font-weight: 200;
+      }
+      .tp-seat:not(.tp-seat--named) .tp-seat-name { display: none; }
+
+      /* Named seat */
+      .tp-seat--named {
+        border-style: solid;
+        border-color: var(--sage);
+      }
+
+      /* States */
+      .tp-seat:hover { background-color: rgba(126, 145, 120, 0.12); }
+
+      .tp-seat--selected {
+        border-style: solid;
+        border-color: var(--terra);
+        background-color: rgba(168, 87, 61, 0.1);
+      }
+      .tp-seat--dragover {
+        border-style: solid;
+        border-color: var(--terra);
+        background-color: rgba(168, 87, 61, 0.2);
+      }
+      .tp-seat--dragging { opacity: 0.4; cursor: grabbing; }
+
+      /* Inline seat edit input */
+      .tp-seat-input {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid var(--terra);
+        background-color: var(--ivory);
+        font-family: var(--font-utility);
+        font-weight: 300;
+        font-size: 0.58rem;
+        color: var(--stone);
+        text-align: center;
+        outline: none;
+        z-index: 10;
+        padding: 0 4px;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      /* ── Print styles ── */
+      @media print {
+        .tp-no-print,
+        .site-header,
+        .site-footer,
+        .skip-link,
+        .tp-venue {
+          display: none !important;
+        }
+
+        .tp-print-only { display: block !important; }
+
+        .tp-print-header {
+          font-family: var(--font-display);
+          font-style: italic;
+          font-size: 1.4rem;
+          color: #000;
+          text-align: center;
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid #000;
+        }
+
+        #tp-print-grid {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          padding: 0;
+        }
+
+        .tp-print-card {
+          border: 1px solid #000;
+          padding: 1rem 1.25rem;
+          break-inside: avoid;
+        }
+        .tp-print-card__name {
+          font-family: var(--font-display);
+          font-style: italic;
+          font-weight: 300;
+          font-size: 1.2rem;
+          margin: 0 0 0.5rem;
+          padding-bottom: 0.4rem;
+          border-bottom: 1px solid #999;
+          color: #000;
+        }
+        .tp-print-card__list {
+          margin: 0;
+          padding-left: 1.5rem;
+          font-family: var(--font-utility);
+          font-size: 0.85rem;
+          line-height: 1.9;
+          color: #000;
+        }
+
+        body { background: #fff; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <site-header></site-header>
+
+    <main id="main">
+
+      <div class="page-header reveal tp-no-print">
+        <span class="eyebrow">Private</span>
+        <h1>Table Plan</h1>
+        <p>
+          Click a table name to rename it. Double-click a seat to add a guest.
+          Click a seat to select it, then click another to swap — or drag and drop.
+          Changes are saved automatically.
+        </p>
+      </div>
+
+      <figure class="figure figure--bleed figure--banner reveal tp-no-print">
+        <img
+          class="figure__img"
+          src="images/barn-hall-banquet.png"
+          alt="The banqueting hall at Eyam Hall set for a wedding reception."
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="tp-controls tp-no-print">
+        <div class="container">
+          <button class="btn" type="button" id="tp-print">Print</button>
+          <button class="btn btn--outline" type="button" id="tp-reset">Reset All</button>
+        </div>
+      </div>
+
+      <section class="tp-venue section" id="tp-venue" aria-label="Table plan diagram">
+        <div class="container">
+          <p class="tp-venue-hint tp-no-print">
+            Rotate your device or use a wider screen to see the full table plan.
+          </p>
+
+          <!-- Row 1: Tables 1–3 -->
+          <div class="tp-row tp-row--1">
+
+            <div class="tp-table-unit" data-table="0">
+              <div class="tp-table-disc">
+                <span class="tp-table-name" data-table="0">Table 1</span>
+              </div>
+              <button class="tp-seat" type="button" data-table="0" data-seat="0" draggable="true" aria-label="Table 1, seat 1: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="1" draggable="true" aria-label="Table 1, seat 2: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="2" draggable="true" aria-label="Table 1, seat 3: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="3" draggable="true" aria-label="Table 1, seat 4: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="4" draggable="true" aria-label="Table 1, seat 5: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="5" draggable="true" aria-label="Table 1, seat 6: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="6" draggable="true" aria-label="Table 1, seat 7: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="7" draggable="true" aria-label="Table 1, seat 8: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="0" data-seat="8" draggable="true" aria-label="Table 1, seat 9: empty"><span class="tp-seat-name"></span></button>
+            </div>
+
+            <div class="tp-table-unit" data-table="1">
+              <div class="tp-table-disc">
+                <span class="tp-table-name" data-table="1">Table 2</span>
+              </div>
+              <button class="tp-seat" type="button" data-table="1" data-seat="0" draggable="true" aria-label="Table 2, seat 1: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="1" draggable="true" aria-label="Table 2, seat 2: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="2" draggable="true" aria-label="Table 2, seat 3: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="3" draggable="true" aria-label="Table 2, seat 4: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="4" draggable="true" aria-label="Table 2, seat 5: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="5" draggable="true" aria-label="Table 2, seat 6: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="6" draggable="true" aria-label="Table 2, seat 7: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="7" draggable="true" aria-label="Table 2, seat 8: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="1" data-seat="8" draggable="true" aria-label="Table 2, seat 9: empty"><span class="tp-seat-name"></span></button>
+            </div>
+
+            <div class="tp-table-unit" data-table="2">
+              <div class="tp-table-disc">
+                <span class="tp-table-name" data-table="2">Table 3</span>
+              </div>
+              <button class="tp-seat" type="button" data-table="2" data-seat="0" draggable="true" aria-label="Table 3, seat 1: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="1" draggable="true" aria-label="Table 3, seat 2: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="2" draggable="true" aria-label="Table 3, seat 3: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="3" draggable="true" aria-label="Table 3, seat 4: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="4" draggable="true" aria-label="Table 3, seat 5: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="5" draggable="true" aria-label="Table 3, seat 6: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="6" draggable="true" aria-label="Table 3, seat 7: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="7" draggable="true" aria-label="Table 3, seat 8: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="2" data-seat="8" draggable="true" aria-label="Table 3, seat 9: empty"><span class="tp-seat-name"></span></button>
+            </div>
+
+          </div><!-- /.tp-row--1 -->
+
+          <!-- Row 2: Tables 4–6 (offset right) -->
+          <div class="tp-row tp-row--2">
+
+            <div class="tp-table-unit" data-table="3">
+              <div class="tp-table-disc">
+                <span class="tp-table-name" data-table="3">Table 4</span>
+              </div>
+              <button class="tp-seat" type="button" data-table="3" data-seat="0" draggable="true" aria-label="Table 4, seat 1: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="1" draggable="true" aria-label="Table 4, seat 2: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="2" draggable="true" aria-label="Table 4, seat 3: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="3" draggable="true" aria-label="Table 4, seat 4: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="4" draggable="true" aria-label="Table 4, seat 5: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="5" draggable="true" aria-label="Table 4, seat 6: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="6" draggable="true" aria-label="Table 4, seat 7: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="7" draggable="true" aria-label="Table 4, seat 8: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="3" data-seat="8" draggable="true" aria-label="Table 4, seat 9: empty"><span class="tp-seat-name"></span></button>
+            </div>
+
+            <div class="tp-table-unit" data-table="4">
+              <div class="tp-table-disc">
+                <span class="tp-table-name" data-table="4">Table 5</span>
+              </div>
+              <button class="tp-seat" type="button" data-table="4" data-seat="0" draggable="true" aria-label="Table 5, seat 1: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="1" draggable="true" aria-label="Table 5, seat 2: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="2" draggable="true" aria-label="Table 5, seat 3: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="3" draggable="true" aria-label="Table 5, seat 4: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="4" draggable="true" aria-label="Table 5, seat 5: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="5" draggable="true" aria-label="Table 5, seat 6: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="6" draggable="true" aria-label="Table 5, seat 7: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="7" draggable="true" aria-label="Table 5, seat 8: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="4" data-seat="8" draggable="true" aria-label="Table 5, seat 9: empty"><span class="tp-seat-name"></span></button>
+            </div>
+
+            <div class="tp-table-unit" data-table="5">
+              <div class="tp-table-disc">
+                <span class="tp-table-name" data-table="5">Table 6</span>
+              </div>
+              <button class="tp-seat" type="button" data-table="5" data-seat="0" draggable="true" aria-label="Table 6, seat 1: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="1" draggable="true" aria-label="Table 6, seat 2: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="2" draggable="true" aria-label="Table 6, seat 3: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="3" draggable="true" aria-label="Table 6, seat 4: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="4" draggable="true" aria-label="Table 6, seat 5: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="5" draggable="true" aria-label="Table 6, seat 6: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="6" draggable="true" aria-label="Table 6, seat 7: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="7" draggable="true" aria-label="Table 6, seat 8: empty"><span class="tp-seat-name"></span></button>
+              <button class="tp-seat" type="button" data-table="5" data-seat="8" draggable="true" aria-label="Table 6, seat 9: empty"><span class="tp-seat-name"></span></button>
+            </div>
+
+          </div><!-- /.tp-row--2 -->
+
+        </div><!-- /.container -->
+      </section>
+
+      <!-- Print-only: title and table list grid -->
+      <div class="tp-print-header tp-print-only" aria-hidden="true">
+        Table Plan &mdash; Rosie &amp; Joe, 17 April 2027
+      </div>
+      <section id="tp-print-grid" class="tp-print-only" aria-hidden="true"></section>
+
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        var STORAGE_KEY  = "rosie-joe-table-plan";
+        var NUM_TABLES   = 6;
+        var NUM_SEATS    = 9;
+        var UNIT_SIZE    = 270;
+        var ORBIT_RADIUS = 105;
+        var SEAT_SIZE    = 50;
+
+        var state;
+        var selected = null; // { tableId, seatIndex } | null
+        var dragSrc  = null; // { tableId, seatIndex } | null
+
+        /* ── Data ── */
+
+        function defaultState() {
+          return {
+            tables: Array.from({ length: NUM_TABLES }, function (_, i) {
+              return {
+                id: i,
+                name: "Table " + (i + 1),
+                seats: Array(NUM_SEATS).fill("")
+              };
+            })
+          };
+        }
+
+        function loadState() {
+          try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+              var parsed = JSON.parse(raw);
+              if (
+                parsed &&
+                Array.isArray(parsed.tables) &&
+                parsed.tables.length === NUM_TABLES
+              ) {
+                return parsed;
+              }
+            }
+          } catch (e) { /* ignore */ }
+          return defaultState();
+        }
+
+        function saveState() {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          } catch (e) { /* ignore */ }
+        }
+
+        /* ── Geometry ── */
+
+        function seatPosition(i) {
+          var rad = (i * (360 / NUM_SEATS) - 90) * (Math.PI / 180);
+          var cx  = UNIT_SIZE / 2;
+          var cy  = UNIT_SIZE / 2;
+          return {
+            left: Math.round(cx + ORBIT_RADIUS * Math.cos(rad) - SEAT_SIZE / 2),
+            top:  Math.round(cy + ORBIT_RADIUS * Math.sin(rad) - SEAT_SIZE / 2)
+          };
+        }
+
+        function positionAllSeats() {
+          document.querySelectorAll(".tp-table-unit").forEach(function (unit) {
+            unit.querySelectorAll(".tp-seat").forEach(function (seat, i) {
+              var pos = seatPosition(i);
+              seat.style.left = pos.left + "px";
+              seat.style.top  = pos.top  + "px";
+            });
+          });
+        }
+
+        /* ── Rendering ── */
+
+        function renderSeat(tableId, seatIndex) {
+          var seat = document.querySelector(
+            ".tp-seat[data-table='" + tableId + "'][data-seat='" + seatIndex + "']"
+          );
+          if (!seat) return;
+          var name      = state.tables[tableId].seats[seatIndex];
+          var tableName = state.tables[tableId].name;
+          seat.querySelector(".tp-seat-name").textContent = name;
+          seat.classList.toggle("tp-seat--named", name.length > 0);
+          seat.setAttribute(
+            "aria-label",
+            tableName + ", seat " + (seatIndex + 1) + (name ? ": " + name : ": empty")
+          );
+        }
+
+        function renderAll() {
+          state.tables.forEach(function (table) {
+            var nameEl = document.querySelector(
+              ".tp-table-name[data-table='" + table.id + "']"
+            );
+            if (nameEl) nameEl.textContent = table.name;
+            table.seats.forEach(function (_, si) { renderSeat(table.id, si); });
+          });
+        }
+
+        function updatePrintGrid() {
+          var grid = document.getElementById("tp-print-grid");
+          if (!grid) return;
+          grid.innerHTML = "";
+          state.tables.forEach(function (table) {
+            var card = document.createElement("div");
+            card.className = "tp-print-card";
+
+            var h2 = document.createElement("h2");
+            h2.className   = "tp-print-card__name";
+            h2.textContent = table.name;
+            card.appendChild(h2);
+
+            var ol = document.createElement("ol");
+            ol.className = "tp-print-card__list";
+            table.seats.forEach(function (name) {
+              var li = document.createElement("li");
+              li.textContent = name || "—"; // em dash for empty seats
+              ol.appendChild(li);
+            });
+            card.appendChild(ol);
+            grid.appendChild(card);
+          });
+        }
+
+        /* ── Swap ── */
+
+        function swapSeats(a, b) {
+          var nameA = state.tables[a.tableId].seats[a.seatIndex];
+          var nameB = state.tables[b.tableId].seats[b.seatIndex];
+          state.tables[a.tableId].seats[a.seatIndex] = nameB;
+          state.tables[b.tableId].seats[b.seatIndex] = nameA;
+          saveState();
+          renderAll();
+          updatePrintGrid();
+        }
+
+        /* ── Selection ── */
+
+        function clearSelection() {
+          if (selected) {
+            var prev = document.querySelector(
+              ".tp-seat[data-table='" + selected.tableId +
+              "'][data-seat='" + selected.seatIndex + "']"
+            );
+            if (prev) prev.classList.remove("tp-seat--selected");
+          }
+          selected = null;
+        }
+
+        function handleSeatClick(seatEl) {
+          var coords = {
+            tableId:   parseInt(seatEl.dataset.table, 10),
+            seatIndex: parseInt(seatEl.dataset.seat,  10)
+          };
+          if (!selected) {
+            selected = coords;
+            seatEl.classList.add("tp-seat--selected");
+            return;
+          }
+          if (
+            selected.tableId   === coords.tableId &&
+            selected.seatIndex === coords.seatIndex
+          ) {
+            clearSelection();
+            return;
+          }
+          swapSeats(selected, coords);
+          clearSelection();
+        }
+
+        /* ── Inline edit: seat name ── */
+
+        function startSeatEdit(seatEl) {
+          var tableId   = parseInt(seatEl.dataset.table, 10);
+          var seatIndex = parseInt(seatEl.dataset.seat,  10);
+          var current   = state.tables[tableId].seats[seatIndex];
+
+          var input = document.createElement("input");
+          input.type      = "text";
+          input.className = "tp-seat-input";
+          input.value     = current;
+          input.maxLength = 30;
+          input.style.left = seatEl.style.left;
+          input.style.top  = seatEl.style.top;
+          input.setAttribute("aria-label", "Edit name for seat " + (seatIndex + 1));
+
+          seatEl.closest(".tp-table-unit").appendChild(input);
+          input.focus();
+          input.select();
+
+          var done = false;
+          function commit() {
+            if (done) return;
+            done = true;
+            var newName = input.value.trim();
+            state.tables[tableId].seats[seatIndex] = newName;
+            saveState();
+            if (input.parentNode) input.remove();
+            renderSeat(tableId, seatIndex);
+            updatePrintGrid();
+          }
+          input.addEventListener("blur", commit);
+          input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") { input.blur(); }
+            if (e.key === "Escape") { done = true; if (input.parentNode) input.remove(); }
+          });
+        }
+
+        /* ── Inline edit: table name ── */
+
+        function startTableNameEdit(nameEl) {
+          var tableId     = parseInt(nameEl.dataset.table, 10);
+          var currentName = state.tables[tableId].name;
+
+          var input = document.createElement("input");
+          input.type      = "text";
+          input.className = "tp-table-name-input";
+          input.value     = currentName;
+          input.maxLength = 20;
+          nameEl.replaceWith(input);
+          input.focus();
+          input.select();
+
+          function restoreSpan(name) {
+            var span = document.createElement("span");
+            span.className      = "tp-table-name";
+            span.dataset.table  = tableId;
+            span.textContent    = name;
+            if (input.parentNode) input.replaceWith(span);
+          }
+
+          var done = false;
+          function commit() {
+            if (done) return;
+            done = true;
+            var newName = input.value.trim() || ("Table " + (tableId + 1));
+            state.tables[tableId].name = newName;
+            saveState();
+            restoreSpan(newName);
+            state.tables[tableId].seats.forEach(function (_, si) { renderSeat(tableId, si); });
+            updatePrintGrid();
+          }
+          input.addEventListener("blur", commit);
+          input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") { input.blur(); }
+            if (e.key === "Escape") { done = true; restoreSpan(currentName); }
+          });
+        }
+
+        /* ── Controls ── */
+
+        function bindControls() {
+          document.getElementById("tp-print").addEventListener("click", function () {
+            updatePrintGrid();
+            window.print();
+          });
+          document.getElementById("tp-reset").addEventListener("click", function () {
+            if (window.confirm("Reset the table plan? This will clear all names.")) {
+              state    = defaultState();
+              selected = null;
+              saveState();
+              renderAll();
+              updatePrintGrid();
+            }
+          });
+        }
+
+        /* ── Seat & table-name events (delegated to #tp-venue) ── */
+
+        function bindSeats() {
+          var venue = document.getElementById("tp-venue");
+
+          venue.addEventListener("click", function (e) {
+            var nameEl = e.target.closest(".tp-table-name");
+            if (nameEl) { startTableNameEdit(nameEl); return; }
+            var seat = e.target.closest(".tp-seat");
+            if (seat) { handleSeatClick(seat); }
+          });
+
+          venue.addEventListener("dblclick", function (e) {
+            var seat = e.target.closest(".tp-seat");
+            if (!seat) return;
+            clearSelection();
+            startSeatEdit(seat);
+          });
+
+          venue.addEventListener("dragstart", function (e) {
+            var seat = e.target.closest(".tp-seat");
+            if (!seat) return;
+            dragSrc = {
+              tableId:   parseInt(seat.dataset.table, 10),
+              seatIndex: parseInt(seat.dataset.seat,  10)
+            };
+            seat.classList.add("tp-seat--dragging");
+            e.dataTransfer.effectAllowed = "move";
+            e.dataTransfer.setData("text/plain", "");
+          });
+
+          venue.addEventListener("dragend", function () {
+            document.querySelectorAll(".tp-seat--dragging, .tp-seat--dragover")
+              .forEach(function (el) {
+                el.classList.remove("tp-seat--dragging", "tp-seat--dragover");
+              });
+            dragSrc = null;
+          });
+
+          venue.addEventListener("dragover", function (e) {
+            if (!dragSrc) return;
+            var seat = e.target.closest(".tp-seat");
+            if (!seat) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = "move";
+            seat.classList.add("tp-seat--dragover");
+          });
+
+          venue.addEventListener("dragleave", function (e) {
+            var seat = e.target.closest(".tp-seat");
+            if (seat) seat.classList.remove("tp-seat--dragover");
+          });
+
+          venue.addEventListener("drop", function (e) {
+            var seat = e.target.closest(".tp-seat");
+            if (!seat || !dragSrc) return;
+            e.preventDefault();
+            var drop = {
+              tableId:   parseInt(seat.dataset.table, 10),
+              seatIndex: parseInt(seat.dataset.seat,  10)
+            };
+            if (dragSrc.tableId !== drop.tableId || dragSrc.seatIndex !== drop.seatIndex) {
+              swapSeats(dragSrc, drop);
+            }
+            seat.classList.remove("tp-seat--dragover");
+          });
+        }
+
+        /* ── Init ── */
+
+        document.addEventListener("DOMContentLoaded", function () {
+          state = loadState();
+          positionAllSeats();
+          renderAll();
+          updatePrintGrid();
+          bindControls();
+          bindSeats();
+        });
+
+      })();
+    </script>
+  </body>
+</html>
