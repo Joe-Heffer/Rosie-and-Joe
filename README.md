@@ -54,6 +54,16 @@ All colours, fonts and spacing live as CSS custom properties at the top of
 
   There's also `--rule`, Sage at ~35% opacity, used for hairline dividers.
 
+- **Bridesmaid dress colours** (Azazie Chiffon fabric — not part of the site's CSS palette above, kept here for reference). Azazie doesn't publish hex codes for these; the values below are sampled from their fabric swatch photos, so treat them as an approximation rather than an exact match:
+
+  | Name       | Approx. hex |
+  | ---------- | ----------- |
+  | Eucalyptus | `#6B8174`   |
+  | Sea moss   | `#5F776A`   |
+  | Dark green | `#25523C`   |
+  | Basil      | `#66884C`   |
+  | Dusty Sage | `#B3BFA7`   |
+
 - **Spacing:** a consistent `--space-*` scale.
 - **Responsive:** mobile-first with a single breakpoint at `768px`.
 - **Utilities:** `.container`, `.section` / `.section--alt`, `.btn` (and `.btn--outline`), `.detail`, `.timeline`, `.link-list`, `.embed`.
