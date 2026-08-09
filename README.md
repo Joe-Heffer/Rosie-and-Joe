@@ -64,6 +64,13 @@ All colours, fonts and spacing live as CSS custom properties at the top of
   | Basil      | `#66884C`   |
   | Dusty Sage | `#B3BFA7`   |
 
+- **Suit colour** (Marks & Spencer suit — not part of the site's CSS palette above, kept here for reference). M&S doesn't publish a hex code for "dusty pink"; the values below are a standard approximation of that named shade, not sampled from the actual garment, so treat them as a rough match:
+
+  | Name               | Approx. hex |
+  | ------------------ | ----------- |
+  | Dusty Pink (light) | `#c297b1`   |
+  | Dusty Pink (dark)  | `#7b5562`   |
+
 - **Spacing:** a consistent `--space-*` scale.
 - **Responsive:** mobile-first with a single breakpoint at `768px`.
 - **Utilities:** `.container`, `.section` / `.section--alt`, `.btn` (and `.btn--outline`), `.detail`, `.timeline`, `.link-list`, `.embed`.
