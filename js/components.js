@@ -43,9 +43,8 @@
     '<header class="site-header">' +
     '<div class="container">' +
     '<nav class="nav" aria-label="Primary">' +
-    '<a class="nav__logo" href="/">' +
+    '<a class="nav__logo" href="/" aria-label="{{LOGO}}">' +
     '<img class="nav__monogram" src="/images/rj-monogram.png" alt="" aria-hidden="true" />' +
-    "{{LOGO}}" +
     "</a>" +
     '<button class="nav__toggle" type="button" aria-label="Toggle navigation menu" aria-controls="primary-menu" aria-expanded="false">' +
     "<span></span><span></span><span></span>" +
