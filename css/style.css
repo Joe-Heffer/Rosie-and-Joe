@@ -1,11 +1,13 @@
 /* ==========================================================================
    Rosie & Joe — Wedding Site
-   Design system & styles — "Walled Garden in Winter Light"
+   Design system & styles — "Blush Botanical"
 
-   Warm, restrained keepsake palette on an ivory canvas. Cormorant Light
-   Italic for display, Spectral for body, Cormorant SC for labels, Jost for
-   utility. Fine sage rules, a film-grain hero overlay, sparing botanical
-   marks. No drop shadows, no gold, no pure white, no bold weights.
+   Matches the couple's printed stationery: a white/warm-white canvas,
+   near-black serif ink, a dusty rose accent and muted botanical green,
+   echoing the wreath/sprig watercolour florals. Cormorant Light Italic for
+   display, Spectral for body, Cormorant SC for labels, Jost for utility.
+   Fine rose rules, a film-grain hero overlay, sparing botanical marks. No
+   drop shadows, no gold, no bold weights.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -13,16 +15,17 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Palette */
-  --ivory:     #f6f2ea;  /* warm parchment — primary background */
-  --stone:     #352f28;  /* deep warm near-black — body text */
-  --sage:      #7e9178;  /* dusty sage — botanical accent, fine rules */
-  --terra:     #a8573d;  /* muted terracotta — the single warm accent */
-  --terra-light: #d99877;  /* lighter terracotta tint — legible on the dark hero photo */
-  --taupe:     #9a8f82;  /* warm taupe — secondary / muted text */
-  --limestone: #eae5dc;  /* paler than ivory — card surfaces, inset areas */
+  --ivory:     #fbf8f5;  /* warm white — primary background, matches the stationery's paper */
+  --stone:     #221e1b;  /* near-black ink — body text, matches the stationery's serif */
+  --sage:      #6e7f52;  /* muted botanical olive-green — foliage accent, fine rules */
+  --forest:    #364226;  /* deep foliage green from the stationery wreath — footer background */
+  --terra:     #a94a68;  /* dusty rose — the single warm accent, from the watercolour petals */
+  --terra-light: #d9829d;  /* mid rose tint — legible on the hero photo's scrim */
+  --taupe:     #8c8177;  /* warm grey-brown — secondary / muted text */
+  --limestone: #f6e8ec;  /* pale blush — card surfaces, inset areas */
 
-  /* A translucent sage for fine hairlines (~35% opacity) */
-  --rule: rgba(126, 145, 120, 0.35);
+  /* A translucent rose for fine hairlines (~30% opacity) */
+  --rule: rgba(169, 74, 104, 0.3);
 
   /* Typography */
   --font-display:    "Cormorant", Georgia, "Times New Roman", serif;
@@ -281,7 +284,7 @@ site-footer {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(246, 242, 234, 0.92);
+  background-color: rgba(251, 248, 245, 0.92);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--rule);
 }
@@ -294,6 +297,9 @@ site-footer {
 }
 
 .nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
   font-family: var(--font-display);
   font-style: italic;
   font-size: var(--fs-lg);
@@ -301,6 +307,12 @@ site-footer {
   letter-spacing: 0.02em;
   color: var(--stone);
   text-decoration: none;
+}
+
+.nav__monogram {
+  width: 22px;
+  height: auto;
+  opacity: 0.85;
 }
 
 .nav__logo:hover {
@@ -394,7 +406,7 @@ site-footer {
   inset: 0;
   z-index: 0;
   background: url("../images/eyam-hall.png") center / cover no-repeat;
-  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+  filter: contrast(1.03) saturate(0.95);
 }
 
 /* Evening guest invitation — swap the daytime hero photo for a barn/banquet
@@ -411,10 +423,10 @@ site-footer {
   background:
     radial-gradient(
       ellipse 65% 55% at 50% 50%,
-      rgba(33, 28, 22, 0.55) 0%,
-      rgba(33, 28, 22, 0) 72%
+      rgba(34, 30, 27, 0.62) 0%,
+      rgba(34, 30, 27, 0.1) 72%
     ),
-    linear-gradient(180deg, rgba(53, 47, 40, 0.4) 0%, rgba(53, 47, 40, 0.58) 100%);
+    linear-gradient(180deg, rgba(34, 30, 27, 0.48) 0%, rgba(34, 30, 27, 0.66) 100%);
 }
 
 /* Film grain — the signature element. ~8% opacity, subliminal. */
@@ -440,12 +452,21 @@ site-footer {
   opacity: 0.9;
 }
 
+/* Watercolour flower sprig — a single restrained echo of the stationery's
+   hand-painted florals, used only on the homepage hero. */
+.hero__flower {
+  width: clamp(90px, 12vw, 140px);
+  height: auto;
+  margin: 0 auto var(--space-sm);
+  filter: drop-shadow(0 2px 10px rgba(34, 30, 27, 0.35));
+}
+
 /* Soft, large-blur shadow for legibility against the photo's high-frequency
    detail (stonework, leaves) — not a decorative drop shadow. */
 .hero__names,
 .hero__date,
 .hero__tagline {
-  text-shadow: 0 2px 16px rgba(30, 26, 20, 0.4);
+  text-shadow: 0 2px 16px rgba(34, 30, 27, 0.4);
 }
 
 .hero__names {
@@ -533,7 +554,7 @@ site-footer {
   aspect-ratio: 21 / 9;
   object-fit: cover;
   /* Ektar / 35mm colour signature. */
-  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+  filter: contrast(1.03) saturate(0.95);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
@@ -590,7 +611,7 @@ site-footer {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   /* Ektar / 35mm colour signature — matches .figure__img. */
-  filter: contrast(1.03) saturate(0.92) sepia(0.06);
+  filter: contrast(1.03) saturate(0.95);
   /* Thin sage hairline frame, inset within the mat. */
   border: 1px solid var(--rule);
 }
@@ -838,21 +859,24 @@ p + .address {
 .site-footer {
   text-align: center;
   padding: var(--section-gap) var(--space-md);
-  border-top: 1px solid var(--rule);
-  background-color: var(--ivory);
+  background-color: var(--forest);
+  color: var(--ivory);
 }
 
-.site-footer__ornament {
-  width: 32px;
+.site-footer__monogram {
+  width: 40px;
   height: auto;
   margin: 0 auto var(--space-md);
   opacity: 0.9;
+  /* Monogram artwork is black-on-transparent; invert to read on the dark footer. */
+  filter: invert(1);
 }
 
 .site-footer__date {
   font-family: var(--font-display);
   font-style: italic;
   font-size: var(--fs-lg);
+  color: var(--ivory);
   margin-bottom: var(--space-xs);
 }
 
@@ -861,7 +885,7 @@ p + .address {
   font-weight: 300;
   font-size: var(--fs-sm);
   letter-spacing: 0.12em;
-  color: var(--taupe);
+  color: rgba(251, 248, 245, 0.72);
   margin-bottom: var(--space-xs);
 }
 
@@ -870,7 +894,16 @@ p + .address {
   font-weight: 300;
   font-size: var(--fs-sm);
   letter-spacing: 0.04em;
+  color: var(--ivory);
   margin-bottom: 0;
+}
+
+.site-footer a {
+  color: var(--ivory);
+}
+
+.site-footer a:hover {
+  color: var(--terra-light);
 }
 
 /* --------------------------------------------------------------------------
@@ -968,6 +1001,7 @@ p + .address {
   .site-header,
   .hero-grain,
   .botanical,
+  .hero__flower,
   .skip-link {
     display: none;
   }
