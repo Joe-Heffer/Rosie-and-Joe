@@ -1,15 +1,11 @@
+# Rosie &amp; Joe — Wedding Website
+
 [![CI](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/ci.yml/badge.svg)](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/ci.yml)
 [![pages-build-deployment](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Joe-Heffer/Rosie-and-Joe/actions/workflows/pages/pages-build-deployment)
-
-# Rosie &amp; Joe — Wedding Website
 
 A static, mobile-first wedding website built with **vanilla HTML, CSS and JavaScript**.
 No frameworks, no build tools, no server-side processing — it runs anywhere static
 files can be hosted, including GitHub Pages.
-
-- **Couple:** Rosie &amp; Joe
-- **Date:** Saturday 17 April 2027
-- **Venue:** Eyam Hall, Eyam, Derbyshire
 
 ## Project structure
 
