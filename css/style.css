@@ -527,6 +527,15 @@ site-footer {
   margin-top: var(--space-xl);
 }
 
+/* Flower garland — decorative divider beneath the hero CTAs. */
+.hero__garland {
+  display: block;
+  width: min(90%, 480px);
+  height: auto;
+  margin: var(--space-lg) auto 0;
+  opacity: 0.9;
+}
+
 /* --------------------------------------------------------------------------
    Figure — letterbox intro image, shot-on-film treatment
    -------------------------------------------------------------------------- */
@@ -858,9 +867,24 @@ p + .address {
    -------------------------------------------------------------------------- */
 .site-footer {
   text-align: center;
-  padding: var(--section-gap) var(--space-md);
+  padding: var(--section-gap) 0 0;
   background-color: var(--forest);
   color: var(--ivory);
+  overflow: hidden;
+}
+
+.site-footer__content {
+  padding: 0 var(--space-md);
+}
+
+.site-footer__arch {
+  display: block;
+  width: 60%;
+  max-width: 540px;
+  height: auto;
+  margin: var(--space-lg) auto 0;
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 .site-footer__monogram {

@@ -58,10 +58,13 @@
 
   var FOOTER_HTML =
     '<footer class="site-footer">' +
+    '<div class="site-footer__content">' +
     '<img class="site-footer__monogram" src="/images/rj-monogram.png" alt="" aria-hidden="true" loading="lazy" />' +
     '<p class="site-footer__date">Saturday 17 April 2027</p>' +
     '<p class="site-footer__note">Eyam Hall &middot; Eyam, Derbyshire</p>' +
     '<p class="site-footer__contact"><a href="mailto:hello@rosieandjoe.uk">hello@rosieandjoe.uk</a></p>' +
+    "</div>" +
+    '<img class="site-footer__arch" src="/images/flower-arch.png" alt="" aria-hidden="true" loading="lazy" />' +
     "</footer>";
 
   customElements.define(
