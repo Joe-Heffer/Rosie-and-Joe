@@ -135,9 +135,12 @@ img {
   padding: var(--section-gap) 0;
 }
 
-/* Inset surface — used for the RSVP block. Paler than ivory, thin sage rules. */
+/* Inset surface — used for the RSVP block. Paler than ivory, thin sage rules.
+   A faint stone-grain texture (same feTurbulence technique as .hero-grain,
+   at a much lower opacity) keeps it from reading as flat digital colour. */
 .section--alt {
   background-color: var(--limestone);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
