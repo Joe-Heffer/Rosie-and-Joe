@@ -17,7 +17,7 @@ There are no tests, linters, or package manifests in this repo. `.github/workflo
 
 ## Architecture
 
-Eight pages share a common header/footer markup pattern (via custom elements, see below) and a single stylesheet/script:
+Eight pages share a common header/footer markup pattern (via custom elements, see below) and a single stylesheet/script, plus one unlinked private page:
 
 - `index.html` — Home (hero with grain + botanical mark, welcome note, CTAs)
 - `details.html` — The Day (ceremony, reception, dress code, schedule timeline)
@@ -27,6 +27,7 @@ Eight pages share a common header/footer markup pattern (via custom elements, se
 - `gift.html` — Gift / honeymoon fund info
 - `evening/index.html` — Evening-only guests page (one directory deep; keeps its own simplified inline header instead of `<site-header>`, since its nav has no links and the shared header's links are root-relative)
 - `save-the-date/index.html` — standalone save-the-date card; fully self-contained with inline `<style>` and no shared header/footer/nav — not part of the templating system below
+- `table-plan.html` — private seating/table-plan page, `<meta name="robots" content="noindex, nofollow">` like `evening/index.html`; not linked from any nav or other page, uses the shared header/footer and design system
 - `css/style.css` — entire design system and all styles
 - `js/main.js` — mobile nav toggle, smooth scroll, active-nav-link highlighting, scroll reveal
 - `js/components.js` — defines the `<site-header>` / `<site-footer>` custom elements (see "Shared header/footer" below)
@@ -61,7 +62,7 @@ A warm, restrained "keepsake" theme. All colours, fonts and rhythm are CSS custo
 
 ### Content status
 
-There are no remaining `<!-- TODO -->` placeholder comments — all copy, the Google Form embed, and the Google Maps embed are live. Two narrower placeholders remain in `evening/index.html`: an `[RSVP DEADLINE]` placeholder in the RSVP section copy, and a `<!-- PARKING: confirm with venue -->` comment ahead of the transport paragraph — both need real information from the couple/venue rather than invented content.
+There are no remaining `<!-- TODO -->` or bracketed placeholders anywhere in the site — all copy, the Google Form embeds (main and evening RSVP), and the Google Maps embed are live.
 
 ### Embedding the Google Form (RSVP)
 
