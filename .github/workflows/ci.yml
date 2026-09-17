@@ -27,3 +27,9 @@ jobs:
         with:
           node-version: '20'
       - run: node --check js/main.js
+
+  unused-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check-unused-files.py

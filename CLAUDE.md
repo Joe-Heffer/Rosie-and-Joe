@@ -13,7 +13,7 @@ A static, mobile-first wedding website for Rosie & Joe, built with vanilla HTML,
 
 There is no build step. Open any `.html` file directly in a browser, or serve the directory with any static file server (e.g. `python3 -m http.server`). All paths are relative, so both approaches work.
 
-There are no tests, linters, or package manifests in this repo. `.github/workflows/ci.yml` runs `html-proofer` (link/image/HTML validity checks, with `cake/index.html` excluded) and `node --check js/main.js` on every push/PR.
+There are no tests, linters, or package manifests in this repo. `.github/workflows/ci.yml` runs `html-proofer` (link/image/HTML validity checks, with `cake/index.html` excluded), `node --check js/main.js`, and `scripts/check-unused-files.py` (fails if any tracked file under `images/`, `css/`, or `js/` isn't referenced by filename from any tracked HTML/CSS/JS source) on every push/PR.
 
 ## Architecture
 
