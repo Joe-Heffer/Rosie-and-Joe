@@ -432,6 +432,26 @@ site-footer {
   background-image: url("../images/eyam-hall-sketch.jpg");
 }
 
+/* Homepage — the sketch is portrait, so "cover" crops it hard at the top and
+   bottom, and its torn-paper edges show at the sides. Instead the painting
+   (and the grain over it) fades into the ivory canvas on every side: in under
+   the header and out behind the garland, which frames the hero's foot. */
+.hero--home {
+  box-shadow: none;
+}
+
+.hero--home .hero__bg,
+.hero--home .hero-grain {
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
+    linear-gradient(to right, transparent 2%, #000 12%, #000 88%, transparent 98%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
+    linear-gradient(to right, transparent 2%, #000 12%, #000 88%, transparent 98%);
+  mask-composite: intersect;
+}
+
 .hero--evening .hero__bg {
   background-image: url("../images/barn-hall-watercolour.jpg");
 }
@@ -672,6 +692,12 @@ site-footer {
   padding-bottom: calc(var(--space-xl) + 12vw);
 }
 
+/* Home — at full width the garland is only a thin strip on a phone, so it is
+   held at a minimum width (its ends run off the sides) and centred. */
+.hero--home {
+  padding-bottom: calc(var(--space-xl) + max(12vw, 80px));
+}
+
 .hero--home .hero__garland,
 .hero--evening .hero__garland {
   position: absolute;
@@ -682,6 +708,13 @@ site-footer {
   opacity: 1;
   transform: translateY(35%);
   pointer-events: none;
+}
+
+.hero--home .hero__garland {
+  left: 50%;
+  width: max(100%, 640px);
+  max-width: none;
+  transform: translate(-50%, 30%);
 }
 
 /* --------------------------------------------------------------------------
