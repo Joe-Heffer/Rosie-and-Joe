@@ -641,9 +641,9 @@ site-footer {
 }
 
 /* Home — now and then a few small birds cross the sky above the names, as
-   far-off silhouettes in the sketch's ink. Like real small birds they flap
-   in short bursts and then glide, each on its own rhythm, rising and dipping
-   a little as they go. Each .hero__bird spans the hero's width and slides one
+   far-off silhouettes in a soft grey that sits back in the faded sketch.
+   Like real small birds they flap in short bursts and then glide, each on
+   its own rhythm, rising and dipping a little as they go. Each .hero__bird spans the hero's width and slides one
    full width across, carrying its bird (the svg) from just off the left edge
    to just off the right; most of each cycle is spent off-screen, so passes
    are rare. */
@@ -670,7 +670,7 @@ site-footer {
   width: 15px;
   height: 8px;
   overflow: visible;
-  fill: var(--stone);
+  fill: var(--taupe);
   opacity: 0.4;
   animation: bird-bob 3.4s ease-in-out infinite alternate;
 }
