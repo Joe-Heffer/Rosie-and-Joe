@@ -1,9 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="816" height="1301" viewBox="0 0 816 1301">
-  <!-- Falling-blossom overlay for images/eyam-hall-sketch.jpg: pink petals
-       drift down from the blossom tree on the left, the shrub below the door
-       and the climbing roses, in the painting's own pixel coordinates, so it
-       lines up when used as a background with the same size and position.
-       Each petal falls, sways and tumbles, then fades before it lands. -->
+  <!-- Signs of life for images/eyam-hall-sketch.jpg, in the painting's own
+       pixel coordinates, so it lines up when used as a background with the
+       same size and position:
+       * smoke curls up from two of the chimney pots and drifts on the breeze
+       * pink petals drift down from the blossom tree on the left, the shrub
+         below the door and the climbing roses, swaying and tumbling, then
+         fade before they land
+       * a pale yellow butterfly flits about the climbing roses by the door -->
+  <defs>
+    <radialGradient id="puff">
+      <stop offset="0" stop-color="#8C8174" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#8C8174" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#8C8174" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
   <style>
     .p {
       opacity: 0;
@@ -54,10 +64,67 @@
       80% { opacity: 0.8; }
       100% { opacity: 0; transform: translate(-24px, 110px); }
     }
+    .s {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: rise-a 8s linear infinite;
+    }
+    .s.b { animation-name: rise-b; }
+    @keyframes rise-a {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+      12% { opacity: 0.6; }
+      35% { transform: translate(-2px, -20px) scale(1); }
+      65% { opacity: 0.25; transform: translate(10px, -42px) scale(1.6); }
+      100% { opacity: 0; transform: translate(26px, -66px) scale(2.2); }
+    }
+    @keyframes rise-b {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+      12% { opacity: 0.6; }
+      35% { transform: translate(3px, -22px) scale(1); }
+      65% { opacity: 0.25; transform: translate(8px, -44px) scale(1.6); }
+      100% { opacity: 0; transform: translate(30px, -62px) scale(2.2); }
+    }
+    .fly { animation: flit 26s ease-in-out infinite; }
+    .bob { animation: bob 1.3s ease-in-out infinite alternate; }
+    .w { animation: flap 0.22s ease-in-out infinite alternate; }
+    @keyframes flit {
+      0%, 100% { transform: translate(0, 0); }
+      12% { transform: translate(24px, -16px); }
+      22%, 30% { transform: translate(52px, -4px); }
+      42% { transform: translate(66px, 26px); }
+      55% { transform: translate(38px, 42px); }
+      66%, 72% { transform: translate(8px, 30px); }
+      85% { transform: translate(-16px, 8px); }
+    }
+    @keyframes bob {
+      from { transform: translateY(-3px); }
+      to { transform: translateY(3px); }
+    }
+    @keyframes flap {
+      from { transform: scaleX(1); }
+      to { transform: scaleX(0.2); }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .p, .r { animation: none; }
+      .p, .r, .s, .fly, .bob, .w { animation: none; }
     }
   </style>
+  <circle class="s" style="animation-delay:-0.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-1.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-2.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-3.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-4.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-5.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-6.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-7.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-0.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-1.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-2.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-3.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-4.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-5.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-6.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-7.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
   <g class="p b" style="animation-duration:11.6s;animation-delay:-9.8s"><g transform="translate(78 770) scale(1.51)"><path class="r" style="fill:#EFC6CF;animation-duration:3.3s;animation-delay:-0.8s" d="M-4 0C-3-2.6 2-3 4 0C2 3-3 2.6-4 0Z"/></g></g>
   <g class="p d" style="animation-duration:11.6s;animation-delay:-3.2s"><g transform="translate(129 767) scale(1.10)"><path class="r" style="fill:#EFC6CF;animation-duration:4.0s;animation-delay:-2.9s" d="M-4 0C-3-2.6 2-3 4 0C2 3-3 2.6-4 0Z"/></g></g>
   <g class="p c" style="animation-duration:13.3s;animation-delay:-8.0s"><g transform="translate(118 782) scale(1.59)"><path class="r" style="fill:#EFC6CF;animation-duration:3.6s;animation-delay:-0.3s" d="M-4 0C-3-2.6 2-3 4 0C2 3-3 2.6-4 0Z"/></g></g>
@@ -87,4 +154,9 @@
   <g class="p c" style="animation-duration:9.3s;animation-delay:-2.9s"><g transform="translate(709 660) scale(1.57)"><path class="r" style="fill:#D98FA3;animation-duration:4.5s;animation-delay:-3.0s" d="M-4 0C-3-2.6 2-3 4 0C2 3-3 2.6-4 0Z"/></g></g>
   <g class="p b" style="animation-duration:12.9s;animation-delay:-2.8s"><g transform="translate(755 664) scale(1.44)"><path class="r" style="fill:#DFA0B0;animation-duration:3.6s;animation-delay:-0.7s" d="M-4 0C-3-2.6 2-3 4 0C2 3-3 2.6-4 0Z"/></g></g>
 
+  <g transform="translate(548 812)"><g class="fly"><g class="bob">
+    <path class="w" fill="#F3DFA2" stroke="#5B4E42" stroke-width="0.5" stroke-linejoin="round" d="M0 0C-2-5-8-6-8-2C-8 0-5 1-3 1C-6 2-6 6-3 5C-2 4-1 2 0 0Z"/>
+    <g transform="scale(-1 1)"><path class="w" fill="#F3DFA2" stroke="#5B4E42" stroke-width="0.5" stroke-linejoin="round" d="M0 0C-2-5-8-6-8-2C-8 0-5 1-3 1C-6 2-6 6-3 5C-2 4-1 2 0 0Z"/></g>
+    <path d="M0-3V3" stroke="#5B4E42" stroke-width="0.9" stroke-linecap="round"/>
+  </g></g></g>
 </svg>
