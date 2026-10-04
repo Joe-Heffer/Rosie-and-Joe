@@ -478,6 +478,17 @@ site-footer {
   text-shadow: none;
 }
 
+/* Evening — a soft ivory halo lifts the text off the fairy lights that run
+   behind it. A glow in the canvas colour, not a dark drop shadow. */
+.hero--evening .hero__names,
+.hero--evening .hero__date,
+.hero--evening .hero__tagline {
+  text-shadow:
+    0 0 6px rgba(246, 242, 234, 0.95),
+    0 0 18px rgba(246, 242, 234, 0.9),
+    0 0 36px rgba(246, 242, 234, 0.7);
+}
+
 .hero--home .hero__names,
 .hero--evening .hero__names,
 .hero--home .hero__tagline,
