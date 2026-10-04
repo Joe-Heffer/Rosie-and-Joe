@@ -445,11 +445,11 @@ site-footer {
 .hero--home .hero-grain {
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
-    linear-gradient(to right, transparent 2%, #000 12%, #000 88%, transparent 98%);
+    linear-gradient(to right, transparent 3%, #000 7%, #000 93%, transparent 97%);
   -webkit-mask-composite: source-in;
   mask-image:
     linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
-    linear-gradient(to right, transparent 2%, #000 12%, #000 88%, transparent 98%);
+    linear-gradient(to right, transparent 3%, #000 7%, #000 93%, transparent 97%);
   mask-composite: intersect;
 }
 
