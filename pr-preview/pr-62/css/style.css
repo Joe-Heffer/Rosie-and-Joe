@@ -1,0 +1,1461 @@
+/* ==========================================================================
+   Rosie & Joe — Wedding Site
+   Design system & styles — "Blush Botanical"
+
+   Matches the couple's printed stationery: a white/warm-white canvas,
+   near-black serif ink, a dusty rose accent and muted botanical green,
+   echoing the wreath/sprig watercolour florals. Cormorant Light Italic for
+   display, Spectral for body, Cormorant SC for labels, Jost for utility.
+   Fine rose rules, a film-grain hero overlay, sparing botanical marks. No
+   drop shadows, no gold, no bold weights.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Design tokens (CSS custom properties)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Palette */
+  --ivory:     #fbf8f5;  /* warm white — primary background, matches the stationery's paper */
+  --stone:     #221e1b;  /* near-black ink — body text, matches the stationery's serif */
+  --sage:      #6e7f52;  /* muted botanical olive-green — foliage accent, fine rules */
+  --forest:    #364226;  /* deep foliage green from the stationery wreath — footer background */
+  --terra:     #a94a68;  /* dusty rose — the single warm accent, from the watercolour petals */
+  --terra-light: #d9829d;  /* mid rose tint — legible on the hero photo's scrim */
+  --taupe:     #8c8177;  /* warm grey-brown — secondary / muted text */
+  --limestone: #f6e8ec;  /* pale blush — card surfaces, inset areas */
+
+  /* A translucent rose for fine hairlines (~30% opacity) */
+  --rule: rgba(169, 74, 104, 0.3);
+
+  /* Typography */
+  --font-display:    "Cormorant", Georgia, "Times New Roman", serif;
+  --font-small-caps: "Cormorant SC", Georgia, "Times New Roman", serif;
+  --font-body:       "Spectral", Georgia, "Times New Roman", serif;
+  --font-utility:    "Jost", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  /* Type scale */
+  --fs-sm: 0.875rem;
+  --fs-lg: 1.4rem;
+  --fs-xl: clamp(1.6rem, 4vw, 2.25rem);    /* sub-display / pull statements */
+  --fs-2xl: clamp(2.25rem, 6vw, 3.25rem);  /* page titles */
+  --fs-3xl: clamp(3rem, 9vw, 6rem);        /* the one big hero moment */
+
+  /* Spacing scale (retained for layout rules) */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Rhythm & layout */
+  --section-gap: clamp(4rem, 8vw, 7rem);
+  --text-max:    680px;
+  --container-max: 1080px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Base / reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ivory);
+  color: var(--stone);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(16px, 1.1vw, 18px);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings — weight comes from size, never from boldness. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 0 0 var(--space-sm);
+  color: var(--stone);
+}
+
+h1 { font-size: var(--fs-2xl); font-style: italic; }
+h2 { font-size: var(--fs-xl); }
+h3 { font-size: var(--fs-lg); }
+
+p {
+  margin: 0 0 var(--space-md);
+}
+
+/* Links — terracotta text with a matching underline, darkening on hover. */
+a {
+  color: var(--terra);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--terra) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration-color: var(--terra);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Utility classes
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section {
+  padding: var(--section-gap) 0;
+}
+
+/* Inset surface — used for the RSVP block. Paler than ivory, thin sage rules.
+   A faint stone-grain texture (same feTurbulence technique as .hero-grain,
+   at a much lower opacity) keeps it from reading as flat digital colour. */
+.section--alt {
+  background-color: var(--limestone);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Constrain running prose to a comfortable measure. */
+.prose {
+  max-width: var(--text-max);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Section labels — structural signposts, not headings. Always taupe. */
+.eyebrow {
+  display: block;
+  font-family: var(--font-small-caps);
+  font-weight: 400;
+  font-size: 0.8125rem;        /* ~13px */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: var(--space-md);
+}
+
+.eyebrow .icon {
+  width: 14px;
+  height: 14px;
+  margin-right: var(--space-xs);
+  stroke: var(--taupe);
+}
+
+/* Buttons — Jost utility type, terracotta as the single accent. No shadow. */
+.btn {
+  display: inline-block;
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--terra);
+  border-radius: 2px;
+  background-color: var(--terra);
+  color: var(--ivory);
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition),
+    border-color var(--transition);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: transparent;
+  color: var(--terra);
+  text-decoration: none;
+}
+
+.btn .icon {
+  stroke: currentColor;
+  width: 16px;
+  height: 16px;
+  margin-right: var(--space-xs);
+  vertical-align: -0.15em;
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--terra);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--terra);
+  color: var(--ivory);
+}
+
+/* Botanical line marks — thin single-stroke SVG in sage. */
+.botanical {
+  display: block;
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 0.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Small line icons — same single-stroke convention as .botanical. */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.2em;
+}
+
+/* Fine horizontal rule between passages. */
+.rule {
+  border: 0;
+  height: 1px;
+  background-color: var(--rule);
+  margin: var(--space-xl) 0;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation — quiet, not a bar competing with the imagery
+   -------------------------------------------------------------------------- */
+/* <site-header>/<site-footer> (js/components.js) are unstyled custom
+   element wrappers around the real <header>/<footer> — display: contents
+   removes their box so the wrapper is invisible to layout. */
+site-header,
+site-footer {
+  display: contents;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(251, 248, 245, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-lg);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--stone);
+  text-decoration: none;
+}
+
+.nav__monogram {
+  width: 28px;
+  height: auto;
+  opacity: 0.85;
+}
+
+.nav__logo:hover {
+  text-decoration: none;
+}
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav__toggle span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--stone);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-decoration: none;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.nav__link .icon {
+  stroke: currentColor;
+  width: 16px;
+  height: 16px;
+}
+
+.nav__link:hover {
+  color: var(--stone);
+  text-decoration: none;
+}
+
+.nav__link.active {
+  color: var(--stone);
+  border-bottom-color: var(--terra);
+}
+
+/* --------------------------------------------------------------------------
+   Hero — wide and quiet; names overlaid in light italic
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  min-height: calc(100vh - 64px);
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--limestone);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--ivory);
+}
+
+/* Hero banner image — Eyam Hall. Filter lives on this layer (not .hero)
+   so the Ektar colour signature doesn't bleed onto the text above it. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../images/eyam-hall.png") center / cover no-repeat;
+  filter: contrast(1.03) saturate(0.95);
+}
+
+/* Homepage and evening heroes — pen-and-watercolour sketches on ivory paper
+   (Eyam Hall; the barn interior). Light images, so the dark scrim and ivory
+   text of the photo heroes are swapped for a soft ivory wash behind stone
+   text. */
+.hero--home,
+.hero--evening {
+  color: var(--stone);
+  background-color: var(--ivory);
+}
+
+.hero--home .hero__bg,
+.hero--evening .hero__bg {
+  background-position: center 62%;
+  filter: none;
+}
+
+.hero--home .hero__bg {
+  background-image: url("../images/eyam-hall-sketch.jpg");
+}
+
+.hero--evening .hero__bg {
+  background-image: url("../images/barn-hall-watercolour.jpg");
+}
+
+/* Evening fairy lights — a twinkling glow over each bulb in the barn
+   watercolour. images/fairy-lights.svg is drawn in the painting's own pixel
+   coordinates, so it shares .hero__bg's size and position to stay aligned.
+   Sits above the scrim so the lights are not washed out. */
+.hero__lights {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("../images/fairy-lights.svg") center 62% / cover no-repeat;
+}
+
+.hero--home .hero__scrim,
+.hero--evening .hero__scrim {
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      rgba(246, 242, 234, 0.92) 0%,
+      rgba(246, 242, 234, 0.7) 60%,
+      rgba(246, 242, 234, 0) 100%
+    );
+}
+
+.hero--home .hero-grain,
+.hero--evening .hero-grain {
+  mix-blend-mode: multiply;
+}
+
+.hero--home .hero__flower,
+.hero--evening .hero__flower {
+  filter: none;
+}
+
+.hero--home .hero__names,
+.hero--evening .hero__names,
+.hero--home .hero__date,
+.hero--evening .hero__date,
+.hero--home .hero__tagline,
+.hero--evening .hero__tagline {
+  text-shadow: none;
+}
+
+/* Evening — a soft ivory halo lifts the text off the fairy lights that run
+   behind it. A glow in the canvas colour, not a dark drop shadow. */
+.hero--evening .hero__names,
+.hero--evening .hero__date,
+.hero--evening .hero__tagline {
+  text-shadow:
+    0 0 6px rgba(246, 242, 234, 0.95),
+    0 0 18px rgba(246, 242, 234, 0.9),
+    0 0 36px rgba(246, 242, 234, 0.7);
+}
+
+.hero--home .hero__names,
+.hero--evening .hero__names,
+.hero--home .hero__tagline,
+.hero--evening .hero__tagline {
+  color: var(--stone);
+}
+
+.hero--home .hero__tagline,
+.hero--evening .hero__tagline {
+  opacity: 1;
+}
+
+.hero--home .hero__date,
+.hero--evening .hero__date {
+  color: var(--terra);
+}
+
+.hero--home .botanical,
+.hero--evening .botanical {
+  stroke: var(--sage);
+}
+
+.hero--home .btn--outline,
+.hero--evening .btn--outline {
+  border-color: var(--terra);
+  background-color: var(--ivory);
+  color: var(--terra);
+}
+
+.hero--home .btn--outline:hover,
+.hero--evening .btn--outline:hover,
+.hero--home .btn--outline:focus-visible,
+.hero--evening .btn--outline:focus-visible {
+  background-color: var(--terra);
+  color: var(--ivory);
+}
+
+.hero--home .btn:not(.btn--outline):hover,
+.hero--evening .btn:not(.btn--outline):hover,
+.hero--home .btn:not(.btn--outline):focus-visible,
+.hero--evening .btn:not(.btn--outline):focus-visible {
+  color: var(--terra);
+}
+
+/* Scrim — darkens the photo so the ivory text reads clearly. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse 65% 55% at 50% 50%,
+      rgba(34, 30, 27, 0.62) 0%,
+      rgba(34, 30, 27, 0.1) 72%
+    ),
+    linear-gradient(180deg, rgba(34, 30, 27, 0.48) 0%, rgba(34, 30, 27, 0.66) 100%);
+}
+
+/* Film grain — the signature element. ~8% opacity, subliminal. */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Hero content sits above the image, scrim and grain. */
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights) {
+  position: relative;
+  z-index: 3;
+}
+
+.hero__mark {
+  width: 38px;
+  height: auto;
+  margin: 0 auto var(--space-md);
+  opacity: 0.9;
+}
+
+/* Watercolour flower sprig — a single restrained echo of the stationery's
+   hand-painted florals, used only on the homepage hero. */
+.hero__flower {
+  width: clamp(90px, 12vw, 140px);
+  height: auto;
+  margin: 0 auto var(--space-sm);
+  filter: drop-shadow(0 2px 10px rgba(34, 30, 27, 0.35));
+}
+
+/* Soft, large-blur shadow for legibility against the photo's high-frequency
+   detail (stonework, leaves) — not a decorative drop shadow. */
+.hero__names,
+.hero__date,
+.hero__tagline {
+  text-shadow: 0 2px 16px rgba(34, 30, 27, 0.4);
+}
+
+.hero__names {
+  font-size: var(--fs-3xl);
+  font-style: italic;
+  margin: 0 0 var(--space-md);
+  letter-spacing: 0.01em;
+  color: var(--ivory);
+}
+
+.hero__date {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--fs-xl);
+  color: var(--terra-light);
+  margin: 0 0 var(--space-md);
+}
+
+/* The botanical mark and outline button use sage/terra elsewhere against
+   the ivory canvas; on the hero's dark photo those muted tones disappear,
+   so lighten them here to keep the same accent without losing legibility. */
+.hero .botanical {
+  stroke: var(--ivory);
+}
+
+.hero .btn--outline {
+  border-color: var(--terra-light);
+  color: var(--terra-light);
+}
+
+.hero .btn--outline:hover,
+.hero .btn--outline:focus-visible {
+  background-color: var(--terra-light);
+  color: var(--stone);
+}
+
+.hero .btn:hover,
+.hero .btn:focus-visible {
+  color: var(--terra-light);
+}
+
+.hero__tagline {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--fs-lg);
+  color: var(--ivory);
+  opacity: 0.85;
+  max-width: 36ch;
+  margin: 0 auto;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+/* Flower garland — decorative divider beneath the hero CTAs. */
+.hero__garland {
+  display: block;
+  width: min(90%, 480px);
+  height: auto;
+  margin: var(--space-lg) auto 0;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   Figure — letterbox intro image, shot-on-film treatment
+   -------------------------------------------------------------------------- */
+.figure {
+  margin: 0;
+}
+
+/* Full-bleed: the image sits directly in <main>, which already spans the
+   full page width (like the hero), so no viewport-breakout trick is needed —
+   using 100vw here would overflow past the scrollbar on the right. */
+.figure--bleed {
+  width: 100%;
+}
+
+/* Banner: a shallower crop than the standard letterbox figure, for images
+   used as a low-profile divider rather than a full editorial moment. */
+.figure--banner .figure__img {
+  aspect-ratio: 16 / 5;
+}
+
+.figure__img {
+  display: block;
+  width: 100%;
+  /* Letterbox crop — never square, per the concept. */
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  /* Ektar / 35mm colour signature. */
+  filter: contrast(1.03) saturate(0.95);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.figure__caption {
+  font-family: var(--font-small-caps);
+  font-weight: 400;
+  font-size: 0.8125rem;        /* ~13px */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+/* Photo credit — quiet utility line beneath a borrowed image's caption. */
+.figure__credit {
+  font-family: var(--font-utility);
+  font-weight: 200;
+  font-size: 0.75rem;
+  color: var(--taupe);
+  text-align: center;
+  margin-top: var(--space-xs);
+}
+
+.figure__credit a {
+  color: var(--taupe);
+}
+
+/* --------------------------------------------------------------------------
+   Split — portrait image beside prose (welcome note)
+   -------------------------------------------------------------------------- */
+.split {
+  display: grid;
+  grid-template-columns: 5fr 6fr;   /* portrait slightly narrower than the prose */
+  gap: var(--space-xl);
+  align-items: center;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.split__figure {
+  margin: 0;
+  /* Keepsake mount: white mat + sage hairline, no shadow per the concept. */
+  padding: var(--space-xs);
+  background-color: #fff;
+  border: 1px solid var(--sage);
+}
+
+.split__img {
+  display: block;
+  width: 100%;
+  /* Gentle portrait crop — never square, per the concept. */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  /* Ektar / 35mm colour signature — matches .figure__img. */
+  filter: contrast(1.03) saturate(0.95);
+  /* Thin sage hairline frame, inset within the mat. */
+  border: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
+   Page header (interior pages) — left-aligned, like a letter
+   -------------------------------------------------------------------------- */
+.page-header {
+  max-width: var(--text-max);
+  margin: 0 auto;
+  padding: var(--section-gap) var(--space-md) var(--space-lg);
+}
+
+.page-header h1 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.page-header p {
+  color: var(--taupe);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Prose blocks (welcome note, accommodation)
+   -------------------------------------------------------------------------- */
+.note {
+  max-width: var(--text-max);
+  margin: 0 auto;
+}
+
+.note__lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-xl);
+  line-height: 1.3;
+  color: var(--stone);
+  margin-bottom: var(--space-lg);
+}
+
+.note .hero__actions {
+  justify-content: flex-start;
+  margin-top: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   Two-column detail rows
+   -------------------------------------------------------------------------- */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-xl);
+  align-items: start;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.detail__meta h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.detail__meta h2 .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: var(--space-xs);
+}
+
+.detail__time {
+  display: block;
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.address {
+  font-family: var(--font-utility);
+  font-style: normal;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.03em;
+  color: var(--taupe);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+/* When an address follows prose, give it room to read as its own block
+   rather than a continuation of the sentence above. */
+p + .address {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
+   Schedule timeline
+   -------------------------------------------------------------------------- */
+.timeline {
+  list-style: none;
+  max-width: var(--text-max);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.timeline__item {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: var(--space-md);
+  align-items: baseline;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline__item:last-child {
+  border-bottom: none;
+}
+
+.timeline__time {
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.timeline__event {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--stone);
+}
+
+.timeline__event > .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: var(--space-xs);
+}
+
+.timeline__event span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--taupe);
+}
+
+/* --------------------------------------------------------------------------
+   Payment details (gift — bank transfer)
+   -------------------------------------------------------------------------- */
+.payment-details {
+  max-width: var(--text-max);
+  margin: var(--space-lg) 0 0;
+}
+
+.payment-details__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.payment-details__row:last-child {
+  border-bottom: none;
+}
+
+.payment-details dt {
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.payment-details dd {
+  margin: 0;
+  font-family: var(--font-utility);
+  font-size: var(--fs-lg);
+  color: var(--stone);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   Link list (accommodation)
+   -------------------------------------------------------------------------- */
+.link-list {
+  list-style: none;
+  max-width: var(--text-max);
+  margin: var(--space-lg) auto 0;
+  padding: 0;
+}
+
+.link-list li {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.link-list li > .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: var(--space-xs);
+}
+
+.link-list li:last-child {
+  border-bottom: none;
+}
+
+.link-list a {
+  color: var(--terra);
+}
+
+/* --------------------------------------------------------------------------
+   Embeds (RSVP form / map)
+   -------------------------------------------------------------------------- */
+.embed {
+  max-width: var(--container-max);
+  margin: var(--space-lg) auto 0;
+}
+
+.embed iframe {
+  width: 100%;
+  height: 900px;
+  border: 0;
+  display: block;
+}
+
+.embed__cta {
+  margin: var(--space-sm) 0 0;
+}
+
+/* The mat — gives a bare cross-origin iframe (Google Forms, Maps) a
+   considered border instead of sitting raw on the section background. */
+.embed__frame {
+  background-color: var(--ivory);
+  padding: var(--space-md);
+  border: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
+   Footer — minimal
+   -------------------------------------------------------------------------- */
+.site-footer {
+  text-align: center;
+  padding: var(--section-gap) 0 0;
+  background-color: var(--forest);
+  color: var(--ivory);
+  overflow: hidden;
+}
+
+.site-footer__content {
+  padding: 0 var(--space-md);
+}
+
+.site-footer__arch {
+  display: block;
+  width: 60%;
+  max-width: 540px;
+  height: auto;
+  margin: var(--space-lg) auto 0;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.site-footer__monogram {
+  width: 40px;
+  height: auto;
+  margin: 0 auto var(--space-md);
+  opacity: 0.9;
+  /* Monogram artwork is black-on-transparent; invert to read on the dark footer. */
+  filter: invert(1);
+}
+
+.site-footer__date {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-lg);
+  color: var(--ivory);
+  margin-bottom: var(--space-xs);
+}
+
+.site-footer__note {
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  color: rgba(251, 248, 245, 0.72);
+  margin-bottom: var(--space-xs);
+}
+
+.site-footer__contact {
+  font-family: var(--font-utility);
+  font-weight: 300;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.04em;
+  color: var(--ivory);
+  margin-bottom: 0;
+}
+
+.site-footer a {
+  color: var(--ivory);
+}
+
+.site-footer a:hover {
+  color: var(--terra-light);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — mobile-first, single breakpoint at 768px
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .nav__toggle {
+    display: flex;
+  }
+
+  .nav__links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background-color: var(--ivory);
+    border-bottom: 1px solid var(--rule);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition);
+  }
+
+  .nav__links.open {
+    max-height: 360px;
+  }
+
+  .nav__links li {
+    text-align: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  .nav__link {
+    display: block;
+    padding: var(--space-sm);
+    border-bottom: none;
+  }
+
+  .nav__link.active {
+    border-bottom: none;
+    background-color: var(--limestone);
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .detail {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .timeline__item {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .embed__frame {
+    padding: var(--space-sm);
+  }
+
+  .embed iframe {
+    height: 1200px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Skip link — visually hidden until focused, for keyboard/screen-reader users
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 200;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--ivory);
+  color: var(--stone);
+  border: 1px solid var(--rule);
+  font-family: var(--font-utility);
+  font-size: var(--fs-sm);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Book intro — home-page entrance (js/book-intro.js)
+   A forest-green clothbound book rises in, its cover swings open, two
+   leaves turn onto a watercolour of Eyam Hall, then the whole thing
+   dissolves into the site. Hidden unless
+   the script adds html.book-intro-play, so it never shows without JS, under
+   reduced motion, or on a repeat visit in the same session.
+   -------------------------------------------------------------------------- */
+.book-intro {
+  display: none;
+}
+
+html.book-intro-play .book-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ivory);
+  cursor: pointer;
+  transition: opacity 1100ms ease;
+}
+
+/* Lock scrolling and hold the hero back until the book has gone, so the
+   hero's own fade-up plays as the page dissolves. */
+html.book-intro-play:not(.book-intro-leaving) {
+  overflow: hidden;
+}
+
+html.book-intro-play:not(.book-intro-leaving) .hero.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+html.book-intro-leaving .book-intro {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The stage handles fade/scale (opacity would flatten 3D if it sat on the
+   book itself); perspective here gives the book's leaves their depth. */
+.book-intro__stage {
+  position: relative;
+  z-index: 3;
+  perspective: 2200px;
+  animation: book-arrive 900ms var(--ease-out) both;
+  transition: scale 1100ms var(--ease-out);
+}
+
+html.book-intro-leaving .book-intro__stage {
+  scale: 1.12;
+}
+
+@keyframes book-arrive {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.book {
+  --book-w: min(44vw, 46vh, 300px);
+  --turn-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+  width: var(--book-w);
+  height: calc(var(--book-w) * 1.42);
+  transform-style: preserve-3d;
+  animation: book-centre 1500ms var(--turn-ease) 1100ms both;
+}
+
+/* Slide right as it opens so the spine ends up mid-screen. */
+@keyframes book-centre {
+  from { translate: 0 0; }
+  to   { translate: 50% 0; }
+}
+
+/* Right-hand page underneath everything: what the book opens onto. */
+.book__page,
+.book__leaf:not(.book__cover) {
+  position: absolute;
+  top: 2%;
+  bottom: 2%;
+  left: 0;
+  right: 3%;
+}
+
+.book__page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--book-w) * 0.04);
+  padding: 12%;
+  text-align: center;
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    var(--ivory);
+  border: 1px solid var(--rule);
+  border-left: 0;
+}
+
+/* Fore-edge: a hint of the stacked pages. */
+.book__page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 3%;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(34, 30, 27, 0.07) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+/* Leaves and cover hinge on the spine (left edge) and turn to the left. */
+.book__leaf {
+  --z: 1px;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg) translateZ(var(--z));
+  animation: book-turn 1500ms var(--turn-ease) 1100ms both;
+}
+
+.book__leaf--1 {
+  --z: 2px;
+  animation-duration: 1400ms;
+  animation-delay: 1450ms;
+}
+
+.book__leaf--2 {
+  --z: 1px;
+  animation-duration: 1300ms;
+  animation-delay: 1700ms;
+}
+
+.book__cover {
+  --z: 3px;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes book-turn {
+  from { transform: rotateY(0deg) translateZ(var(--z)); }
+  to   { transform: rotateY(-180deg) translateZ(var(--z)); }
+}
+
+.book__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--book-w) * 0.04);
+  padding: 12%;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.1), rgba(34, 30, 27, 0) 9%),
+    var(--ivory);
+  border: 1px solid var(--rule);
+}
+
+/* The back of a turned leaf is mirrored, so its gutter sits on the right. */
+.book__face--back {
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    var(--ivory);
+}
+
+/* Clothbound cover: forest green, a hinge crease by the spine, a fine
+   inset frame, ivory lettering. */
+.book__cover .book__face--front {
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  color: var(--ivory);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.28),
+      rgba(0, 0, 0, 0) 5%,
+      rgba(255, 255, 255, 0.07) 6%,
+      rgba(255, 255, 255, 0) 8%
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E"),
+    var(--forest);
+}
+
+.book__cover .book__face--front::before {
+  content: "";
+  position: absolute;
+  inset: 7% 7% 7% 11%;
+  border: 1px solid rgba(251, 248, 245, 0.35);
+}
+
+/* Endpaper inside the cover. */
+.book__cover .book__face--back {
+  border-radius: 3px 0 0 3px;
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.14), rgba(34, 30, 27, 0) 9%),
+    var(--limestone);
+}
+
+.book__eyebrow {
+  font-family: var(--font-small-caps);
+  font-size: calc(var(--book-w) * 0.058);
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--taupe);
+}
+
+.book__cover .book__eyebrow {
+  color: var(--terra-light);
+}
+
+.book__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: calc(var(--book-w) * 0.15);
+  line-height: 1.05;
+}
+
+.book__rule {
+  display: block;
+  width: 28%;
+  height: 1px;
+  background-color: var(--rule);
+}
+
+.book__cover .book__rule {
+  background-color: rgba(251, 248, 245, 0.45);
+}
+
+.book__line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: calc(var(--book-w) * 0.07);
+  line-height: 1.3;
+}
+
+/* The spread it opens onto: one watercolour of Eyam Hall running across
+   both pages (each page shows half), set low so the caption sits in the
+   sky. The image's edges are pre-feathered to --ivory so it has no seam. */
+.book__plate {
+  justify-content: flex-start;
+  padding-top: 11%;
+}
+
+.book__plate--left {
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    url("../images/eyam-hall-watercolour.jpg") 0% 72% / 200% auto no-repeat,
+    var(--ivory);
+}
+
+.book__plate--right {
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    url("../images/eyam-hall-watercolour.jpg") 100% 72% / 200% auto no-repeat,
+    var(--ivory);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-intro {
+    display: none !important;
+  }
+
+  .hero__lights {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print — guests printing the schedule or directions get plain, paginated
+   text rather than the sticky header, hero photo and decorative motifs.
+   -------------------------------------------------------------------------- */
+@media print {
+  .book-intro,
+  .site-header,
+  .hero-grain,
+  .botanical,
+  .hero__flower,
+  .skip-link {
+    display: none;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: var(--space-md) 0;
+  }
+
+  .hero__bg,
+  .hero__scrim,
+  .hero__lights {
+    display: none;
+  }
+
+  .hero__names,
+  .hero__date,
+  .hero__tagline {
+    color: var(--stone);
+  }
+
+  .section,
+  .detail,
+  .timeline__item {
+    break-inside: avoid;
+  }
+
+  .embed iframe {
+    display: none;
+  }
+}
