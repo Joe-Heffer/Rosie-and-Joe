@@ -441,14 +441,15 @@ site-footer {
 }
 
 .hero--home .hero__bg,
+.hero--home .hero__life,
 .hero--home .hero-grain {
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
-    linear-gradient(to right, transparent 2%, #000 12%, #000 88%, transparent 98%);
+    linear-gradient(to right, transparent 3%, #000 7%, #000 93%, transparent 97%);
   -webkit-mask-composite: source-in;
   mask-image:
     linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
-    linear-gradient(to right, transparent 2%, #000 12%, #000 88%, transparent 98%);
+    linear-gradient(to right, transparent 3%, #000 7%, #000 93%, transparent 97%);
   mask-composite: intersect;
 }
 
@@ -466,6 +467,142 @@ site-footer {
   z-index: 1;
   pointer-events: none;
   background: url("../images/fairy-lights.svg") center 62% / cover no-repeat;
+}
+
+/* Home — signs of life in the sketch: chimney smoke, pink petals drifting
+   down from the blossom trees and climbing roses, and a butterfly by the
+   door. images/eyam-hall-life.svg is drawn in the painting's own pixel
+   coordinates, so it shares .hero__bg's size and position to stay aligned.
+   Sits above the scrim, as the fairy lights do, so it is not washed out;
+   all of it stays clear of the names. */
+.hero__life {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("../images/eyam-hall-life.svg") center 62% / cover no-repeat;
+}
+
+/* Home — now and then a few small birds cross the sky above the names, as
+   far-off silhouettes in the sketch's ink. Like real small birds they flap
+   in short bursts and then glide, each on its own rhythm, rising and dipping
+   a little as they go. Each .hero__bird spans the hero's width and slides one
+   full width across, carrying its bird (the svg) from just off the left edge
+   to just off the right; most of each cycle is spent off-screen, so passes
+   are rare. */
+.hero__birds {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__bird {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 100%;
+  transform: translateX(-100%);
+  animation: bird-cross 52s linear infinite;
+}
+
+.hero__bird svg {
+  position: absolute;
+  right: 0;
+  width: 15px;
+  height: 8px;
+  overflow: visible;
+  fill: var(--stone);
+  opacity: 0.4;
+  animation: bird-bob 3.4s ease-in-out infinite alternate;
+}
+
+.hero__wing {
+  transform-box: view-box;
+  transform-origin: 20px 10px;
+  animation: 2.8s ease-in-out infinite;
+}
+
+.hero__wing--l { animation-name: wing-l; }
+.hero__wing--r { animation-name: wing-r; }
+
+.hero__bird:nth-child(2) {
+  top: 12%;
+  animation-delay: 2.2s;
+}
+
+.hero__bird:nth-child(2) svg {
+  width: 12px;
+  height: 6px;
+  opacity: 0.32;
+  animation-duration: 4.1s;
+  animation-delay: -1.3s;
+}
+
+.hero__bird:nth-child(2) .hero__wing {
+  animation-duration: 3.3s;
+  animation-delay: -1.1s;
+}
+
+.hero__bird:nth-child(3) {
+  top: 18%;
+  animation-delay: 3.6s;
+}
+
+.hero__bird:nth-child(3) svg {
+  width: 13px;
+  height: 7px;
+  opacity: 0.36;
+  animation-duration: 3s;
+  animation-delay: -2.2s;
+}
+
+.hero__bird:nth-child(3) .hero__wing {
+  animation-duration: 2.5s;
+  animation-delay: -0.4s;
+}
+
+@media (min-width: 768px) {
+  .hero__bird svg { width: 20px; height: 10px; }
+  .hero__bird:nth-child(2) svg { width: 15px; height: 8px; }
+  .hero__bird:nth-child(3) svg { width: 17px; height: 9px; }
+}
+
+@keyframes bird-cross {
+  0% { transform: translateX(-100%); }
+  40%, 100% { transform: translateX(30px); }
+}
+
+@keyframes bird-bob {
+  from { transform: translateY(-4px); }
+  to { transform: translateY(4px); }
+}
+
+/* A burst of four wingbeats, then a glide on level, slightly raised wings.
+   Positive rotation lifts the left wing; the right wing mirrors it. */
+@keyframes wing-l {
+  0% { transform: rotate(6deg); }
+  7% { transform: rotate(-28deg) scaleY(0.8); }
+  14% { transform: rotate(30deg); }
+  21% { transform: rotate(-28deg) scaleY(0.8); }
+  28% { transform: rotate(30deg); }
+  35% { transform: rotate(-28deg) scaleY(0.8); }
+  42% { transform: rotate(30deg); }
+  49% { transform: rotate(-22deg) scaleY(0.85); }
+  58%, 100% { transform: rotate(6deg); }
+}
+
+@keyframes wing-r {
+  0% { transform: rotate(-6deg); }
+  7% { transform: rotate(28deg) scaleY(0.8); }
+  14% { transform: rotate(-30deg); }
+  21% { transform: rotate(28deg) scaleY(0.8); }
+  28% { transform: rotate(-30deg); }
+  35% { transform: rotate(28deg) scaleY(0.8); }
+  42% { transform: rotate(-30deg); }
+  49% { transform: rotate(22deg) scaleY(0.85); }
+  58%, 100% { transform: rotate(-6deg); }
 }
 
 .hero--home .hero__scrim,
@@ -585,7 +722,7 @@ site-footer {
 }
 
 /* Hero content sits above the image, scrim and grain. */
-.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__garland) {
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__life):not(.hero__birds):not(.hero__garland) {
   position: relative;
   z-index: 3;
 }
@@ -1476,7 +1613,9 @@ html.book-intro-leaving .book-intro__stage {
     display: none !important;
   }
 
-  .hero__lights {
+  .hero__lights,
+  .hero__life,
+  .hero__birds {
     display: none;
   }
 }
@@ -1890,7 +2029,9 @@ html.book-intro-leaving .book-intro__stage {
 
   .hero__bg,
   .hero__scrim,
-  .hero__lights {
+  .hero__lights,
+  .hero__life,
+  .hero__birds {
     display: none;
   }
 
