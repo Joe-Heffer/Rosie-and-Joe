@@ -1709,6 +1709,95 @@ html.book-intro-leaving .book-intro__stage {
   to   { opacity: 1; transform: none; }
 }
 
+/* RSVP (rsvp.html) — a letter slides into its envelope, the flap folds shut,
+   a heart seals it, and little hearts drift up as it waits to be sent. The
+   flap is two shapes: the open one sits behind the letter and folds down
+   flat, then the closed one folds down over the pocket in front of it. */
+.vignette--envelope {
+  margin-top: var(--space-lg);
+}
+
+.vignette__paper {
+  fill: var(--ivory);
+}
+
+.vignette__letter {
+  transform: translateY(24px);
+}
+
+.vignette__flap--open {
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+}
+
+.vignette__flap--closed {
+  transform-origin: 50% 0;
+}
+
+.vignette__heart--float {
+  opacity: 0;
+}
+
+.is-visible .vignette__letter {
+  animation: vignette-letter-in 1.2s var(--ease-out) 0.4s both;
+}
+
+.is-visible .vignette__flap--open {
+  animation: vignette-flap-down 0.35s ease-in 1.5s both;
+}
+
+.is-visible .vignette__flap--closed {
+  animation: vignette-flap-shut 0.35s ease-out 1.85s both;
+}
+
+.is-visible .vignette__seal {
+  animation:
+    vignette-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.2s both,
+    vignette-beat 2.4s ease-in-out 3.2s infinite;
+}
+
+.is-visible .vignette__envelope {
+  animation: vignette-hop 4s ease-in-out 3s infinite;
+}
+
+.is-visible .vignette--envelope .vignette__heart--float {
+  animation: vignette-float-up 4.5s ease-in-out 2.9s infinite both;
+}
+
+.is-visible .vignette--envelope .vignette__heart--late {
+  animation-delay: 5.1s;
+}
+
+.is-visible .vignette--envelope .vignette__sparkle {
+  animation-delay: 2.5s;
+}
+
+.is-visible .vignette--envelope .vignette__sparkle--late {
+  animation-delay: 3.7s;
+}
+
+@keyframes vignette-letter-in {
+  from { transform: translateY(-4px); }
+  to   { transform: translateY(24px); }
+}
+
+@keyframes vignette-flap-down {
+  from { transform: scaleY(1); }
+  to   { transform: scaleY(0); }
+}
+
+@keyframes vignette-flap-shut {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes vignette-hop {
+  0%, 70%, 100% { transform: none; }
+  78%           { transform: translateY(-3px) rotate(-2deg); }
+  86%           { transform: translateY(0) rotate(1deg); }
+  92%           { transform: none; }
+}
+
 @media (max-width: 768px) {
   .vignette {
     width: 108px;
@@ -1738,6 +1827,9 @@ html.book-intro-leaving .book-intro__stage {
 
   .vignette__leaf {
     transform: scaleX(0.28);
+  }
+  .vignette__heart--float {
+    display: none;
   }
 }
 
