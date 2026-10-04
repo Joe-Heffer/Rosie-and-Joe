@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1376" height="768" viewBox="0 0 1376 768">
+  <!-- Twinkle overlay for images/barn-hall-watercolour.jpg: one soft glow per
+       fairy-light bulb, in the painting's own pixel coordinates, so it lines
+       up when used as a background with the same size and position. -->
+  <defs>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#FFFDF4"/>
+      <stop offset="0.22" stop-color="#FFF4D2"/>
+      <stop offset="0.55" stop-color="#F7DB98" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#F2CF7E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <style>
+    circle {
+      fill: url(#glow);
+      opacity: 0.2;
+      animation: glow ease-in-out infinite;
+    }
+    circle.s { animation-name: sparkle; }
+    @keyframes glow {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.85; }
+    }
+    @keyframes sparkle {
+      0%, 70%, 100% { opacity: 0.2; }
+      78% { opacity: 1; }
+      86% { opacity: 0.35; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      circle { animation: none; opacity: 0.5; }
+    }
+  </style>
+  <circle cx="285" cy="209" r="9" style="animation-duration:3.5s;animation-delay:-1.3s"/>
+  <circle cx="302" cy="219" r="9" style="animation-duration:3.9s;animation-delay:-0.4s"/>
+  <circle cx="301" cy="240" r="9" style="animation-duration:6.1s;animation-delay:-3.3s"/>
+  <circle cx="323" cy="250" r="9" style="animation-duration:6.2s;animation-delay:-5.8s"/>
+  <circle cx="342" cy="265" r="9" style="animation-duration:5.9s;animation-delay:-2.0s"/>
+  <circle cx="358" cy="263" r="9" style="animation-duration:4.2s;animation-delay:-2.5s"/>
+  <circle cx="369" cy="193" r="9" style="animation-duration:5.7s;animation-delay:-3.6s"/>
+  <circle cx="386" cy="208" r="9" style="animation-duration:4.9s;animation-delay:-4.3s"/>
+  <circle cx="404" cy="219" r="9" style="animation-duration:5.2s;animation-delay:-2.6s"/>
+  <circle cx="412" cy="244" r="9" style="animation-duration:5.7s;animation-delay:-2.4s"/>
+  <circle cx="439" cy="259" r="9" style="animation-duration:6.0s;animation-delay:-4.8s"/>
+  <circle cx="481" cy="207" r="9" style="animation-duration:3.5s;animation-delay:-0.9s"/>
+  <circle cx="498" cy="220" r="9" style="animation-duration:4.5s;animation-delay:-0.3s"/>
+  <circle class="s" cx="517" cy="227" r="9" style="animation-duration:7.8s;animation-delay:-0.8s"/>
+  <circle class="s" cx="525" cy="251" r="9" style="animation-duration:6.0s;animation-delay:-3.4s"/>
+  <circle cx="536" cy="252" r="9" style="animation-duration:4.0s;animation-delay:-0.4s"/>
+  <circle cx="454" cy="295" r="9" style="animation-duration:4.7s;animation-delay:-4.5s"/>
+  <circle cx="507" cy="287" r="9" style="animation-duration:4.8s;animation-delay:-3.7s"/>
+  <circle cx="518" cy="298" r="9" style="animation-duration:3.5s;animation-delay:-1.4s"/>
+  <circle class="s" cx="551" cy="297" r="9" style="animation-duration:9.1s;animation-delay:-4.7s"/>
+  <circle cx="476" cy="313" r="9" style="animation-duration:4.2s;animation-delay:-2.9s"/>
+  <circle cx="538" cy="315" r="9" style="animation-duration:6.3s;animation-delay:-4.5s"/>
+  <circle class="s" cx="596" cy="187" r="9" style="animation-duration:6.3s;animation-delay:-2.5s"/>
+  <circle cx="608" cy="203" r="9" style="animation-duration:4.1s;animation-delay:-3.1s"/>
+  <circle cx="630" cy="211" r="9" style="animation-duration:6.0s;animation-delay:-3.8s"/>
+  <circle cx="623" cy="221" r="9" style="animation-duration:3.4s;animation-delay:-1.9s"/>
+  <circle class="s" cx="637" cy="240" r="9" style="animation-duration:7.8s;animation-delay:-3.6s"/>
+  <circle class="s" cx="648" cy="237" r="9" style="animation-duration:6.3s;animation-delay:-5.6s"/>
+  <circle class="s" cx="665" cy="261" r="9" style="animation-duration:8.2s;animation-delay:-4.3s"/>
+  <circle cx="684" cy="260" r="9" style="animation-duration:5.4s;animation-delay:-1.5s"/>
+  <circle cx="760" cy="189" r="9" style="animation-duration:6.0s;animation-delay:-4.7s"/>
+  <circle cx="765" cy="207" r="9" style="animation-duration:3.7s;animation-delay:-0.9s"/>
+  <circle cx="776" cy="218" r="9" style="animation-duration:3.3s;animation-delay:-0.9s"/>
+  <circle cx="793" cy="231" r="9" style="animation-duration:5.3s;animation-delay:-3.7s"/>
+  <circle cx="782" cy="238" r="9" style="animation-duration:5.0s;animation-delay:-0.0s"/>
+  <circle cx="792" cy="252" r="9" style="animation-duration:6.3s;animation-delay:-6.1s"/>
+  <circle cx="806" cy="259" r="9" style="animation-duration:4.9s;animation-delay:-4.7s"/>
+  <circle cx="562" cy="253" r="9" style="animation-duration:4.6s;animation-delay:-2.5s"/>
+  <circle cx="644" cy="285" r="9" style="animation-duration:6.1s;animation-delay:-1.9s"/>
+  <circle cx="636" cy="288" r="9" style="animation-duration:6.2s;animation-delay:-0.1s"/>
+  <circle class="s" cx="690" cy="289" r="9" style="animation-duration:8.5s;animation-delay:-0.3s"/>
+  <circle cx="708" cy="299" r="9" style="animation-duration:6.1s;animation-delay:-4.6s"/>
+  <circle cx="659" cy="307" r="9" style="animation-duration:4.0s;animation-delay:-2.1s"/>
+  <circle cx="786" cy="291" r="9" style="animation-duration:5.3s;animation-delay:-0.6s"/>
+  <circle cx="776" cy="290" r="9" style="animation-duration:5.4s;animation-delay:-1.2s"/>
+  <circle cx="666" cy="313" r="9" style="animation-duration:5.5s;animation-delay:-5.3s"/>
+  <circle class="s" cx="764" cy="335" r="9" style="animation-duration:8.3s;animation-delay:-0.4s"/>
+  <circle class="s" cx="576" cy="315" r="9" style="animation-duration:8.2s;animation-delay:-0.2s"/>
+  <circle class="s" cx="554" cy="297" r="9" style="animation-duration:8.7s;animation-delay:-4.8s"/>
+  <circle class="s" cx="620" cy="317" r="9" style="animation-duration:6.2s;animation-delay:-0.5s"/>
+  <circle cx="972" cy="205" r="9" style="animation-duration:5.7s;animation-delay:-3.2s"/>
+  <circle class="s" cx="962" cy="201" r="9" style="animation-duration:7.9s;animation-delay:-4.4s"/>
+  <circle cx="945" cy="207" r="9" style="animation-duration:4.4s;animation-delay:-3.4s"/>
+  <circle class="s" cx="948" cy="220" r="9" style="animation-duration:6.7s;animation-delay:-1.7s"/>
+  <circle class="s" cx="928" cy="232" r="9" style="animation-duration:7.8s;animation-delay:-0.2s"/>
+  <circle cx="930" cy="246" r="9" style="animation-duration:4.8s;animation-delay:-3.4s"/>
+  <circle cx="907" cy="259" r="9" style="animation-duration:4.3s;animation-delay:-0.1s"/>
+  <circle cx="1018" cy="207" r="9" style="animation-duration:6.3s;animation-delay:-6.2s"/>
+  <circle class="s" cx="1030" cy="203" r="9" style="animation-duration:7.4s;animation-delay:-7.2s"/>
+  <circle cx="1044" cy="235" r="9" style="animation-duration:6.1s;animation-delay:-3.2s"/>
+  <circle cx="1075" cy="217" r="9" style="animation-duration:3.4s;animation-delay:-1.4s"/>
+  <circle class="s" cx="1090" cy="211" r="9" style="animation-duration:6.3s;animation-delay:-2.2s"/>
+  <circle cx="1082" cy="232" r="9" style="animation-duration:3.8s;animation-delay:-1.7s"/>
+  <circle cx="1072" cy="245" r="9" style="animation-duration:5.5s;animation-delay:-2.3s"/>
+  <circle cx="1053" cy="255" r="9" style="animation-duration:5.6s;animation-delay:-0.9s"/>
+  <circle cx="1038" cy="251" r="9" style="animation-duration:5.7s;animation-delay:-2.5s"/>
+  <circle cx="1086" cy="197" r="9" style="animation-duration:4.9s;animation-delay:-0.2s"/>
+  <circle cx="860" cy="293" r="9" style="animation-duration:6.1s;animation-delay:-4.4s"/>
+  <circle cx="893" cy="290" r="9" style="animation-duration:3.8s;animation-delay:-2.3s"/>
+  <circle cx="906" cy="301" r="9" style="animation-duration:4.9s;animation-delay:-4.3s"/>
+  <circle class="s" cx="942" cy="293" r="9" style="animation-duration:9.1s;animation-delay:-7.3s"/>
+  <circle cx="948" cy="301" r="9" style="animation-duration:3.5s;animation-delay:-3.5s"/>
+  <circle cx="858" cy="308" r="9" style="animation-duration:4.2s;animation-delay:-1.1s"/>
+  <circle cx="923" cy="313" r="9" style="animation-duration:3.2s;animation-delay:-0.7s"/>
+  <circle cx="878" cy="323" r="9" style="animation-duration:4.6s;animation-delay:-1.7s"/>
+  <circle class="s" cx="836" cy="327" r="9" style="animation-duration:6.6s;animation-delay:-6.5s"/>
+</svg>
