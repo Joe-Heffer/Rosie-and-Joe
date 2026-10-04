@@ -441,6 +441,7 @@ site-footer {
 }
 
 .hero--home .hero__bg,
+.hero--home .hero__petals,
 .hero--home .hero-grain {
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
@@ -466,6 +467,90 @@ site-footer {
   z-index: 1;
   pointer-events: none;
   background: url("../images/fairy-lights.svg") center 62% / cover no-repeat;
+}
+
+/* Home — pink petals drift down from the blossom trees and climbing roses in
+   the sketch. images/blossom-petals.svg is drawn in the painting's own pixel
+   coordinates, so it shares .hero__bg's size and position to stay aligned.
+   Sits above the scrim, as the fairy lights do, so the petals are not washed
+   out; they all fall well clear of the names. */
+.hero__petals {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("../images/blossom-petals.svg") center 62% / cover no-repeat;
+}
+
+/* Home — a few pen-stroke birds cross the sky above the names now and then.
+   Each .hero__bird spans the hero's width and slides one full width across,
+   carrying its bird (the ::before) from just off the left edge to just off
+   the right; most of each cycle is spent off-screen, so passes are rare. */
+.hero__birds {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__bird {
+  position: absolute;
+  top: 16%;
+  left: 0;
+  width: 100%;
+  transform: translateX(-100%);
+  animation: bird-cross 38s linear infinite;
+}
+
+.hero__bird::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 26px;
+  height: 13px;
+  background: url("../images/bird.svg") center / contain no-repeat;
+  opacity: 0.7;
+  animation: bird-bob 4s ease-in-out infinite alternate;
+}
+
+.hero__bird:nth-child(2) {
+  top: 12%;
+  animation-delay: 1.6s;
+}
+
+.hero__bird:nth-child(2)::before {
+  width: 20px;
+  height: 10px;
+  animation-delay: -1.5s;
+}
+
+.hero__bird:nth-child(3) {
+  top: 19%;
+  animation-delay: 3s;
+}
+
+.hero__bird:nth-child(3)::before {
+  width: 17px;
+  height: 9px;
+  opacity: 0.6;
+  animation-delay: -2.8s;
+}
+
+@media (min-width: 768px) {
+  .hero__bird::before { width: 34px; height: 17px; }
+  .hero__bird:nth-child(2)::before { width: 26px; height: 13px; }
+  .hero__bird:nth-child(3)::before { width: 22px; height: 11px; }
+}
+
+@keyframes bird-cross {
+  0% { transform: translateX(-100%); }
+  45%, 100% { transform: translateX(40px); }
+}
+
+@keyframes bird-bob {
+  from { transform: translateY(-6px); }
+  to { transform: translateY(6px); }
 }
 
 .hero--home .hero__scrim,
@@ -585,7 +670,7 @@ site-footer {
 }
 
 /* Hero content sits above the image, scrim and grain. */
-.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__garland) {
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__petals):not(.hero__birds):not(.hero__garland) {
   position: relative;
   z-index: 3;
 }
@@ -1476,7 +1561,9 @@ html.book-intro-leaving .book-intro__stage {
     display: none !important;
   }
 
-  .hero__lights {
+  .hero__lights,
+  .hero__petals,
+  .hero__birds {
     display: none;
   }
 }
@@ -1890,7 +1977,9 @@ html.book-intro-leaving .book-intro__stage {
 
   .hero__bg,
   .hero__scrim,
-  .hero__lights {
+  .hero__lights,
+  .hero__petals,
+  .hero__birds {
     display: none;
   }
 
