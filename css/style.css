@@ -663,14 +663,16 @@ site-footer {
   opacity: 0.9;
 }
 
-/* Evening — the garland runs edge to edge as the hero's bottom border. The
+/* Home and evening — the garland runs edge to edge as the hero's bottom border. The
    PNG has transparent space above and below the flowers (they span roughly
    30–65% of its height), so it is nudged down until the lowest blooms meet
    the hero's edge, and the hero gains bottom padding so the CTAs clear it. */
+.hero--home,
 .hero--evening {
   padding-bottom: calc(var(--space-xl) + 12vw);
 }
 
+.hero--home .hero__garland,
 .hero--evening .hero__garland {
   position: absolute;
   left: 0;
