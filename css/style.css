@@ -441,7 +441,7 @@ site-footer {
 }
 
 .hero--home .hero__bg,
-.hero--home .hero__petals,
+.hero--home .hero__life,
 .hero--home .hero-grain {
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, #000 14%, #000 60%, transparent 88%),
@@ -469,17 +469,18 @@ site-footer {
   background: url("../images/fairy-lights.svg") center 62% / cover no-repeat;
 }
 
-/* Home — pink petals drift down from the blossom trees and climbing roses in
-   the sketch. images/blossom-petals.svg is drawn in the painting's own pixel
+/* Home — signs of life in the sketch: chimney smoke, pink petals drifting
+   down from the blossom trees and climbing roses, and a butterfly by the
+   door. images/eyam-hall-life.svg is drawn in the painting's own pixel
    coordinates, so it shares .hero__bg's size and position to stay aligned.
-   Sits above the scrim, as the fairy lights do, so the petals are not washed
-   out; they all fall well clear of the names. */
-.hero__petals {
+   Sits above the scrim, as the fairy lights do, so it is not washed out;
+   all of it stays clear of the names. */
+.hero__life {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: url("../images/blossom-petals.svg") center 62% / cover no-repeat;
+  background: url("../images/eyam-hall-life.svg") center 62% / cover no-repeat;
 }
 
 /* Home — a few pen-stroke birds cross the sky above the names now and then.
@@ -670,7 +671,7 @@ site-footer {
 }
 
 /* Hero content sits above the image, scrim and grain. */
-.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__petals):not(.hero__birds):not(.hero__garland) {
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__life):not(.hero__birds):not(.hero__garland) {
   position: relative;
   z-index: 3;
 }
@@ -1562,7 +1563,7 @@ html.book-intro-leaving .book-intro__stage {
   }
 
   .hero__lights,
-  .hero__petals,
+  .hero__life,
   .hero__birds {
     display: none;
   }
@@ -1978,7 +1979,7 @@ html.book-intro-leaving .book-intro__stage {
   .hero__bg,
   .hero__scrim,
   .hero__lights,
-  .hero__petals,
+  .hero__life,
   .hero__birds {
     display: none;
   }
