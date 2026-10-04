@@ -1023,7 +1023,8 @@ p + .address {
 /* --------------------------------------------------------------------------
    Book intro — home-page entrance (js/book-intro.js)
    A forest-green clothbound book rises in, its cover swings open, two
-   leaves turn, then the whole thing dissolves into the site. Hidden unless
+   leaves turn onto a watercolour of Eyam Hall, then the whole thing
+   dissolves into the site. Hidden unless
    the script adds html.book-intro-play, so it never shows without JS, under
    reduced motion, or on a repeat visit in the same session.
    -------------------------------------------------------------------------- */
@@ -1270,10 +1271,26 @@ html.book-intro-leaving .book-intro__stage {
   line-height: 1.3;
 }
 
-.book__sprig {
-  width: 42%;
-  height: auto;
-  opacity: 0.9;
+/* The spread it opens onto: one watercolour of Eyam Hall running across
+   both pages (each page shows half), set low so the caption sits in the
+   sky. The image's edges are pre-feathered to --ivory so it has no seam. */
+.book__plate {
+  justify-content: flex-start;
+  padding-top: 11%;
+}
+
+.book__plate--left {
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    url("../images/eyam-hall-watercolour.jpg") 0% 72% / 200% auto no-repeat,
+    var(--ivory);
+}
+
+.book__plate--right {
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    url("../images/eyam-hall-watercolour.jpg") 100% 72% / 200% auto no-repeat,
+    var(--ivory);
 }
 
 @media (prefers-reduced-motion: reduce) {
