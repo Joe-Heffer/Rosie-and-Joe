@@ -412,27 +412,32 @@ site-footer {
   filter: contrast(1.03) saturate(0.95);
 }
 
-/* Evening guest invitation — swap the daytime hero photo for a barn/banquet
-   shot, distinguishing this page from the homepage at a glance. */
-.hero--evening .hero__bg {
-  background-image: url("../images/barn-hall-banquet.png");
-}
-
-/* Homepage hero — the Eyam Hall pen-and-watercolour sketch on ivory paper.
-   A light image, so the dark scrim and ivory text of the photo heroes are
-   swapped for a soft ivory wash behind stone text. */
-.hero--home {
+/* Homepage and evening heroes — pen-and-watercolour sketches on ivory paper
+   (Eyam Hall; the barn interior). Light images, so the dark scrim and ivory
+   text of the photo heroes are swapped for a soft ivory wash behind stone
+   text. */
+.hero--home,
+.hero--evening {
   color: var(--stone);
   background-color: var(--ivory);
 }
 
-.hero--home .hero__bg {
-  background-image: url("../images/eyam-hall-sketch.jpg");
+.hero--home .hero__bg,
+.hero--evening .hero__bg {
   background-position: center 62%;
   filter: none;
 }
 
-.hero--home .hero__scrim {
+.hero--home .hero__bg {
+  background-image: url("../images/eyam-hall-sketch.jpg");
+}
+
+.hero--evening .hero__bg {
+  background-image: url("../images/barn-hall-watercolour.jpg");
+}
+
+.hero--home .hero__scrim,
+.hero--evening .hero__scrim {
   background:
     radial-gradient(
       ellipse 70% 60% at 50% 50%,
@@ -442,51 +447,66 @@ site-footer {
     );
 }
 
-.hero--home .hero-grain {
+.hero--home .hero-grain,
+.hero--evening .hero-grain {
   mix-blend-mode: multiply;
 }
 
-.hero--home .hero__flower {
+.hero--home .hero__flower,
+.hero--evening .hero__flower {
   filter: none;
 }
 
 .hero--home .hero__names,
+.hero--evening .hero__names,
 .hero--home .hero__date,
-.hero--home .hero__tagline {
+.hero--evening .hero__date,
+.hero--home .hero__tagline,
+.hero--evening .hero__tagline {
   text-shadow: none;
 }
 
 .hero--home .hero__names,
-.hero--home .hero__tagline {
+.hero--evening .hero__names,
+.hero--home .hero__tagline,
+.hero--evening .hero__tagline {
   color: var(--stone);
 }
 
-.hero--home .hero__tagline {
+.hero--home .hero__tagline,
+.hero--evening .hero__tagline {
   opacity: 1;
 }
 
-.hero--home .hero__date {
+.hero--home .hero__date,
+.hero--evening .hero__date {
   color: var(--terra);
 }
 
-.hero--home .botanical {
+.hero--home .botanical,
+.hero--evening .botanical {
   stroke: var(--sage);
 }
 
-.hero--home .btn--outline {
+.hero--home .btn--outline,
+.hero--evening .btn--outline {
   border-color: var(--terra);
   background-color: var(--ivory);
   color: var(--terra);
 }
 
 .hero--home .btn--outline:hover,
-.hero--home .btn--outline:focus-visible {
+.hero--evening .btn--outline:hover,
+.hero--home .btn--outline:focus-visible,
+.hero--evening .btn--outline:focus-visible {
   background-color: var(--terra);
   color: var(--ivory);
 }
 
 .hero--home .btn:not(.btn--outline):hover,
-.hero--home .btn:not(.btn--outline):focus-visible {
+.hero--evening .btn:not(.btn--outline):hover,
+.hero--home .btn:not(.btn--outline):focus-visible,
+.hero--evening .btn:not(.btn--outline):focus-visible {
   color: var(--terra);
 }
 
