@@ -418,6 +418,78 @@ site-footer {
   background-image: url("../images/barn-hall-banquet.png");
 }
 
+/* Homepage hero — the Eyam Hall pen-and-watercolour sketch on ivory paper.
+   A light image, so the dark scrim and ivory text of the photo heroes are
+   swapped for a soft ivory wash behind stone text. */
+.hero--home {
+  color: var(--stone);
+  background-color: var(--ivory);
+}
+
+.hero--home .hero__bg {
+  background-image: url("../images/eyam-hall-sketch.jpg");
+  background-position: center 62%;
+  filter: none;
+}
+
+.hero--home .hero__scrim {
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      rgba(246, 242, 234, 0.92) 0%,
+      rgba(246, 242, 234, 0.7) 60%,
+      rgba(246, 242, 234, 0) 100%
+    );
+}
+
+.hero--home .hero-grain {
+  mix-blend-mode: multiply;
+}
+
+.hero--home .hero__flower {
+  filter: none;
+}
+
+.hero--home .hero__names,
+.hero--home .hero__date,
+.hero--home .hero__tagline {
+  text-shadow: none;
+}
+
+.hero--home .hero__names,
+.hero--home .hero__tagline {
+  color: var(--stone);
+}
+
+.hero--home .hero__tagline {
+  opacity: 1;
+}
+
+.hero--home .hero__date {
+  color: var(--terra);
+}
+
+.hero--home .botanical {
+  stroke: var(--sage);
+}
+
+.hero--home .btn--outline {
+  border-color: var(--terra);
+  background-color: var(--ivory);
+  color: var(--terra);
+}
+
+.hero--home .btn--outline:hover,
+.hero--home .btn--outline:focus-visible {
+  background-color: var(--terra);
+  color: var(--ivory);
+}
+
+.hero--home .btn:not(.btn--outline):hover,
+.hero--home .btn:not(.btn--outline):focus-visible {
+  color: var(--terra);
+}
+
 /* Scrim — darkens the photo so the ivory text reads clearly. */
 .hero__scrim {
   position: absolute;
