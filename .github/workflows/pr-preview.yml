@@ -1,0 +1,63 @@
+name: PR preview
+
+# Publishes each pull request to https://rosieandjoe.uk/pr-preview/pr-<n>/
+# (via the gh-pages branch) and comments the link on the PR, so changes can
+# be checked on a phone before merging. The preview is removed when the PR
+# is closed or merged.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    # Forks can't write to this repo's gh-pages branch.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+
+      # First run only: if gh-pages doesn't yet carry the live site, publish
+      # main to its root so switching Pages over to gh-pages loses nothing.
+      # After that, deploy.yml keeps the root up to date.
+      - name: Check gh-pages has the live site
+        id: live
+        run: |
+          if git ls-remote --exit-code origin gh-pages >/dev/null \
+            && git fetch --depth=1 origin gh-pages \
+            && git cat-file -e FETCH_HEAD:index.html 2>/dev/null; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.live.outputs.present == 'false' && github.event.action != 'closed'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          path: live-site
+      - if: steps.live.outputs.present == 'false' && github.event.action != 'closed'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: live-site
+          branch: gh-pages
+          clean-exclude: pr-preview/
+          force: false
+      - name: Tidy up so the live copy isn't swept into the preview
+        if: steps.live.outputs.present == 'false' && github.event.action != 'closed'
+        run: rm -rf live-site
+
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: .
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: rosieandjoe.uk
+          action: auto
