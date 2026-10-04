@@ -469,18 +469,175 @@ site-footer {
   background: url("../images/fairy-lights.svg") center 62% / cover no-repeat;
 }
 
-/* Home — signs of life in the sketch: chimney smoke, pink petals drifting
-   down from the blossom trees and climbing roses, and a butterfly by the
-   door. images/eyam-hall-life.svg is drawn in the painting's own pixel
-   coordinates, so it shares .hero__bg's size and position to stay aligned.
-   Sits above the scrim, as the fairy lights do, so it is not washed out;
-   all of it stays clear of the names. */
+/* Home — chimney smoke in the sketch. images/eyam-hall-life.svg is drawn in
+   the painting's own pixel coordinates, so it shares .hero__bg's size and
+   position to stay aligned. Sits above the scrim, as the fairy lights do, so
+   it is not washed out. */
 .hero__life {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background: url("../images/eyam-hall-life.svg") center 62% / cover no-repeat;
+}
+
+/* Home — pink petals drifting down from the blossom tree on the left and the
+   climbing roses on the right, and a butterfly flitting about the roses.
+   They are placed in percentages of the hero and sized in screen pixels, so
+   they stay in view and legible on phones, where the cover crop shrinks the
+   sketch and pushes the blossom tree off the edge. The layer sits above the
+   hero's text, as real petals would, but keeps to the sides, clear of the
+   names. Each petal's position, timing, size and colour are set inline in
+   index.html. The fall moves the petal with `translate` and the tumble turns
+   it with `rotate` and `scale`, so the two animations do not overwrite each
+   other. */
+.hero__drift {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__petal {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: calc(9px * var(--s));
+  height: calc(6px * var(--s));
+  border-radius: 100% 0;
+  background: var(--c);
+  opacity: 0;
+  animation:
+    petal-fall-a var(--d) linear var(--dl) infinite,
+    petal-tumble var(--t) linear var(--tl) infinite;
+}
+
+.hero__petal--b { animation-name: petal-fall-b, petal-tumble; }
+.hero__petal--c { animation-name: petal-fall-c, petal-tumble; }
+.hero__petal--d { animation-name: petal-fall-d, petal-tumble; }
+
+@media (min-width: 768px) {
+  .hero__petal {
+    width: calc(12px * var(--s));
+    height: calc(8px * var(--s));
+  }
+}
+
+@keyframes petal-tumble {
+  0% { rotate: 0deg; scale: 1 1; }
+  50% { rotate: 180deg; scale: 0.35 1; }
+  100% { rotate: 360deg; scale: 1 1; }
+}
+
+@keyframes petal-fall-a {
+  0% { opacity: 0; translate: 0 0; }
+  12% { opacity: 0.9; }
+  35% { translate: 22px 60px; }
+  65% { translate: -8px 125px; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; translate: 16px 190px; }
+}
+
+@keyframes petal-fall-b {
+  0% { opacity: 0; translate: 0 0; }
+  12% { opacity: 0.9; }
+  35% { translate: -18px 52px; }
+  65% { translate: 14px 118px; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; translate: -6px 175px; }
+}
+
+@keyframes petal-fall-c {
+  0% { opacity: 0; translate: 0 0; }
+  12% { opacity: 0.9; }
+  40% { translate: 32px 66px; }
+  70% { translate: 44px 140px; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; translate: 70px 205px; }
+}
+
+@keyframes petal-fall-d {
+  0% { opacity: 0; translate: 0 0; }
+  12% { opacity: 0.9; }
+  30% { translate: 12px 42px; }
+  60% { translate: -20px 104px; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; translate: -34px 160px; }
+}
+
+/* The butterfly — a brimstone, the first butterfly of an English spring.
+   .hero__flight fills the hero, so translating it by percentages moves the
+   butterfly (pinned to its top-left corner) around the hero itself. It
+   wanders about the roses with short rests, bobbing as it goes. */
+.hero__flight {
+  position: absolute;
+  inset: 0;
+  animation: butterfly-flit 30s ease-in-out infinite;
+}
+
+.hero__butterfly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: butterfly-bob 1.2s ease-in-out infinite alternate;
+}
+
+.hero__butterfly svg {
+  display: block;
+  width: 30px;
+  height: 24px;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .hero__butterfly svg {
+    width: 36px;
+    height: 29px;
+  }
+}
+
+.hero__bwing {
+  fill: #EFCF6A;
+  stroke: #5B4E42;
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: butterfly-flap 0.2s ease-in-out infinite alternate;
+}
+
+.hero__bwing--r {
+  transform: scaleX(-1);
+}
+
+.hero__bbody {
+  fill: none;
+  stroke: #5B4E42;
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+@keyframes butterfly-flit {
+  0%, 100% { transform: translate(84%, 52%); }
+  10% { transform: translate(78%, 44%); }
+  18%, 26% { transform: translate(72%, 47%); }
+  36% { transform: translate(80%, 38%); }
+  46% { transform: translate(90%, 44%); }
+  54%, 62% { transform: translate(88%, 56%); }
+  72% { transform: translate(76%, 60%); }
+  84% { transform: translate(70%, 54%); }
+  92% { transform: translate(80%, 58%); }
+}
+
+@keyframes butterfly-bob {
+  from { transform: translateY(-4px) rotate(-8deg); }
+  to { transform: translateY(4px) rotate(6deg); }
+}
+
+@keyframes butterfly-flap {
+  from { scale: 1 1; }
+  to { scale: 0.15 1; }
 }
 
 /* Home — now and then a few small birds cross the sky above the names, as
@@ -722,7 +879,7 @@ site-footer {
 }
 
 /* Hero content sits above the image, scrim and grain. */
-.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__life):not(.hero__birds):not(.hero__garland) {
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__life):not(.hero__birds):not(.hero__drift):not(.hero__garland) {
   position: relative;
   z-index: 3;
 }
@@ -1615,7 +1772,8 @@ html.book-intro-leaving .book-intro__stage {
 
   .hero__lights,
   .hero__life,
-  .hero__birds {
+  .hero__birds,
+  .hero__drift {
     display: none;
   }
 }
@@ -2031,7 +2189,8 @@ html.book-intro-leaving .book-intro__stage {
   .hero__scrim,
   .hero__lights,
   .hero__life,
-  .hero__birds {
+  .hero__birds,
+  .hero__drift {
     display: none;
   }
 
