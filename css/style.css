@@ -436,6 +436,18 @@ site-footer {
   background-image: url("../images/barn-hall-watercolour.jpg");
 }
 
+/* Evening fairy lights — a twinkling glow over each bulb in the barn
+   watercolour. images/fairy-lights.svg is drawn in the painting's own pixel
+   coordinates, so it shares .hero__bg's size and position to stay aligned.
+   Sits above the scrim so the lights are not washed out. */
+.hero__lights {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("../images/fairy-lights.svg") center 62% / cover no-repeat;
+}
+
 .hero--home .hero__scrim,
 .hero--evening .hero__scrim {
   background:
@@ -535,7 +547,7 @@ site-footer {
 }
 
 /* Hero content sits above the image, scrim and grain. */
-.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim) {
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights) {
   position: relative;
   z-index: 3;
 }
@@ -1389,6 +1401,10 @@ html.book-intro-leaving .book-intro__stage {
   .book-intro {
     display: none !important;
   }
+
+  .hero__lights {
+    display: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1411,7 +1427,8 @@ html.book-intro-leaving .book-intro__stage {
   }
 
   .hero__bg,
-  .hero__scrim {
+  .hero__scrim,
+  .hero__lights {
     display: none;
   }
 

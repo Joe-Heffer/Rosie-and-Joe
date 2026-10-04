@@ -77,6 +77,8 @@ There are no remaining `<!-- TODO -->` or bracketed placeholders anywhere in the
 
 The hero background image is already wired in via `.hero__bg` in `css/style.css` (around line 391; there's also a `.hero--evening` variant used on `evening/index.html`). To swap the photo, add the new image to `images/` and update the `background-image` value there. For the Ektar/35mm look the concept calls for, keep `filter: contrast(1.03) saturate(0.92) sepia(0.06);` and crop landscape/letterbox — never square. The `.hero-grain` overlay already sits above the image and makes photographs feel shot on film.
 
+The evening hero also has a `.hero__lights` layer: `images/fairy-lights.svg` places a softly twinkling glow over each fairy-light bulb in `images/barn-hall-watercolour.jpg`, using that image's pixel coordinates (1376×768) and the same `center 62% / cover` background geometry so it stays aligned. If the evening image or its `background-position` changes, regenerate the bulb positions or update the layer to match. The layer is hidden under `prefers-reduced-motion` and in print.
+
 ## Deployment
 
 GitHub Pages serves the `gh-pages` branch (Settings → Pages → Deploy from branch → `gh-pages` → `/ (root)`), on the custom domain in `CNAME`.
