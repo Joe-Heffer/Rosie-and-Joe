@@ -25,7 +25,7 @@ Eight pages share a common header/footer markup pattern (via custom elements, se
 - `travel.html` — Getting Here (directions + live Google Maps embed)
 - `accommodation.html` — Where to stay near the venue
 - `gift.html` — Gift / honeymoon fund info
-- `evening/index.html` — Evening-only guests page (one directory deep; keeps its own simplified inline header instead of `<site-header>`, since its nav has no links and the shared header's links are root-relative)
+- `evening/index.html` — Evening-only guests page (one directory deep; keeps its own simplified inline header instead of `<site-header>`, since its nav has no links and the shared header's page links are relative to the site root)
 - `save-the-date/index.html` — standalone save-the-date card; fully self-contained with inline `<style>` and no shared header/footer/nav — not part of the templating system below
 - `table-plan.html` — private seating/table-plan page, `<meta name="robots" content="noindex, nofollow">` like `evening/index.html`; not linked from any nav or other page, uses the shared header/footer and design system
 - `css/style.css` — entire design system and all styles
@@ -46,7 +46,7 @@ There's no templating engine or build step, so duplication across pages is handl
 <site-footer></site-footer>
 ```
 
-The `logo` attribute is optional (defaults to "Rosie & Joe"). `evening/index.html` is the one exception — it keeps an inline simplified `<header>` rather than `<site-header>`.
+The header/footer's home link and images are built from `ROOT`, the site root worked out from `components.js`'s own URL, so they resolve both on the live domain and under a PR preview sub-path. Avoid root-relative (`/…`) paths anywhere in the site for the same reason. The `logo` attribute is optional (defaults to "Rosie & Joe"). `evening/index.html` is the one exception — it keeps an inline simplified `<header>` rather than `<site-header>`.
 
 ### Design system — "Walled Garden in Winter Light"
 
@@ -79,4 +79,7 @@ The hero background image is already wired in via `.hero__bg` in `css/style.css`
 
 ## Deployment
 
-Designed to be deployed via GitHub Pages with the site files at the repo root (already the case after the `chore: move files to root` commit) — Settings → Pages → Deploy from branch → `main` → `/ (root)`.
+GitHub Pages serves the `gh-pages` branch (Settings → Pages → Deploy from branch → `gh-pages` → `/ (root)`), on the custom domain in `CNAME`.
+
+* `.github/workflows/deploy.yml` publishes `main` to the root of `gh-pages` on every push to `main` (or by hand via **Run workflow**).
+* `.github/workflows/pr-preview.yml` publishes each same-repo pull request to `https://rosieandjoe.uk/pr-preview/pr-<n>/` using `rossjrw/pr-preview-action`, comments the link on the PR, and removes the preview when the PR closes. On its first run it also seeds the `gh-pages` root with `main` if the live site isn't there yet.
