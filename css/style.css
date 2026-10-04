@@ -1001,6 +1001,57 @@ p + .address {
 }
 
 /* --------------------------------------------------------------------------
+   Homepage intro — the watercolour of Eyam Hall lifts away as paper
+   confetti (driven by js/intro.js). Hidden unless the script opts in, so
+   guests without JavaScript or with reduced motion never see it.
+   -------------------------------------------------------------------------- */
+.intro {
+  display: none;
+}
+
+.intro-active {
+  overflow: hidden;
+}
+
+.intro-active .intro {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: var(--ivory);
+  cursor: pointer;
+}
+
+.intro canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(1.025);
+  transition: opacity 1.2s var(--ease-out), transform 2.4s var(--ease-out);
+}
+
+.intro.is-shown canvas {
+  opacity: 1;
+  transform: none;
+}
+
+/* Once the paper starts to lift, the page shows through the gaps. */
+.intro.is-dissolving {
+  background-color: transparent;
+}
+
+/* Hold the hero's own fade-up until the painting begins to dissolve. */
+.intro-hold .hero.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.intro-active .hero.reveal {
+  transition-duration: 1.6s;
+}
+
+/* --------------------------------------------------------------------------
    Skip link — visually hidden until focused, for keyboard/screen-reader users
    -------------------------------------------------------------------------- */
 .skip-link {

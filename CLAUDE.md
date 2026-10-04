@@ -13,7 +13,7 @@ A static, mobile-first wedding website for Rosie & Joe, built with vanilla HTML,
 
 There is no build step. Open any `.html` file directly in a browser, or serve the directory with any static file server (e.g. `python3 -m http.server`). All paths are relative, so both approaches work.
 
-There are no tests, linters, or package manifests in this repo. `.github/workflows/ci.yml` runs `html-proofer` (link/image/HTML validity checks, with `cake/index.html` excluded), `node --check js/main.js`, and `scripts/check-unused-files.py` (fails if any tracked file under `images/`, `css/`, or `js/` isn't referenced by filename from any tracked HTML/CSS/JS source) on every push/PR.
+There are no tests, linters, or package manifests in this repo. `.github/workflows/ci.yml` runs `html-proofer` (link/image/HTML validity checks, with `cake/index.html` excluded), `node --check` on `js/main.js` and `js/intro.js`, and `scripts/check-unused-files.py` (fails if any tracked file under `images/`, `css/`, or `js/` isn't referenced by filename from any tracked HTML/CSS/JS source) on every push/PR.
 
 ## Architecture
 
@@ -30,6 +30,7 @@ Eight pages share a common header/footer markup pattern (via custom elements, se
 - `table-plan.html` — private seating/table-plan page, `<meta name="robots" content="noindex, nofollow">` like `evening/index.html`; not linked from any nav or other page, uses the shared header/footer and design system
 - `css/style.css` — entire design system and all styles
 - `js/main.js` — mobile nav toggle, smooth scroll, active-nav-link highlighting, scroll reveal
+- `js/intro.js` — homepage-only entrance animation: `images/eyam-hall-watercolour.jpg` (with the names and date painted on) fills a canvas overlay (`<div class="intro">` at the top of `index.html`'s `<body>`), then lifts away as paper confetti on a breeze. Loaded synchronously in `<head>` so the overlay covers the first paint; plays once per session (`sessionStorage`), `?intro` in the URL replays it, click/tap/scroll/key hurries it, and it is skipped entirely under `prefers-reduced-motion` or without JavaScript
 - `js/components.js` — defines the `<site-header>` / `<site-footer>` custom elements (see "Shared header/footer" below)
 - `images/icons.svg` — shared SVG icon sprite; pages reference icons via `<svg class="icon"><use href="images/icons.svg#icon-name"></use></svg>` instead of duplicating `<symbol>` defs inline
 - `images/` — hero/gallery images
