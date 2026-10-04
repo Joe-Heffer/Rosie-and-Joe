@@ -1021,10 +1021,290 @@ p + .address {
 }
 
 /* --------------------------------------------------------------------------
+   Book intro — home-page entrance (js/book-intro.js)
+   A forest-green clothbound book rises in, its cover swings open, two
+   leaves turn onto a watercolour of Eyam Hall, then the whole thing
+   dissolves into the site. Hidden unless
+   the script adds html.book-intro-play, so it never shows without JS, under
+   reduced motion, or on a repeat visit in the same session.
+   -------------------------------------------------------------------------- */
+.book-intro {
+  display: none;
+}
+
+html.book-intro-play .book-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ivory);
+  cursor: pointer;
+  transition: opacity 1100ms ease;
+}
+
+/* Lock scrolling and hold the hero back until the book has gone, so the
+   hero's own fade-up plays as the page dissolves. */
+html.book-intro-play:not(.book-intro-leaving) {
+  overflow: hidden;
+}
+
+html.book-intro-play:not(.book-intro-leaving) .hero.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+html.book-intro-leaving .book-intro {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The stage handles fade/scale (opacity would flatten 3D if it sat on the
+   book itself); perspective here gives the book's leaves their depth. */
+.book-intro__stage {
+  position: relative;
+  z-index: 3;
+  perspective: 2200px;
+  animation: book-arrive 900ms var(--ease-out) both;
+  transition: scale 1100ms var(--ease-out);
+}
+
+html.book-intro-leaving .book-intro__stage {
+  scale: 1.12;
+}
+
+@keyframes book-arrive {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.book {
+  --book-w: min(44vw, 46vh, 300px);
+  --turn-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+  width: var(--book-w);
+  height: calc(var(--book-w) * 1.42);
+  transform-style: preserve-3d;
+  animation: book-centre 1500ms var(--turn-ease) 1100ms both;
+}
+
+/* Slide right as it opens so the spine ends up mid-screen. */
+@keyframes book-centre {
+  from { translate: 0 0; }
+  to   { translate: 50% 0; }
+}
+
+/* Right-hand page underneath everything: what the book opens onto. */
+.book__page,
+.book__leaf:not(.book__cover) {
+  position: absolute;
+  top: 2%;
+  bottom: 2%;
+  left: 0;
+  right: 3%;
+}
+
+.book__page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--book-w) * 0.04);
+  padding: 12%;
+  text-align: center;
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    var(--ivory);
+  border: 1px solid var(--rule);
+  border-left: 0;
+}
+
+/* Fore-edge: a hint of the stacked pages. */
+.book__page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 3%;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(34, 30, 27, 0.07) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+/* Leaves and cover hinge on the spine (left edge) and turn to the left. */
+.book__leaf {
+  --z: 1px;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg) translateZ(var(--z));
+  animation: book-turn 1500ms var(--turn-ease) 1100ms both;
+}
+
+.book__leaf--1 {
+  --z: 2px;
+  animation-duration: 1400ms;
+  animation-delay: 1450ms;
+}
+
+.book__leaf--2 {
+  --z: 1px;
+  animation-duration: 1300ms;
+  animation-delay: 1700ms;
+}
+
+.book__cover {
+  --z: 3px;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes book-turn {
+  from { transform: rotateY(0deg) translateZ(var(--z)); }
+  to   { transform: rotateY(-180deg) translateZ(var(--z)); }
+}
+
+.book__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--book-w) * 0.04);
+  padding: 12%;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.1), rgba(34, 30, 27, 0) 9%),
+    var(--ivory);
+  border: 1px solid var(--rule);
+}
+
+/* The back of a turned leaf is mirrored, so its gutter sits on the right. */
+.book__face--back {
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    var(--ivory);
+}
+
+/* Clothbound cover: forest green, a hinge crease by the spine, a fine
+   inset frame, ivory lettering. */
+.book__cover .book__face--front {
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  color: var(--ivory);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.28),
+      rgba(0, 0, 0, 0) 5%,
+      rgba(255, 255, 255, 0.07) 6%,
+      rgba(255, 255, 255, 0) 8%
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E"),
+    var(--forest);
+}
+
+.book__cover .book__face--front::before {
+  content: "";
+  position: absolute;
+  inset: 7% 7% 7% 11%;
+  border: 1px solid rgba(251, 248, 245, 0.35);
+}
+
+/* Endpaper inside the cover. */
+.book__cover .book__face--back {
+  border-radius: 3px 0 0 3px;
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.14), rgba(34, 30, 27, 0) 9%),
+    var(--limestone);
+}
+
+.book__eyebrow {
+  font-family: var(--font-small-caps);
+  font-size: calc(var(--book-w) * 0.058);
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--taupe);
+}
+
+.book__cover .book__eyebrow {
+  color: var(--terra-light);
+}
+
+.book__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: calc(var(--book-w) * 0.15);
+  line-height: 1.05;
+}
+
+.book__rule {
+  display: block;
+  width: 28%;
+  height: 1px;
+  background-color: var(--rule);
+}
+
+.book__cover .book__rule {
+  background-color: rgba(251, 248, 245, 0.45);
+}
+
+.book__line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: calc(var(--book-w) * 0.07);
+  line-height: 1.3;
+}
+
+/* The spread it opens onto: one watercolour of Eyam Hall running across
+   both pages (each page shows half), set low so the caption sits in the
+   sky. The image's edges are pre-feathered to --ivory so it has no seam. */
+.book__plate {
+  justify-content: flex-start;
+  padding-top: 11%;
+}
+
+.book__plate--left {
+  background:
+    linear-gradient(270deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    url("../images/eyam-hall-watercolour.jpg") 0% 72% / 200% auto no-repeat,
+    var(--ivory);
+}
+
+.book__plate--right {
+  background:
+    linear-gradient(90deg, rgba(34, 30, 27, 0.12), rgba(34, 30, 27, 0) 9%),
+    url("../images/eyam-hall-watercolour.jpg") 100% 72% / 200% auto no-repeat,
+    var(--ivory);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-intro {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Print — guests printing the schedule or directions get plain, paginated
    text rather than the sticky header, hero photo and decorative motifs.
    -------------------------------------------------------------------------- */
 @media print {
+  .book-intro,
   .site-header,
   .hero-grain,
   .botanical,
