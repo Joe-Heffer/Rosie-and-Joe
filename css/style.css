@@ -506,6 +506,13 @@ site-footer {
   color: var(--terra);
 }
 
+/* Evening — "Evening Reception" is the page's headline, so it is set in a
+   heavier cut than the usual light italic to stand out from the barn
+   watercolour behind it. */
+.hero--evening .hero__date {
+  font-weight: 600;
+}
+
 .hero--home .botanical,
 .hero--evening .botanical {
   stroke: var(--sage);
@@ -558,7 +565,7 @@ site-footer {
 }
 
 /* Hero content sits above the image, scrim and grain. */
-.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights) {
+.hero > *:not(.hero-grain):not(.hero__bg):not(.hero__scrim):not(.hero__lights):not(.hero__garland) {
   position: relative;
   z-index: 3;
 }
@@ -647,11 +654,32 @@ site-footer {
 
 /* Flower garland — decorative divider beneath the hero CTAs. */
 .hero__garland {
+  position: relative;
+  z-index: 3;
   display: block;
   width: min(90%, 480px);
   height: auto;
   margin: var(--space-lg) auto 0;
   opacity: 0.9;
+}
+
+/* Evening — the garland runs edge to edge as the hero's bottom border. The
+   PNG has transparent space above and below the flowers (they span roughly
+   30–65% of its height), so it is nudged down until the lowest blooms meet
+   the hero's edge, and the hero gains bottom padding so the CTAs clear it. */
+.hero--evening {
+  padding-bottom: calc(var(--space-xl) + 12vw);
+}
+
+.hero--evening .hero__garland {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 1;
+  transform: translateY(35%);
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
