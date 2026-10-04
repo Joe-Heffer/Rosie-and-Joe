@@ -45,8 +45,43 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
     <meta name="theme-color" content="#A94A68" />
     <script src="js/components.js"></script>
+    <script src="js/book-intro.js"></script>
   </head>
   <body>
+    <!-- Entrance: a clothbound book opens onto the site (js/book-intro.js).
+         Hidden unless the script adds html.book-intro-play. -->
+    <div class="book-intro" aria-hidden="true">
+      <div class="hero-grain"></div>
+      <div class="book-intro__stage">
+        <div class="book">
+          <div class="book__page">
+            <span class="book__eyebrow">Chapter one</span>
+            <span class="book__rule"></span>
+            <span class="book__line">Eyam Hall, Derbyshire</span>
+          </div>
+          <div class="book__leaf book__leaf--2">
+            <div class="book__face book__face--front"></div>
+            <div class="book__face book__face--back">
+              <img class="book__sprig" src="images/flower-sprig.png" alt="" />
+            </div>
+          </div>
+          <div class="book__leaf book__leaf--1">
+            <div class="book__face book__face--front"></div>
+            <div class="book__face book__face--back"></div>
+          </div>
+          <div class="book__leaf book__cover">
+            <div class="book__face book__face--front">
+              <span class="book__eyebrow">The wedding of</span>
+              <span class="book__title">Rosie &amp; Joe</span>
+              <span class="book__rule"></span>
+              <span class="book__line">17 April 2027</span>
+            </div>
+            <div class="book__face book__face--back"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <a class="skip-link" href="#main">Skip to content</a>
     <site-header></site-header>
 

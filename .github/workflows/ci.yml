@@ -27,6 +27,7 @@ jobs:
         with:
           node-version: '20'
       - run: node --check js/main.js
+      - run: node --check js/book-intro.js
 
   unused-files:
     runs-on: ubuntu-latest
