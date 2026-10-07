@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="816" height="1301" viewBox="0 0 816 1301">
-  <!-- Mask for the home hero's birds (.hero__birds), in the pixel coordinates
-       of images/eyam-hall-sketch.jpg so it lines up when used with the same
-       size and position as .hero__bg. The filled shape is the sky above the
-       roofline; the house is left empty, so the birds pass behind it. -->
-  <path d="M0 0H816V1301H794L794 700L792 220L784 220L768 227L736 202L704 177L688 151L680 152L664 176L640 216L616 257L600 284L592 291L560 305L528 317L524 405L520 405L496 387L480 373L472 370L456 398L440 425L424 452L416 462L400 467L368 478L360 439L352 420L344 416L336 437L328 449L320 431L312 434L304 452L300 465L296 465L280 458L264 452L248 450L232 449L216 442L208 438L200 432L192 422L184 419L176 426L168 445L160 465L152 483L144 494L128 494L114 520L108 600L96 614L80 632L62 646L58 700L58 1301H0Z"/>
-</svg>
