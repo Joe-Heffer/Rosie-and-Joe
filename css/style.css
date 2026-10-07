@@ -724,13 +724,17 @@ site-footer {
    its own rhythm, rising and dipping a little as they go. Each .hero__bird spans the hero's width and slides one
    full width across, carrying its bird (the svg) from just off the left edge
    to just off the right; most of each cycle is spent off-screen, so passes
-   are rare. */
+   are rare. They fly behind the house: images/birds-mask.svg covers only the
+   sky above the roofline, drawn in the sketch's own pixel coordinates, so it
+   shares .hero__bg's size and position to stay aligned. */
 .hero__birds {
   position: absolute;
   inset: 0;
   z-index: 2;
   overflow: hidden;
   pointer-events: none;
+  -webkit-mask: url("../images/birds-mask.svg") center 62% / cover no-repeat;
+  mask: url("../images/birds-mask.svg") center 62% / cover no-repeat;
 }
 
 .hero__bird {
