@@ -482,7 +482,8 @@ site-footer {
 }
 
 /* Home — pink petals drifting down from the blossom tree on the left and the
-   climbing roses on the right, and a butterfly flitting about the roses.
+   climbing roses on the right, a bumblebee working the blossom and a
+   butterfly flitting about the roses.
    They are placed in percentages of the hero and sized in screen pixels, so
    they stay in view and legible on phones, where the cover crop shrinks the
    sketch and pushes the blossom tree off the edge. The layer sits above the
@@ -638,6 +639,83 @@ site-footer {
 @keyframes butterfly-flap {
   from { scale: 1 1; }
   to { scale: 0.15 1; }
+}
+
+/* The bumblebee — a buff-tailed bumblebee, seen from above, working the
+   blossom tree on the left while the butterfly keeps to the roses. Like
+   .hero__flight, .hero__bee-flight fills the hero so percentage translates
+   move the bee around the hero. It darts between blossoms and hangs at each
+   one for a moment, with a quick unsteady hover and a blur of wings. */
+.hero__bee-flight {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+  animation: bee-forage 26s ease-in-out infinite;
+}
+
+/* Centred on the flight box's top-left corner, so turning the bee to face
+   its next blossom pivots it on the spot. */
+.hero__bee {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: -8px 0 0 -10px;
+  animation: bee-hover 0.9s ease-in-out infinite;
+}
+
+.hero__bee svg {
+  display: block;
+  width: 20px;
+  height: 16px;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .hero__bee {
+    margin: -10px 0 0 -12.5px;
+  }
+
+  .hero__bee svg {
+    width: 25px;
+    height: 20px;
+  }
+}
+
+.hero__beewing {
+  fill: rgba(246, 242, 234, 0.7);
+  stroke: #5B4E42;
+  stroke-width: 0.4;
+  stroke-linejoin: round;
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: bee-buzz 0.06s linear infinite alternate;
+}
+
+.hero__beewing--r {
+  transform: scaleX(-1);
+}
+
+@keyframes bee-forage {
+  0%, 100% { transform: translate(10%, 62%) rotate(-20deg); }
+  6%, 14% { transform: translate(14%, 57%) rotate(25deg); }
+  20%, 27% { transform: translate(7%, 54%) rotate(-50deg); }
+  34%, 40% { transform: translate(17%, 65%) rotate(140deg); }
+  48% { transform: translate(22%, 58%) rotate(70deg); }
+  55%, 62% { transform: translate(19%, 52%) rotate(-30deg); }
+  70%, 78% { transform: translate(5%, 64%) rotate(-110deg); }
+  86%, 93% { transform: translate(12%, 68%) rotate(60deg); }
+}
+
+@keyframes bee-hover {
+  0%, 100% { translate: 0 0; }
+  25% { translate: 1.5px -2px; }
+  50% { translate: -1px 1px; }
+  75% { translate: 2px 1.5px; }
+}
+
+@keyframes bee-buzz {
+  from { scale: 1 1; opacity: 0.9; }
+  to { scale: 0.75 0.9; opacity: 0.5; }
 }
 
 /* Home — now and then a few small birds cross the sky above the names, as
