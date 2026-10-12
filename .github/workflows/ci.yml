@@ -35,6 +35,12 @@ jobs:
       - uses: actions/checkout@v4
       - run: python3 scripts/check-unused-files.py
 
+  file-sizes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check-file-sizes.py
+
   spellcheck:
     runs-on: ubuntu-latest
     steps:
