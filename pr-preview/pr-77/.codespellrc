@@ -1,0 +1,3 @@
+[codespell]
+skip = ./cake/index.html,*.svg,./.git
+count = true
