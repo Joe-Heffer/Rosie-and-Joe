@@ -15,7 +15,7 @@ files can be hosted, including GitHub Pages.
 ├── details.html            # The Day — ceremony, reception, dress code, schedule
 ├── rsvp.html                # RSVP — intro + Google Form embed
 ├── travel.html              # Getting Here — by car, public transport, map
-├── accommodation.html       # Where to stay near the venue
+├── accommodation.html       # Where to stay, plus Eyam Hall & village history
 ├── gift.html                 # Gift / honeymoon fund info
 ├── evening/index.html        # Evening-only guests page
 ├── save-the-date/index.html  # Standalone save-the-date card
