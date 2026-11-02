@@ -20,7 +20,7 @@ There are no tests, linters, or package manifests in this repo. `.github/workflo
 Eight pages share a common header/footer markup pattern (via custom elements, see below) and a single stylesheet/script, plus one unlinked private page:
 
 - `index.html` — Home (hero with grain + botanical mark, welcome note, CTAs)
-- `details.html` — The Day (ceremony, reception, dress code, schedule timeline)
+- `details.html` — The Day (arrival, ceremony, drinks, wedding breakfast, evening reception, carriages, dress code, venue notes)
 - `rsvp.html` — RSVP (intro + live Google Form embed, on a limestone band)
 - `travel.html` — Getting Here (directions + live Google Maps embed)
 - `accommodation.html` — Where to stay near the venue
