@@ -1863,9 +1863,9 @@ html.book-intro-leaving .book-intro__stage {
 /* --------------------------------------------------------------------------
    The Day vignettes — small single-stroke line drawings beside each part of
    the day (details.html) that play once as their section fades in: the gate
-   swings open, the rings come together, two flutes clink and the umbrella
-   opens against the April rain. The schedule and venue notes then arrive
-   one line at a time. Everything waits for the section's .is-visible (see
+   swings open, the rings come together, two flutes clink, sparkles twinkle
+   over the plate, the music and the moon, and the umbrella opens against
+   the April rain. The venue notes then arrive one line at a time. Everything waits for the section's .is-visible (see
    "Scroll reveal"), and without motion the drawings simply sit at rest.
    -------------------------------------------------------------------------- */
 .vignette {
