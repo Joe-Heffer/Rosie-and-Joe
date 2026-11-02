@@ -12,8 +12,12 @@ on:
 permissions:
   contents: write
 
+# Deploys queue only behind other deploys. Sharing a group with pr-preview.yml
+# let a PR's "closed" preview run replace the pending deploy when a merge
+# landed, so the push to main was cancelled and never published. A replaced
+# deploy is harmless here, since each one publishes the latest main.
 concurrency:
-  group: gh-pages
+  group: gh-pages-deploy
   cancel-in-progress: false
 
 jobs:
