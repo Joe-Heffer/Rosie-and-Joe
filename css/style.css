@@ -1885,6 +1885,20 @@ html.book-intro-leaving .book-intro__stage {
   stroke-linejoin: round;
 }
 
+/* Sits to the right of the heading and time rather than on a line below. */
+.detail__meta:has(> .vignette) {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--space-md);
+  align-items: start;
+}
+
+.detail__meta > .vignette {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin-top: 0;
+}
+
 .vignette * {
   transform-box: fill-box;
   transform-origin: center;
@@ -2131,8 +2145,16 @@ html.book-intro-leaving .book-intro__stage {
    a heart seals it, and little hearts drift up as it waits to be sent. The
    flap is two shapes: the open one sits behind the letter and folds down
    flat, then the closed one folds down over the pocket in front of it. */
+/* Floats right of the intro so the paragraphs wrap around it. */
 .vignette--envelope {
-  margin-top: var(--space-lg);
+  float: right;
+  margin: 0 0 var(--space-sm) var(--space-md);
+}
+
+.page-header:has(.vignette--envelope)::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 .vignette__paper {
