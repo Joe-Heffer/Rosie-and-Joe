@@ -23,7 +23,7 @@ jobs:
     # Forks can't write to this repo's gh-pages branch.
     if: github.event.pull_request.head.repo.full_name == github.repository
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # First run only: if gh-pages doesn't yet carry the live site, publish
       # main to its root so switching Pages over to gh-pages loses nothing.
@@ -39,7 +39,7 @@ jobs:
             echo "present=false" >> "$GITHUB_OUTPUT"
           fi
       - if: steps.live.outputs.present == 'false' && github.event.action != 'closed'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.repository.default_branch }}
           path: live-site
