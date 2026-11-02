@@ -23,7 +23,7 @@ Eight pages share a common header/footer markup pattern (via custom elements, se
 - `details.html` — The Day (arrival, ceremony, drinks, wedding breakfast, evening reception, carriages, dress code, venue notes)
 - `rsvp.html` — RSVP (intro + live Google Form embed, on a limestone band)
 - `travel.html` — Getting Here (directions + live Google Maps embed)
-- `accommodation.html` — Where to stay near the venue
+- `accommodation.html` — Where to stay near the venue, plus short histories of Eyam Hall and the village of Eyam
 - `gift.html` — Gift / honeymoon fund info
 - `evening/index.html` — Evening-only guests page (one directory deep; keeps its own simplified inline header instead of `<site-header>`, since its nav has no links and the shared header's page links are relative to the site root)
 - `save-the-date/index.html` — standalone save-the-date card; fully self-contained with inline `<style>` and no shared header/footer/nav — not part of the templating system below
