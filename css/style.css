@@ -2292,3 +2292,14 @@ html.book-intro-leaving .book-intro__stage {
     display: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Add-to-calendar links
+   -------------------------------------------------------------------------- */
+.calendar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  max-width: var(--text-max);
+  margin: var(--space-md) auto 0;
+}
