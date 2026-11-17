@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="816" height="1301" viewBox="0 0 816 1301">
+  <!-- Chimney smoke for images/eyam-hall-sketch.jpg, in the painting's own
+       pixel coordinates, so it lines up when used as a background with the
+       same size and position: smoke curls up from two of the chimney pots
+       and drifts on the breeze. The petals and butterfly live in the hero's
+       .hero__drift layer (index.html, css/style.css) so they stay in view on
+       phones. -->
+  <defs>
+    <radialGradient id="puff">
+      <stop offset="0" stop-color="#8C8174" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#8C8174" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#8C8174" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <style>
+    .s {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: rise-a 8s linear infinite;
+    }
+    .s.b { animation-name: rise-b; }
+    @keyframes rise-a {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+      12% { opacity: 0.6; }
+      35% { transform: translate(-2px, -20px) scale(1); }
+      65% { opacity: 0.25; transform: translate(10px, -42px) scale(1.6); }
+      100% { opacity: 0; transform: translate(26px, -66px) scale(2.2); }
+    }
+    @keyframes rise-b {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+      12% { opacity: 0.6; }
+      35% { transform: translate(3px, -22px) scale(1); }
+      65% { opacity: 0.25; transform: translate(8px, -44px) scale(1.6); }
+      100% { opacity: 0; transform: translate(30px, -62px) scale(2.2); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .s { animation: none; }
+    }
+  </style>
+  <circle class="s" style="animation-delay:-0.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-1.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-2.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-3.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-4.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-5.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-6.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-7.0s" cx="343" cy="416" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-0.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-1.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-2.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-3.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-4.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-5.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s" style="animation-delay:-6.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+  <circle class="s b" style="animation-delay:-7.5s" cx="317" cy="431" r="6" fill="url(#puff)"/>
+</svg>
